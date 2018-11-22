@@ -18,15 +18,15 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static main.java.soupit.handlers.ZutatenAbfrageHandler.ZUTAT_KEY;
 import static main.java.soupit.handlers.ZutatenAbfrageHandler.ZUTAT_SLOT;
 
 public class ZutatenAuswahlHandler implements RequestHandler {
+    private static final ArrayList<String> ALLE_ZUTATEN = new ArrayList<String>(Arrays.asList("Kartoffel", "Kartoffeln", "Tomate", "Tomaten", "Lkw", "Karotte", "Karotten"));
+
     @Override
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("ZutatenAuswahlIntent"));
@@ -51,7 +51,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
             String favoriteZutat = zutatSlot.getValue();
             input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, favoriteZutat));
 
-            if(favoriteZutat != null){
+            if(ALLE_ZUTATEN.contains(favoriteZutat)){
                 speechText =
                         String.format("Deine ausgeählte Zutat ist %s. Du kannst mich jetzt nach Deiner Zutat fragen. "
                                 + "Frage einfach: was ist meine zutat?", favoriteZutat);
