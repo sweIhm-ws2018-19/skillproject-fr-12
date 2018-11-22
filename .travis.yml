@@ -21,3 +21,6 @@ deploy:
   role: "arn:aws:iam::567943339894:role/lambda_basic_execution"
   runtime: "java8"
   handler_name: "main.java.soupit.ColorPickerStreamHandler"
+
+  on:
+    branch: prototype
