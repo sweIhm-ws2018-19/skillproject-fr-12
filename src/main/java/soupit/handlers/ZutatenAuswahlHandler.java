@@ -51,11 +51,20 @@ public class ZutatenAuswahlHandler implements RequestHandler {
             String favoriteZutat = zutatSlot.getValue();
             input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, favoriteZutat));
 
-            speechText =
-                    String.format("Deine ausgeählte Zutat ist %s. Du kannst mich jetzt nach Deiner Zutat fragen. "
-                            + "Frage einfach: was ist meine zutat?", favoriteZutat);
-            repromptText =
-                    "Frage nach meiner Zutat.";
+            if(favoriteZutat != null){
+                speechText =
+                        String.format("Deine ausgeählte Zutat ist %s. Du kannst mich jetzt nach Deiner Zutat fragen. "
+                                + "Frage einfach: was ist meine zutat?", favoriteZutat);
+                repromptText =
+                        "Frage nach meiner Zutat.";
+            }
+            else{
+                speechText = "Ich kenne Deine Zutat nicht. Bitte versuche es noch einmal.";
+                repromptText =
+                        "Ich weiss nicht welches Deine ausgewählte Zutat ist. Sag mir Deine Zutat. Sage zum Beispiel: Die Zutat ist Kartoffel.";
+                isAskResponse = true;
+            }
+
 
         } else {
             // Render an error since we don't know what the users favorite color is.
