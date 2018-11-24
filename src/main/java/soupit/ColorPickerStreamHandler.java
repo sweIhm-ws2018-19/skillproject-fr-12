@@ -16,13 +16,7 @@ package main.java.soupit;
 import com.amazon.ask.Skill;
 import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
-import main.java.soupit.handlers.FallbackIntentHandler;
-import main.java.soupit.handlers.HelpIntentHandler;
-import main.java.soupit.handlers.LaunchRequestHandler;
-import main.java.soupit.handlers.SessionEndedRequestHandler;
-import main.java.soupit.handlers.WhatsMyColorIntentHandler;
-import main.java.soupit.handlers.CancelandStopIntentHandler;
-import main.java.soupit.handlers.MyColorIsIntentHandler;
+import main.java.soupit.handlers.*;
 
 public class ColorPickerStreamHandler extends SkillStreamHandler {
 
@@ -35,7 +29,9 @@ public class ColorPickerStreamHandler extends SkillStreamHandler {
                         new CancelandStopIntentHandler(),
                         new SessionEndedRequestHandler(),
                         new HelpIntentHandler(),
-                        new FallbackIntentHandler())
+                        new FallbackIntentHandler(),
+                        new ZutatenAbfrageHandler(),
+                        new ZutatenAuswahlHandler())
                 // Add your skill id below
                 //.withSkillId("")
                 .build();

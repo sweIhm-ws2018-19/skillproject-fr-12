@@ -15,28 +15,36 @@ package main.java.soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 
 import java.util.Optional;
 
-import static com.amazon.ask.request.Predicates.requestType;
+import static com.amazon.ask.request.Predicates.intentName;
 
-public class LaunchRequestHandler implements RequestHandler {
+public class ZutatenAbfrageHandler implements RequestHandler {
+    public static final String ZUTAT_KEY = "ZUTAT";
+    public static final String ZUTAT_SLOT = "Zutat";
+
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(requestType(LaunchRequest.class));
+        return input.matches(intentName("ZutatenAbfrageIntent"));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Willkommen bei Soup-IT! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung. " +
-                "Welche Zutaten möchtest du verwenden?";
-        String repromptText = "Welche Zutaten möchtest du verwenden?";
+        String speechText;
+        String favoriteZutat = (String) input.getAttributesManager().getSessionAttributes().get(ZUTAT_KEY);
+
+        if (favoriteZutat != null && !favoriteZutat.isEmpty()) {
+            speechText = String.format("Deine ausgewählte Zutat ist %s. Auf Wiedersehen.", favoriteZutat);
+        } else {
+            // Since the user's favorite color is not set render an error message.
+            speechText = "Ich weiss nicht welches Deine ausgewählte Zutat ist. Nenne mir eine Zutat. Sage zum Beispiel: Die Zutat ist Kartoffel.";
+        }
+
         return input.getResponseBuilder()
-                .withSimpleCard("ColorSession", speechText)
                 .withSpeech(speechText)
-                .withReprompt(repromptText)
+                .withSimpleCard("ColorSession", speechText)
                 .build();
     }
 }
