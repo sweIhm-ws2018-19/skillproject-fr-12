@@ -9,6 +9,9 @@ install:
 addons:
   sonarcloud:
     organization: "sweihmws2018-19"
+    branches:
+      - sprint1
+      - master
 
 script:
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Pdev sonar:sonar
