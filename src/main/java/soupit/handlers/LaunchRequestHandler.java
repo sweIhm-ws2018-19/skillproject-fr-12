@@ -19,6 +19,7 @@ import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 
 import java.util.Optional;
+import java.util.Random;
 
 import static com.amazon.ask.request.Predicates.requestType;
 
@@ -31,12 +32,23 @@ public class LaunchRequestHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput input) {
         String speechText = "Willkommen bei Soup-IT! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung. " +
-                "Welche Zutaten möchtest du verwenden?";
-        String repromptText = "Welche Zutaten möchtest du verwenden?";
+                randomResponse();
+        String repromptText = randomResponse();
         return input.getResponseBuilder()
                 .withSimpleCard("ColorSession", speechText)
                 .withSpeech(speechText)
                 .withReprompt(repromptText)
                 .build();
+    }
+
+    private String randomResponse(){
+        String[] phrases = {"Welche Zutaten möchtest du verwenden?", "Nenne mir Zutaten, die du zum Kochen verwenden möchtest.",
+                "Mit welchen Zutaten möchtest du eine Suppe kochen?"};
+        String response;
+
+        int rnd = new Random().nextInt(phrases.length);
+        response = phrases[rnd];
+
+        return response;
     }
 }
