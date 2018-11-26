@@ -25,7 +25,7 @@ import static main.java.soupit.handlers.ZutatenAbfrageHandler.ZUTAT_KEY;
 import static main.java.soupit.handlers.ZutatenAbfrageHandler.ZUTAT_SLOT;
 
 public class ZutatenAuswahlHandler implements RequestHandler {
-    private static final ArrayList<String> ALLE_ZUTATEN = new ArrayList<String>(Arrays.asList("Kartoffel", "Kartoffeln", "Tomate", "Tomaten", "Lkw", "Karotte", "Karotten"));
+    private static final ArrayList<String> ALLE_ZUTATEN = new ArrayList<>(Arrays.asList("Kartoffel", "Kartoffeln", "Tomate", "Tomaten", "Lkw", "Karotte", "Karotten"));
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -42,19 +42,29 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         // Get the zutat slot from the list of slots.
         Slot zutatSlot = slots.get(ZUTAT_SLOT);
 
-        String speechText, repromptText;
+        final String speechText;
+        final String repromptText;
         boolean isAskResponse = false;
 
         // Check for favorite color and create output to user.
         if (zutatSlot != null) {
             // Store the user's favorite color in the Session and create response.
-            String favoriteZutat = zutatSlot.getValue();
-            input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, favoriteZutat));
+            String[] uncheckedZutatenListe = zutatSlot.getValue().split("\\s");
+            ArrayList<String> checkedZutatenListe = new ArrayList<>();
 
-            if(ALLE_ZUTATEN.contains(favoriteZutat)){
+            for (String ztat :uncheckedZutatenListe){
+             if (ALLE_ZUTATEN.contains(ztat)){
+                 checkedZutatenListe.add(ztat);
+             }
+            }
+
+            String Zutaten = zutatSlot.getValue();
+            input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, Zutaten));
+
+            if(!checkedZutatenListe.isEmpty()){
                 speechText =
                         String.format("Deine ausgeählte Zutat ist %s. Du kannst mich jetzt nach Deiner Zutat fragen. "
-                                + "Frage einfach: was ist meine zutat?", favoriteZutat);
+                                + "Frage einfach: was ist meine zutat?" + checkedZutatenListe.toString(), Zutaten);
                 repromptText =
                         "Frage nach meiner Zutat.";
             }
