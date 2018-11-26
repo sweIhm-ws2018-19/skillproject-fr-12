@@ -25,7 +25,7 @@ import static main.java.soupit.handlers.ZutatenAbfrageHandler.ZUTAT_KEY;
 import static main.java.soupit.handlers.ZutatenAbfrageHandler.ZUTAT_SLOT;
 
 public class ZutatenAuswahlHandler implements RequestHandler {
-    private static final ArrayList<String> ALLE_ZUTATEN = new ArrayList<>(Arrays.asList("Kartoffel", "Kartoffeln", "Tomate", "Tomaten", "Lkw", "Karotte", "Karotten"));
+    private static final ArrayList<String> ALLE_ZUTATEN = new ArrayList<>(Arrays.asList("kartoffel", "kartoffeln", "tomate", "tomaten", "lkw", "karotte", "karotten"));
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -58,13 +58,12 @@ public class ZutatenAuswahlHandler implements RequestHandler {
              }
             }
 
-            String Zutaten = zutatSlot.getValue();
-            input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, Zutaten));
+            input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, checkedZutatenListe));
 
             if(!checkedZutatenListe.isEmpty()){
                 speechText =
-                        String.format("Deine ausgeählte Zutat ist %s. Du kannst mich jetzt nach Deiner Zutat fragen. "
-                                + "Frage einfach: was ist meine zutat?" + checkedZutatenListe.toString(), Zutaten);
+                        "Deine ausgeählte Zutat ist . Du kannst mich jetzt nach Deiner Zutat fragen. "
+                                + "Frage einfach: was ist meine zutat?" + checkedZutatenListe.toString();
                 repromptText =
                         "Frage nach meiner Zutat.";
             }
