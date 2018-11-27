@@ -16,7 +16,9 @@ package main.java.soupit.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
+import com.amazon.ask.model.slu.entityresolution.StatusCode;
 import com.amazon.ask.response.ResponseBuilder;
+import main.java.soupit.Hilfsklassen.IngredientSlotFilter;
 
 import java.util.*;
 
@@ -25,7 +27,6 @@ import static main.java.soupit.handlers.ZutatenAbfrageHandler.ZUTAT_KEY;
 import static main.java.soupit.handlers.ZutatenAbfrageHandler.ZUTAT_SLOT;
 
 public class ZutatenAuswahlHandler implements RequestHandler {
-    private static final ArrayList<String> ALLE_ZUTATEN = new ArrayList<>(Arrays.asList("kartoffel", "kartoffeln", "tomate", "tomaten", "lkw", "karotte", "karotten"));
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -39,49 +40,37 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         Intent intent = intentRequest.getIntent();
         Map<String, Slot> slots = intent.getSlots();
 
-        // Get the zutat slot from the list of slots.
-        Slot zutatSlot = slots.get(ZUTAT_SLOT);
+
+        final ArrayList<String> zutatStringList = IngredientSlotFilter.getIngredient(slots);
 
         final String speechText;
         final String repromptText;
         boolean isAskResponse = false;
 
-        // Check for favorite color and create output to user.
-        if (zutatSlot != null) {
+
             // Store the user's favorite color in the Session and create response.
-            String[] uncheckedZutatenListe = zutatSlot.getValue().split("\\s");
-            ArrayList<String> checkedZutatenListe = new ArrayList<>();
 
-            for (String ztat :uncheckedZutatenListe){
-             if (ALLE_ZUTATEN.contains(ztat)){
-                 checkedZutatenListe.add(ztat);
-             }
-            }
 
-            input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, checkedZutatenListe));
+            input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, zutatStringList));
 
-            if(!checkedZutatenListe.isEmpty()){
-                speechText =
-                        "Deine ausgeählte Zutat ist . Du kannst mich jetzt nach Deiner Zutat fragen. "
-                                + "Frage einfach: was ist meine zutat?" + checkedZutatenListe.toString();
-                repromptText =
-                        "Frage nach meiner Zutat.";
-            }
-            else{
+            if (!zutatStringList.isEmpty()) {
+                if (zutatStringList.size() == 1){
+
+                    speechText =
+                            "Deine ausgeählte Zutat ist " + zutatStringList.get(0);
+                    repromptText = speechText;
+                } else {
+                    speechText = "Du hast folgende Zutaten ausgewählt: " + zutatStringList.toString();
+                    repromptText = speechText;
+                }
+
+            } else {
                 speechText = "Ich kenne Deine Zutat nicht. Bitte versuche es noch einmal.";
                 repromptText =
                         "Ich weiss nicht welches Deine ausgewählte Zutat ist. Sag mir Deine Zutat. Sage zum Beispiel: Die Zutat ist Kartoffel.";
                 isAskResponse = true;
+
             }
-
-
-        } else {
-            // Render an error since we don't know what the users favorite color is.
-            speechText = "Ich kenne Deine Zutat nicht. Bitte versuche es noch einmal.";
-            repromptText =
-                    "Ich weiss nicht welches Deine ausgewählte Zutat ist. Sag mir Deine Zutat. Sage zum Beispiel: Die Zutat ist Kartoffel.";
-            isAskResponse = true;
-        }
 
         ResponseBuilder responseBuilder = input.getResponseBuilder();
 
