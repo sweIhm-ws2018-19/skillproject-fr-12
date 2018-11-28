@@ -55,6 +55,7 @@ public class ZutatenAbfrageHandler implements RequestHandler {
         return input.getResponseBuilder()
                 .withSpeech(speechText)
                 .withSimpleCard("ColorSession", speechText)
+                .withShouldEndSession(false)
                 .build();
     }
 }

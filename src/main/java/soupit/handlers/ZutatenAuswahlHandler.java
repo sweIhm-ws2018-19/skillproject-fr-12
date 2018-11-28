@@ -18,6 +18,7 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.model.slu.entityresolution.StatusCode;
 import com.amazon.ask.response.ResponseBuilder;
+import main.java.soupit.Hilfsklassen.DbRequest;
 import main.java.soupit.Hilfsklassen.IngredientSlotFilter;
 
 import java.util.*;
@@ -48,29 +49,31 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         boolean isAskResponse = false;
 
 
-            // Store the user's favorite color in the Session and create response.
+        // Store the user's favorite color in the Session and create response.
 
 
-            input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, zutatStringList));
+        input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, zutatStringList));
+        ArrayList<String> recipies = DbRequest.getRecipies(zutatStringList);
 
-            if (!zutatStringList.isEmpty()) {
-                if (zutatStringList.size() == 1){
+        if (!recipies.isEmpty()) {
 
-                    speechText =
-                            "Deine ausgeählte Zutat ist " + zutatStringList.get(0);
-                    repromptText = speechText;
-                } else {
-                    speechText = "Du hast folgende Zutaten ausgewählt: " + zutatStringList.toString();
-                    repromptText = speechText;
-                }
+            if (zutatStringList.size() == 1) {
 
+                speechText =
+                        "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0);
+                repromptText = speechText;
             } else {
-                speechText = "Ich kenne Deine Zutat nicht. Bitte versuche es noch einmal.";
-                repromptText =
-                        "Ich weiss nicht welches Deine ausgewählte Zutat ist. Sag mir Deine Zutat. Sage zum Beispiel: Die Zutat ist Kartoffel.";
-                isAskResponse = true;
-
+                speechText = "Ich kann dir folgende Rezepte vorschlagen " + recipies.toString();
+                repromptText = speechText;
             }
+
+        } else {
+            speechText = "Hierzu kann ich dir aktuell leider kein passendes Suppenrezept vorschlagen. Nenne mir eine andere Zutat, zum Beispiel eine Gemüsesorte.";
+            repromptText =
+                    "Hierzu kann ich dir aktuell leider kein passendes Suppenrezept vorschlagen. Nenne mir eine andere Zutat, zum Beispiel eine Gemüsesorte.";
+            isAskResponse = true;
+
+        }
 
         ResponseBuilder responseBuilder = input.getResponseBuilder();
 
