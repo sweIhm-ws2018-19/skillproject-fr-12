@@ -29,7 +29,8 @@ public class HelpIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Willkommen bei Soup It! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung. Welche Zutaten möchtest du verwenden?";
+        String speechText = "Willkommen bei Soup It! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung." +
+                "Welche Zutaten möchtest du verwenden? Sage zum Beispiel meine Zutaten sind tomaten kartoffeln.";
         String repromptText = "Welche Zutaten möchtest du verwenden?";
         return input.getResponseBuilder()
                 .withSimpleCard("ColorSession", speechText)
