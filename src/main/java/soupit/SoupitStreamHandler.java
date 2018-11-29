@@ -18,13 +18,11 @@ import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
 import main.java.soupit.handlers.*;
 
-public class ColorPickerStreamHandler extends SkillStreamHandler {
+public class SoupitStreamHandler extends SkillStreamHandler {
 
     private static Skill getSkill() {
         return Skills.standard()
                 .addRequestHandlers(
-                        new WhatsMyColorIntentHandler(),
-                        new MyColorIsIntentHandler(),
                         new LaunchRequestHandler(),
                         new CancelandStopIntentHandler(),
                         new SessionEndedRequestHandler(),
@@ -38,7 +36,7 @@ public class ColorPickerStreamHandler extends SkillStreamHandler {
                 .build();
     }
 
-    public ColorPickerStreamHandler() {
+    public SoupitStreamHandler() {
         super(getSkill());
     }
 

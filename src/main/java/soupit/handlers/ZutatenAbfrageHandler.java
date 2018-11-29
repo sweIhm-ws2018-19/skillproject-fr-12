@@ -34,10 +34,10 @@ public class ZutatenAbfrageHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput input) {
         String speechText;
-      ArrayList<String> zutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_KEY);
+        ArrayList<String> zutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_KEY);
 
         if (zutatenListe != null && !zutatenListe.isEmpty()) {
-            if (zutatenListe.size() == 1){
+            if (zutatenListe.size() == 1) {
 
                 speechText =
                         "Deine ausgeählte Zutat ist " + zutatenListe.get(0);
@@ -54,7 +54,7 @@ public class ZutatenAbfrageHandler implements RequestHandler {
 
         return input.getResponseBuilder()
                 .withSpeech(speechText)
-                .withSimpleCard("ColorSession", speechText)
+                .withSimpleCard("SoupitSession", speechText)
                 .withShouldEndSession(false)
                 .build();
     }

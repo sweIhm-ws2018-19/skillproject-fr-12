@@ -32,7 +32,7 @@ public class HelpIntentHandler implements RequestHandler {
         String speechText = "Willkommen bei Soup It! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung.";
         String repromptText = "Welche Zutaten möchtest du verwenden?";
         return input.getResponseBuilder()
-                .withSimpleCard("ColorSession", speechText)
+                .withSimpleCard("SoupitSession", speechText)
                 .withSpeech(speechText)
                 .withReprompt(repromptText)
                 .withShouldEndSession(false)
