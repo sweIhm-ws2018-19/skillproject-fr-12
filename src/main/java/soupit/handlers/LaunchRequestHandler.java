@@ -41,6 +41,10 @@ public class LaunchRequestHandler implements RequestHandler {
                 .build();
     }
 
+    /**
+     *
+     * @return String response
+     */
     private String randomResponse(){
         String[] phrases = {"Welche Zutaten möchtest du verwenden?", "Nenne mir Zutaten, die du zum Kochen verwenden möchtest.",
                 "Mit welchen Zutaten möchtest du eine Suppe kochen?"};
