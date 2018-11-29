@@ -66,5 +66,11 @@ class DbRequestTest {
         assertEquals(want, have);
     }
 
+    @Test()
+    void shouldFailTest() {
+        //assert
+        assertTrue(false);
+    }
+
 
 }
