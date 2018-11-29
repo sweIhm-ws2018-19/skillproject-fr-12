@@ -31,7 +31,8 @@ public class ColorPickerStreamHandler extends SkillStreamHandler {
                         new HelpIntentHandler(),
                         new FallbackIntentHandler(),
                         new ZutatenAbfrageHandler(),
-                        new ZutatenAuswahlHandler())
+                        new ZutatenAuswahlHandler(),
+                        new RezeptAuswahlHandler())
                 // Add your skill id below
                 //.withSkillId("")
                 .build();
