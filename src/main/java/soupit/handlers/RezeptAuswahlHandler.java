@@ -2,8 +2,7 @@ package main.java.soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.Response;
-import com.amazon.ask.model.Slot;
+import com.amazon.ask.model.*;
 import com.amazon.ask.model.slu.entityresolution.Resolution;
 
 import java.util.Map;
@@ -20,11 +19,26 @@ public class RezeptAuswahlHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
+        Request request = input.getRequestEnvelope().getRequest();
+        IntentRequest intentRequest = (IntentRequest) request;
+        Intent intent = intentRequest.getIntent();
+        Map<String, Slot> slots = intent.getSlots();
+
         String speechText;
         String[] rezepte = getRezepte(input);
+        String[] suppenWahl = getSuppenWahl(slots);
 
         if (rezepte[0] != null && rezepte[0] != "") {
-            speechText = "Alles klar. Es wird eine Tomatensuppe gekocht.";
+            if(suppenWahl[0].equals("Zahl")){
+                speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeZahl(suppenWahl[1], rezepte));
+            }
+            else if(suppenWahl[0].equals("Suppe")){
+                speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeText(suppenWahl[1], rezepte));
+            }
+            else{
+                speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle zuerst Zutaten aus.";
+            }
+
         } else {
             // Es wurden noch keine Zutaten genannt -> es können keine Rezepte vorgeschlagen werden
             speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle zuerst Zutaten aus.";
@@ -49,6 +63,29 @@ public class RezeptAuswahlHandler implements RequestHandler {
         rezepte = new String[]{"kartoffelsuppe", "karottensuppe", "tomatensuppe"};
 
         return rezepte;
+    }
+
+    private String checkSuppeZahl(String suppe, String[] rezepte){
+        String dieSuppe = "";
+
+        int index = Integer.parseInt(suppe) + 1;
+
+        if(index <= rezepte.length){
+            dieSuppe = rezepte[index - 1];
+        }
+
+        return dieSuppe;
+    }
+
+    private String checkSuppeText(String suppe, String[] rezepte){
+        String dieSuppe = "";
+
+        for(String rezept: rezepte){
+            if(suppe.equals(rezept))
+                dieSuppe = suppe;
+        }
+
+        return dieSuppe;
     }
 
 
