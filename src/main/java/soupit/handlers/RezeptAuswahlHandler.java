@@ -29,13 +29,11 @@ public class RezeptAuswahlHandler implements RequestHandler {
         String[] suppenWahl = getSuppenWahl(slots);
 
         if (rezepte[0] != null && rezepte[0] != "") {
-            if(suppenWahl[0].equals("Zahl")){
+            if (suppenWahl[0].equals("Zahl")) {
                 speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeZahl(suppenWahl[1], rezepte));
-            }
-            else if(suppenWahl[0].equals("Suppe")){
+            } else if (suppenWahl[0].equals("Suppe")) {
                 speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeText(suppenWahl[1], rezepte));
-            }
-            else{
+            } else {
                 speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle zuerst Zutaten aus.";
             }
 
@@ -66,30 +64,46 @@ public class RezeptAuswahlHandler implements RequestHandler {
         return rezepte;
     }
 
-    private String checkSuppeZahl(String suppe, String[] rezepte){
+    /**
+     * @param suppe:   index der Suppe (als String)
+     * @param rezepte: alle vorgeschlagenen Rezepte
+     * @return falls index nicht passt: ""
+     * falls index passt: string suppe
+     */
+    private String checkSuppeZahl(String suppe, String[] rezepte) {
         String dieSuppe = "";
 
         int index = Integer.parseInt(suppe);
 
-        if(index <= rezepte.length){
+        if (index <= rezepte.length) {
             dieSuppe = rezepte[index - 1];
         }
 
         return dieSuppe;
     }
 
-    private String checkSuppeText(String suppe, String[] rezepte){
+    /**
+     * @param suppe:   von nutzer genannte Suppe
+     * @param rezepte: alle vorgeschlagenen Rezepte
+     * @return falls suppe nicht in rezepten: ""
+     * falls suppe in rezepten: string suppe
+     */
+    private String checkSuppeText(String suppe, String[] rezepte) {
         String dieSuppe = "";
 
-        for(String rezept: rezepte){
-            if(suppe.equals(rezept))
+        for (String rezept : rezepte) {
+            if (suppe.equals(rezept))
                 dieSuppe = suppe;
         }
 
         return dieSuppe;
     }
 
-
+    /**
+     *
+     * @param slots: alle slots von input
+     * @return {slotName, value} (beides "" wenn kein "ER_SUCCESS_MATCH"
+     */
     public String[] getSuppenWahl(Map<String, Slot> slots) {
         String[] ret = new String[2];
         ret[0] = ret[1] = "";
