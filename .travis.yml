@@ -12,6 +12,8 @@ addons:
     branches:
       - master
       - sprint1
+    exclusion:
+      - src/test
 
 script:
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Pdev sonar:sonar
