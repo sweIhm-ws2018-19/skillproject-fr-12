@@ -1,0 +1,9 @@
+mvn org.apache.maven.plugins:maven-assembly-plugin:2.6:assembly -DdescriptorId=jar-with-dependencies package
+
+Workflow:
+- Pull von Branch (sprint1, nicht master)
+- code bearbeiten
+- build jar
+- Commit + Push (zu origin sprint1)
+- upload jar to aws
+- test skill
