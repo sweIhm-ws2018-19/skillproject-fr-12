@@ -1,16 +1,16 @@
 package test.java.soupit.Hilfsklassen;
 
 import main.java.soupit.Hilfsklassen.DbRequest;
-import org.junit.jupiter.api.Test;
-import org.junit.*;
 import java.util.ArrayList;
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-class DbRequestTest {
+
+ public class DbRequestTest {
 
 
     @Test()
-    void getRecipies() {
+    public void getRecipies() {
         //arrange
 
         final ArrayList<String> have;
@@ -33,7 +33,7 @@ class DbRequestTest {
     }
 
     @Test()
-    void getRecipiesNullPointer() {
+    public void getRecipiesNullPointer() {
         //arrange
 
         final ArrayList<String> have;
@@ -49,7 +49,7 @@ class DbRequestTest {
     }
 
     @Test()
-    void getRecipiesNoMatch() {
+    public void getRecipiesNoMatch() {
         //arrange
 
         final ArrayList<String> have;
@@ -68,9 +68,9 @@ class DbRequestTest {
 
     //zum überprüfen, ob travis die tests ausführt
     @Test()
-    void shouldFailTest() {
+    public void shouldFailTest() {
         //assert
-        assertTrue(false);
+        assertTrue(true);
     }
 
 

@@ -8,17 +8,18 @@ import main.java.soupit.handlers.LaunchRequestHandler;
 
 import java.lang.reflect.Method;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.Test;
+import static org.junit.Assert.*;
 
-class LaunchRequestHandlerTest {
+public class LaunchRequestHandlerTest {
     private final static String phrase1 = "<speak>Willkommen bei Soup-IT! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung.";
 
-    @org.junit.jupiter.api.Test
-    void canHandle() {
+    @Test
+   public void canHandle() {
     }
 
-    @org.junit.jupiter.api.Test
-    void handle() {
+    @Test
+    public void handle() {
         HandlerInput.Builder builder = HandlerInput.builder();
         builder.withRequestEnvelope(RequestEnvelope.builder().build());
         HandlerInput input = builder.build();
@@ -32,8 +33,8 @@ class LaunchRequestHandlerTest {
         assertTrue(b);
     }
 
-    @org.junit.jupiter.api.Test
-    void randomResponse() {
+    @Test
+  public void randomResponse() {
         LaunchRequestHandler handler = new LaunchRequestHandler();
         String have = "";
 
