@@ -46,6 +46,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
 
         return input.getResponseBuilder()
                 .withSpeech(speechText)
+                .withShouldEndSession(false)
                 .withSimpleCard("ColorSession", speechText)
                 .build();
     }
@@ -68,7 +69,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
     private String checkSuppeZahl(String suppe, String[] rezepte){
         String dieSuppe = "";
 
-        int index = Integer.parseInt(suppe) + 1;
+        int index = Integer.parseInt(suppe);
 
         if(index <= rezepte.length){
             dieSuppe = rezepte[index - 1];
@@ -91,6 +92,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
 
     public String[] getSuppenWahl(Map<String, Slot> slots) {
         String[] ret = new String[2];
+        ret[0] = ret[1] = "";
 
         //get ingredient from slots
         for (Map.Entry<String, Slot> slotEntry : slots.entrySet()) {
