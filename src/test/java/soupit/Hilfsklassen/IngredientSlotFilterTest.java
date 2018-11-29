@@ -1,7 +1,7 @@
 package test.java.soupit.Hilfsklassen;
 
 import com.amazon.ask.model.Slot;
-import main.java.soupit.Hilfsklassen.IngredientSlotFilter;
+import main.java.soupit.Hilfsklassen.SlotFilter;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -20,7 +20,7 @@ class IngredientSlotFilterTest {
 
 
         //act
-        ArrayList<String> want = IngredientSlotFilter.getIngredient(slotMap);
+        ArrayList<String> want = SlotFilter.getIngredient(slotMap);
         //assert
         assertEquals(want, have);
     }
@@ -33,7 +33,7 @@ class IngredientSlotFilterTest {
 
 
         //act
-        ArrayList<String> want = IngredientSlotFilter.getIngredient(slotMap);
+        ArrayList<String> want = SlotFilter.getIngredient(slotMap);
         //assert
         assertEquals(want, have);
     }

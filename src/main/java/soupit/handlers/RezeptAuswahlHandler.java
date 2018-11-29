@@ -3,7 +3,7 @@ package main.java.soupit.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import com.amazon.ask.model.slu.entityresolution.Resolution;
+import main.java.soupit.Hilfsklassen.SlotFilter;
 
 import java.util.Map;
 import java.util.Optional;
@@ -26,7 +26,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
 
         String speechText;
         String[] rezepte = getRezepte(input);
-        String[] suppenWahl = getSuppenWahl(slots);
+        String[] suppenWahl = SlotFilter.getSuppenWahl(slots);
 
         if (rezepte[0] != null && rezepte[0] != "") {
             if (suppenWahl[0].equals("Zahl")) {
@@ -99,30 +99,5 @@ public class RezeptAuswahlHandler implements RequestHandler {
         return dieSuppe;
     }
 
-    /**
-     *
-     * @param slots: alle slots von input
-     * @return {slotName, value} (beides "" wenn kein "ER_SUCCESS_MATCH"
-     */
-    public String[] getSuppenWahl(Map<String, Slot> slots) {
-        String[] ret = new String[2];
-        ret[0] = ret[1] = "";
 
-        //get ingredient from slots
-        for (Map.Entry<String, Slot> slotEntry : slots.entrySet()) {
-
-            //check if slot is not empty
-            if (slotEntry.getValue().getResolutions() != null) {
-                Resolution resolution = slotEntry.getValue().getResolutions().getResolutionsPerAuthority().get(0);
-
-                // only accept matches
-                if (resolution.getStatus().getCode().toString().equals("ER_SUCCESS_MATCH")) {
-                    ret[0] = slotEntry.getValue().getName();
-                    ret[1] = resolution.getValues().get(0).getValue().getName();
-                }
-            }
-        }
-
-        return ret;
-    }
 }

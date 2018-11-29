@@ -16,16 +16,14 @@ package main.java.soupit.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import com.amazon.ask.model.slu.entityresolution.StatusCode;
 import com.amazon.ask.response.ResponseBuilder;
 import main.java.soupit.Hilfsklassen.DbRequest;
-import main.java.soupit.Hilfsklassen.IngredientSlotFilter;
+import main.java.soupit.Hilfsklassen.SlotFilter;
 
 import java.util.*;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static main.java.soupit.handlers.ZutatenAbfrageHandler.ZUTAT_KEY;
-import static main.java.soupit.handlers.ZutatenAbfrageHandler.ZUTAT_SLOT;
 
 public class ZutatenAuswahlHandler implements RequestHandler {
 
@@ -42,7 +40,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         Map<String, Slot> slots = intent.getSlots();
 
 
-        final ArrayList<String> zutatStringList = IngredientSlotFilter.getIngredient(slots);
+        final ArrayList<String> zutatStringList = SlotFilter.getIngredient(slots);
 
         final String speechText;
         final String repromptText;
