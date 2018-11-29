@@ -17,6 +17,7 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
@@ -33,10 +34,19 @@ public class ZutatenAbfrageHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput input) {
         String speechText;
-        String favoriteZutat = (String) input.getAttributesManager().getSessionAttributes().get(ZUTAT_KEY);
+      ArrayList<String> zutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_KEY);
 
-        if (favoriteZutat != null && !favoriteZutat.isEmpty()) {
-            speechText = String.format("Deine ausgewählte Zutat ist %s. Auf Wiedersehen.", favoriteZutat);
+        if (zutatenListe != null && !zutatenListe.isEmpty()) {
+            if (zutatenListe.size() == 1){
+
+                speechText =
+                        "Deine ausgeählte Zutat ist " + zutatenListe.get(0);
+
+            } else {
+                speechText = "Du hast folgende Zutaten ausgewählt: " + zutatenListe.toString();
+
+            }
+
         } else {
             // Since the user's favorite color is not set render an error message.
             speechText = "Ich weiss nicht welches Deine ausgewählte Zutat ist. Nenne mir eine Zutat. Sage zum Beispiel: Die Zutat ist Kartoffel.";
@@ -45,6 +55,7 @@ public class ZutatenAbfrageHandler implements RequestHandler {
         return input.getResponseBuilder()
                 .withSpeech(speechText)
                 .withSimpleCard("ColorSession", speechText)
+                .withShouldEndSession(false)
                 .build();
     }
 }
