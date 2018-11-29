@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "soup it",
+      "invocationName": "soupitn",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -9,33 +9,16 @@
         },
         {
           "name": "AMAZON.HelpIntent",
-          "samples": []
+          "samples": [
+            "Hilf mir Alexa",
+            "Alexa ich brauche Hilfe",
+            "Hilfe",
+            "Ich brauche Hilfe"
+          ]
         },
         {
           "name": "AMAZON.StopIntent",
           "samples": []
-        },
-        {
-          "name": "MyColorIsIntent",
-          "slots": [
-            {
-              "name": "Color",
-              "type": "LIST_OF_COLORS"
-            }
-          ],
-          "samples": [
-            " Meine Lieblingsfarbe ist {Color}",
-            " Ich mag {Color}"
-          ]
-        },
-        {
-          "name": "WhatsMyColorIntent",
-          "slots": [],
-          "samples": [
-            "was ist meine Lieblingsfarbe",
-            "welche Farbe mag ich am liebsten",
-            "sag mir meine Lieblingsfarbe"
-          ]
         },
         {
           "name": "AMAZON.PauseIntent",
@@ -44,50 +27,280 @@
         {
           "name": "AMAZON.ResumeIntent",
           "samples": []
+        },
+        {
+          "name": "ZutatenAuswahlIntent",
+          "slots": [
+            {
+              "name": "Zutat",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "Zutat_zwei",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "Zutat_drei",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "Zutat_vier",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "Zutat_fuenf",
+              "type": "AMAZON.Food"
+            }
+          ],
+          "samples": [
+            "Meine Zutaten sind {Zutat} {Zutat_zwei} {Zutat_drei} {Zutat_vier} und  {Zutat_fuenf}",
+            "Meine Zutaten sind {Zutat} {Zutat_zwei} {Zutat_drei} und {Zutat_vier}",
+            "Meine Zutaten sind {Zutat} {Zutat_zwei} und {Zutat_drei}",
+            "Meine Zutaten sind {Zutat} und {Zutat_zwei}",
+            "Meine Zutaten sind {Zutat} {Zutat_zwei} {Zutat_drei}",
+            "Meine Zutaten sind {Zutat} {Zutat_zwei} ",
+            "Meine Zutaten sind {Zutat} {Zutat_zwei} {Zutat_drei} {Zutat_vier}",
+            "Meine Zutaten sind {Zutat} {Zutat_zwei} {Zutat_drei} {Zutat_vier} {Zutat_fuenf}",
+            "Meine Zutat ist {Zutat}",
+            "Die Zutat ist {Zutat}"
+          ]
+        },
+        {
+          "name": "ZutatenAbfrageIntent",
+          "slots": [],
+          "samples": [
+            "wie lauten meine zutaten",
+            "was sind meine zutaten",
+            "Wie lautet meine Zutat",
+            "Was ist meine Zutat"
+          ]
+        },
+        {
+          "name": "RezeptAuswahlIntent",
+          "slots": [
+            {
+              "name": "Zahl",
+              "type": "INDEX"
+            },
+            {
+              "name": "Suppe",
+              "type": "SUPPEN"
+            }
+          ],
+          "samples": [
+            "ich möchte eine {Suppe} kochen",
+            "ich will eine {Suppe} kochen",
+            "ich will die {Suppe} kochen",
+            "Ich möchte die {Suppe} kochen",
+            "Ich koche Rezept {Zahl}",
+            "Ich will Rezept {Zahl} kochen ",
+            "Ich möchte Rezept {Zahl} kochen",
+            "Rezept {Zahl}"
+          ]
         }
       ],
       "types": [
         {
-          "name": "LIST_OF_COLORS",
+          "name": "INGREDIENTS",
           "values": [
             {
               "name": {
-                "value": "grün"
+                "value": "Tomate",
+                "synonyms": [
+                  "Tomaten"
+                ]
               }
             },
             {
               "name": {
-                "value": "blau"
+                "value": "Lauch"
               }
             },
             {
               "name": {
-                "value": "lila"
+                "value": "Karotte",
+                "synonyms": [
+                  "Karotten"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "AMAZON.Food",
+          "values": [
+            {
+              "name": {
+                "value": "champignon",
+                "synonyms": [
+                  "champignon",
+                  "champignons"
+                ]
               }
             },
             {
               "name": {
-                "value": "rot"
+                "value": "paprika",
+                "synonyms": [
+                  "paprika",
+                  "paprikas"
+                ]
               }
             },
             {
               "name": {
-                "value": "orange"
+                "value": "kürbis",
+                "synonyms": [
+                  "kürbis",
+                  "kürbisse",
+                  "kürbise"
+                ]
               }
             },
             {
               "name": {
-                "value": "rosa"
+                "value": "knoblauch",
+                "synonyms": [
+                  "knoblauch",
+                  "knoblauchzehe"
+                ]
               }
             },
             {
               "name": {
-                "value": "türkis"
+                "value": "petersilie",
+                "synonyms": [
+                  "petersilie"
+                ]
               }
             },
             {
               "name": {
-                "value": "gelb"
+                "value": "zwiebel",
+                "synonyms": [
+                  "zwiebel",
+                  "zwiebeln"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "zucchini",
+                "synonyms": [
+                  "zucchini",
+                  "zucchinis"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "lauch",
+                "synonyms": [
+                  "lauch"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "karotte",
+                "synonyms": [
+                  "karotte",
+                  "möhren",
+                  "möhre",
+                  "karotten"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "tomate",
+                "synonyms": [
+                  "tomate",
+                  "tomaten"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "kartoffel",
+                "synonyms": [
+                  "kartoffel",
+                  "erdapfel",
+                  "Erdapfel",
+                  "Kartoffeln",
+                  "kartoffeln",
+                  "Kartoffeln"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "name": "SUPPEN",
+          "values": [
+            {
+              "name": {
+                "value": "karottensuppe"
+              }
+            },
+            {
+              "name": {
+                "value": "tomatensuppe"
+              }
+            },
+            {
+              "name": {
+                "value": "kartoffelsuppe"
+              }
+            }
+          ]
+        },
+        {
+          "name": "INDEX",
+          "values": [
+            {
+              "name": {
+                "value": "5",
+                "synonyms": [
+                  "fünfte",
+                  "fünf"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "4",
+                "synonyms": [
+                  "vierte",
+                  "vier"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "3",
+                "synonyms": [
+                  "dritte",
+                  "drei"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "2",
+                "synonyms": [
+                  "zweite",
+                  "zwei"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "1",
+                "synonyms": [
+                  "erste",
+                  "eins"
+                ]
               }
             }
           ]

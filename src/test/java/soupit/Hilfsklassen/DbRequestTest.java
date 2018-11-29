@@ -66,6 +66,7 @@ class DbRequestTest {
         assertEquals(want, have);
     }
 
+    //zum überprüfen, ob travis die tests ausführt
     @Test()
     void shouldFailTest() {
         //assert

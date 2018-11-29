@@ -45,7 +45,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
         return input.getResponseBuilder()
                 .withSpeech(speechText)
                 .withShouldEndSession(false)
-                .withSimpleCard("ColorSession", speechText)
+                .withSimpleCard("SoupitSession", speechText)
                 .build();
     }
 
@@ -98,6 +98,5 @@ public class RezeptAuswahlHandler implements RequestHandler {
 
         return dieSuppe;
     }
-
 
 }

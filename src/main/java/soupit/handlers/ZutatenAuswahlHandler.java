@@ -47,9 +47,6 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         boolean isAskResponse = false;
 
 
-        // Store the user's favorite color in the Session and create response.
-
-
         input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, zutatStringList));
         ArrayList<String> recipies = DbRequest.getRecipies(zutatStringList);
 
@@ -75,7 +72,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
         ResponseBuilder responseBuilder = input.getResponseBuilder();
 
-        responseBuilder.withSimpleCard("ColorSession", speechText)
+        responseBuilder.withSimpleCard("SoupitSession", speechText)
                 .withSpeech(speechText)
                 .withShouldEndSession(false);
 

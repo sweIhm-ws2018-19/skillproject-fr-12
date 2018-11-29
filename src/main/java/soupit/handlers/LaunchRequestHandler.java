@@ -35,7 +35,7 @@ public class LaunchRequestHandler implements RequestHandler {
                 randomResponse();
         String repromptText = randomResponse();
         return input.getResponseBuilder()
-                .withSimpleCard("ColorSession", speechText)
+                .withSimpleCard("SoupitSession", speechText)
                 .withSpeech(speechText)
                 .withReprompt(repromptText)
                 .build();
