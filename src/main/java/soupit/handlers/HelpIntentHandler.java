@@ -11,7 +11,7 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.colorpicker.handlers;
+package main.java.soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
@@ -29,11 +29,10 @@ public class HelpIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Willkommen bei Soup It! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung." +
-                "Welche Zutaten möchtest du verwenden? Sage zum Beispiel meine Zutaten sind tomaten und kartoffeln.";
+        String speechText = "Willkommen bei Soup It! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung.";
         String repromptText = "Welche Zutaten möchtest du verwenden?";
         return input.getResponseBuilder()
-                .withSimpleCard("ColorSession", speechText)
+                .withSimpleCard("SoupitSession", speechText)
                 .withSpeech(speechText)
                 .withReprompt(repromptText)
                 .withShouldEndSession(false)

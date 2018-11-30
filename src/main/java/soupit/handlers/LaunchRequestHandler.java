@@ -11,7 +11,7 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.colorpicker.handlers;
+package main.java.soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
@@ -19,6 +19,7 @@ import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 
 import java.util.Optional;
+import java.util.Random;
 
 import static com.amazon.ask.request.Predicates.requestType;
 
@@ -30,12 +31,28 @@ public class LaunchRequestHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Hallo. Ich lerne Deine Lieblingsfarbe. Bitte sage mir zum Beispiel: Meine Lieblingsfarbe ist blau.";
-        String repromptText = "Bitte nenne Deine Lieblingsfarbe.";
+        String speechText = "Willkommen bei Soup-IT! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung. " +
+                randomResponse();
+        String repromptText = randomResponse();
         return input.getResponseBuilder()
-                .withSimpleCard("ColorSession", speechText)
+                .withSimpleCard("SoupitSession", speechText)
                 .withSpeech(speechText)
                 .withReprompt(repromptText)
                 .build();
+    }
+
+    /**
+     *
+     * @return String response
+     */
+    private String randomResponse(){
+        String[] phrases = {"Welche Zutaten möchtest du verwenden?", "Nenne mir Zutaten, die du zum Kochen verwenden möchtest.",
+                "Mit welchen Zutaten möchtest du eine Suppe kochen?"};
+        String response;
+
+        int rnd = new Random().nextInt(phrases.length);
+        response = phrases[rnd];
+
+        return response;
     }
 }

@@ -11,40 +11,51 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.colorpicker.handlers;
+package main.java.soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
-public class WhatsMyColorIntentHandler implements RequestHandler {
-    public static final String COLOR_KEY = "COLOR";
-    public static final String COLOR_SLOT = "Color";
+public class ZutatenAbfrageHandler implements RequestHandler {
+    public static final String ZUTAT_KEY = "ZUTAT";
+    public static final String ZUTAT_SLOT = "Zutat";
 
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("WhatsMyColorIntent"));
+        return input.matches(intentName("ZutatenAbfrageIntent"));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
         String speechText;
-        String favoriteColor = (String) input.getAttributesManager().getSessionAttributes().get(COLOR_KEY);
+        ArrayList<String> zutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_KEY);
 
-        if (favoriteColor != null && !favoriteColor.isEmpty()) {
-            speechText = String.format("Deine Lieblingsfarbe ist %s. Auf Wiedersehen.", favoriteColor);
+        if (zutatenListe != null && !zutatenListe.isEmpty()) {
+            if (zutatenListe.size() == 1) {
+
+                speechText =
+                        "Deine ausgeählte Zutat ist " + zutatenListe.get(0);
+
+            } else {
+                speechText = "Du hast folgende Zutaten ausgewählt: " + zutatenListe.toString();
+
+            }
+
         } else {
             // Since the user's favorite color is not set render an error message.
-            speechText = "Ich weiss nicht welches Deine Lieblingsfarbe ist. Sag mir Deine Lieblingsfarbe. Sage zum Beispiel: ich mag rot.";
+            speechText = "Ich weiss nicht welches Deine ausgewählte Zutat ist. Nenne mir eine Zutat. Sage zum Beispiel: Die Zutat ist Kartoffel.";
         }
 
         return input.getResponseBuilder()
                 .withSpeech(speechText)
-                .withSimpleCard("ColorSession", speechText)
+                .withSimpleCard("SoupitSession", speechText)
+                .withShouldEndSession(false)
                 .build();
     }
 }
