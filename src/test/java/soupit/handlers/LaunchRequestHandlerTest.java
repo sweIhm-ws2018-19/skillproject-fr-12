@@ -1,10 +1,10 @@
-package test.java.soupit.handlers;
+package soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.ui.SsmlOutputSpeech;
-import main.java.soupit.handlers.LaunchRequestHandler;
+import soupit.handlers.LaunchRequestHandler;
 
 import java.lang.reflect.Method;
 

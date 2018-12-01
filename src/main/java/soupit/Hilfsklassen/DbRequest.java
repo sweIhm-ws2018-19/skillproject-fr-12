@@ -1,6 +1,4 @@
-package main.java.soupit.Hilfsklassen;
-
-
+package soupit.Hilfsklassen;
 
 import java.util.ArrayList;
 

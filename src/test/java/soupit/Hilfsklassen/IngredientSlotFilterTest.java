@@ -1,7 +1,7 @@
-package test.java.soupit.Hilfsklassen;
+package soupit.Hilfsklassen;
 
 import com.amazon.ask.model.Slot;
-import main.java.soupit.Hilfsklassen.SlotFilter;
+import soupit.Hilfsklassen.SlotFilter;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

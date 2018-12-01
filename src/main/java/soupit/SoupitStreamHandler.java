@@ -11,12 +11,12 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.soupit;
+package soupit;
 
 import com.amazon.ask.Skill;
 import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
-import main.java.soupit.handlers.*;
+import soupit.handlers.*;
 
 public class SoupitStreamHandler extends SkillStreamHandler {
 
