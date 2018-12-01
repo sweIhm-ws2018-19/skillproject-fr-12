@@ -1,9 +1,9 @@
-package main.java.soupit.handlers;
+package soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import main.java.soupit.Hilfsklassen.SlotFilter;
+import soupit.Hilfsklassen.SlotFilter;
 
 import java.util.Map;
 import java.util.Optional;

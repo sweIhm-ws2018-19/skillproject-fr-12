@@ -1,4 +1,4 @@
-package main.java.soupit.Hilfsklassen;
+package soupit.Hilfsklassen;
 
 import com.amazon.ask.model.Slot;
 import com.amazon.ask.model.slu.entityresolution.Resolution;

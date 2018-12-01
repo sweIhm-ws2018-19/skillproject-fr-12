@@ -11,19 +11,19 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.soupit.handlers;
+package soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
-import main.java.soupit.Hilfsklassen.DbRequest;
-import main.java.soupit.Hilfsklassen.SlotFilter;
+import soupit.Hilfsklassen.DbRequest;
+import soupit.Hilfsklassen.SlotFilter;
 
 import java.util.*;
 
 import static com.amazon.ask.request.Predicates.intentName;
-import static main.java.soupit.handlers.ZutatenAbfrageHandler.ZUTAT_KEY;
+import static soupit.handlers.ZutatenAbfrageHandler.ZUTAT_KEY;
 
 public class ZutatenAuswahlHandler implements RequestHandler {
 

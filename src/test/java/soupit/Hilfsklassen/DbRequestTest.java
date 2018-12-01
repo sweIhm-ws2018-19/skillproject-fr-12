@@ -1,6 +1,6 @@
-package test.java.soupit.Hilfsklassen;
+package soupit.Hilfsklassen;
 
-import main.java.soupit.Hilfsklassen.DbRequest;
+import soupit.Hilfsklassen.DbRequest;
 import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
