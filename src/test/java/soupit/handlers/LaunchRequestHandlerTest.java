@@ -4,26 +4,38 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.ui.SsmlOutputSpeech;
-import soupit.handlers.LaunchRequestHandler;
+import org.junit.Before;
+import org.mockito.Mockito;
 
 import java.lang.reflect.Method;
 
 import org.junit.Test;
+
 import static org.junit.Assert.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.when;
 
 public class LaunchRequestHandlerTest {
     private final static String phrase1 = "<speak>Willkommen bei Soup-IT! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung.";
+    private LaunchRequestHandler handler;
 
-    @Test
-   public void canHandle() {
+    @Before
+    public void setup(){
+        handler = new LaunchRequestHandler();
     }
 
     @Test
-    public void handle() {
+    public void testCanHandle() {
+        HandlerInput inputMock = Mockito.mock(HandlerInput.class);
+        when(inputMock.matches(any())).thenReturn(true);
+        assertTrue(handler.canHandle(inputMock));
+    }
+
+    @Test
+    public void testHandle() {
         HandlerInput.Builder builder = HandlerInput.builder();
         builder.withRequestEnvelope(RequestEnvelope.builder().build());
         HandlerInput input = builder.build();
-        LaunchRequestHandler handler = new LaunchRequestHandler();
 
         Response response = handler.handle(input).get();
         SsmlOutputSpeech ssmlOut = (SsmlOutputSpeech) response.getOutputSpeech();
@@ -34,8 +46,7 @@ public class LaunchRequestHandlerTest {
     }
 
     @Test
-  public void randomResponse() {
-        LaunchRequestHandler handler = new LaunchRequestHandler();
+    public void testRandomResponse() {
         String have = "";
 
         try {
