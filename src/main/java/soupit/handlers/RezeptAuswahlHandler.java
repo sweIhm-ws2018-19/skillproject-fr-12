@@ -53,7 +53,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
      * @param input: HandlerInput
      * @return falls Rezepete in den Session Attributen gespichert wurden: die ersten drei Rezepte
      */
-    private String[] getRezepte(HandlerInput input) {
+    public String[] getRezepte(HandlerInput input) {
         String[] rezepte = new String[3];
 
         //hier mit .getSessionAttributes() die gespeicherten Rezepte holen
@@ -70,7 +70,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
      * @return falls index nicht passt: ""
      * falls index passt: string suppe
      */
-    private String checkSuppeZahl(String suppe, String[] rezepte) {
+    public String checkSuppeZahl(String suppe, String[] rezepte) {
         String dieSuppe = "";
 
         int index = Integer.parseInt(suppe);
@@ -88,7 +88,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
      * @return falls suppe nicht in rezepten: ""
      * falls suppe in rezepten: string suppe
      */
-    private String checkSuppeText(String suppe, String[] rezepte) {
+    public String checkSuppeText(String suppe, String[] rezepte) {
         String dieSuppe = "";
 
         for (String rezept : rezepte) {
