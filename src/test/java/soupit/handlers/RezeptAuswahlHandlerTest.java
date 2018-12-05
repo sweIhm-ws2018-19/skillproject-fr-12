@@ -22,44 +22,16 @@ public class RezeptAuswahlHandlerTest {
     }
 
     @Test
-    public void testCanHandle(){
+    public void testCanHandle() {
         HandlerInput inputMock = Mockito.mock(HandlerInput.class);
         when(inputMock.matches(any())).thenReturn(true);
         assertTrue(handler.canHandle(inputMock));
     }
 
     @Test
-    public void testHandle(){
-        //Resolution Mock
-        Resolution resolutionMock = Resolution.builder()
-                .withStatus(Status.builder()
-                        .withCode(StatusCode.valueOf("ER_SUCCESS_MATCH"))
-                        .build())
-                .addValuesItem(ValueWrapper.builder()
-                        .withValue(Value.builder()
-                                .withName("2")
-                                .build())
-                        .build())
-                .build();
-
-        //IntentRequest Mock
-        IntentRequest requestMock = IntentRequest.builder()
-                .withIntent(Intent.builder()
-                        .putSlotsItem("zutat", Slot.builder()
-                                .withResolutions(Resolutions.builder()
-                                        .addResolutionsPerAuthorityItem(resolutionMock)
-                                        .build())
-                                .withName("Zahl")
-                                .build())
-                        .build())
-                .build();
-
+    public void testHandleNumberInput() {
         //HandlerInput Mock
-        HandlerInput inputMock = HandlerInput.builder()
-                .withRequestEnvelope(RequestEnvelope.builder()
-                        .withRequest(requestMock)
-                        .build())
-                .build();
+        HandlerInput inputMock = TestHelper.mockInputWithSlot("Zahl", "2", true);
 
         Response response = handler.handle(inputMock).get();
 
@@ -68,19 +40,41 @@ public class RezeptAuswahlHandlerTest {
     }
 
     @Test
-    public void testGetRezepte(){
+    public void testHandleTextInput() {
+        //HandlerInput Mock
+        HandlerInput inputMock = TestHelper.mockInputWithSlot("Suppe", "kartoffelsuppe", true);
+
+        Response response = handler.handle(inputMock).get();
+
+        assertFalse(response.getShouldEndSession());
+        assertTrue(response.getOutputSpeech().toString().contains("Wir werden eine kartoffelsuppe kochen."));
+    }
+
+    @Test
+    public void testHandleWrongInput() {
+        //HandlerInput Mock
+        HandlerInput inputMock = TestHelper.mockInputWithSlot("Zutat", "karotten", true);
+
+        Response response = handler.handle(inputMock).get();
+
+        assertFalse(response.getShouldEndSession());
+        assertTrue(response.getOutputSpeech().toString().contains("Bitte wähle zuerst Zutaten aus."));
+    }
+
+    @Test
+    public void testGetRezepte() {
         HandlerInput inputMock = Mockito.mock(HandlerInput.class);
 
         String[] want = new String[]{"kartoffelsuppe", "karottensuppe", "tomatensuppe"};
         String[] have = handler.getRezepte(inputMock);
 
-        for(int i = 0; i < want.length; i++){
+        for (int i = 0; i < want.length; i++) {
             assertEquals(want[i], have[i]);
         }
     }
 
     @Test
-    public void testCheckSuppeZahl(){
+    public void testCheckSuppeZahl() {
         String want = "kartoffelsuppe";
         String have = handler.checkSuppeZahl("1", new String[]{"kartoffelsuppe", "karottensuppe", "tomatensuppe"});
 
@@ -88,7 +82,7 @@ public class RezeptAuswahlHandlerTest {
     }
 
     @Test
-    public void testCheckSuppeText(){
+    public void testCheckSuppeText() {
         String want = "tomatensuppe";
         String have = handler.checkSuppeText("tomatensuppe", new String[]{"kartoffelsuppe", "karottensuppe", "tomatensuppe"});
 

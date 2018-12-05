@@ -2,7 +2,11 @@ package soupit.Hilfsklassen;
 
 import java.util.ArrayList;
 
-public class DbRequest {
+public final class DbRequest {
+
+    private DbRequest() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static ArrayList<String> getRecipies(ArrayList<String> ingredientList) {
         ArrayList<String> recipies = new ArrayList();

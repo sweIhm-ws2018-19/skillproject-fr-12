@@ -1,18 +1,17 @@
 package soupit.Hilfsklassen;
 
-import soupit.Hilfsklassen.DbRequest;
 import java.util.ArrayList;
+
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 
- public class DbRequestTest {
-
+public class DbRequestTest {
 
     @Test()
-    public void getRecipies() {
+    public void testGetRecipies() {
         //arrange
-
         final ArrayList<String> have;
         final ArrayList<String> want = new ArrayList<>();
         want.add("kartoffelsuppe");
@@ -25,53 +24,37 @@ import static org.junit.Assert.*;
         ingr.add("karotte");
 
         //act
-        have =  DbRequest.getRecipies(ingr);
+        have = DbRequest.getRecipies(ingr);
 
         //assert
-
         assertEquals(want, have);
     }
 
     @Test()
-    public void getRecipiesNullPointer() {
+    public void testGetRecipiesNullPointer() {
         //arrange
-
         final ArrayList<String> have;
         final ArrayList<String> want = new ArrayList<>();
 
-
         //act
-        have =  DbRequest.getRecipies(null);
+        have = DbRequest.getRecipies(null);
 
         //assert
-
         assertEquals(want, have);
     }
 
     @Test()
-    public void getRecipiesNoMatch() {
+    public void testGetRecipiesNoMatch() {
         //arrange
-
         final ArrayList<String> have;
         final ArrayList<String> want = new ArrayList<>();
         final ArrayList<String> ingrds = new ArrayList<>();
         ingrds.add("skibrille");
 
-
         //act
-        have =  DbRequest.getRecipies(ingrds);
+        have = DbRequest.getRecipies(ingrds);
 
         //assert
-
         assertEquals(want, have);
     }
-
-    //zum überprüfen, ob travis die tests ausführt
-    @Test()
-    public void shouldFailTest() {
-        //assert
-        assertTrue(true);
-    }
-
-
 }
