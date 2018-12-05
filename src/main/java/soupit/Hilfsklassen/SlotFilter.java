@@ -8,10 +8,6 @@ import java.util.Map;
 
 public final class SlotFilter {
 
-    private SlotFilter() {
-        throw new IllegalStateException("Utility class");
-    }
-
     public static ArrayList<String> getIngredient(Map<String, Slot> slots) {
 
         final ArrayList<String> zutatStringList = new ArrayList<>();

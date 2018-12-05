@@ -39,6 +39,18 @@ public class SlotFilterTest {
     }
 
     @Test
+    public void testGetIngredientEmptySlot() {
+        ArrayList<String> want = new ArrayList<>();
+        HashMap<String, Slot> slotMap = new HashMap<>();
+        slotMap.put("MOCK", TestHelper.mockEmptySlot("Zutat"));
+
+        ArrayList<String> have = SlotFilter.getIngredient(slotMap);
+
+        //assert
+        assertEquals(want, have);
+    }
+
+    @Test
     public void testGetIngredientNullPointer() {
         //arrange
         ArrayList<String> have = new ArrayList<>();
@@ -49,5 +61,47 @@ public class SlotFilterTest {
 
         //assert
         assertEquals(want, have);
+    }
+
+    @Test
+    public void testGetIngredientDuplicateSlot() {
+        ArrayList<String> want = new ArrayList<>();
+        HashMap<String, Slot> slotMap = new HashMap<>();
+        slotMap.put("MOCK", TestHelper.mockSlotWithValue("Zutat", "kartoffel", true));
+        slotMap.put("MOCK" + 1, TestHelper.mockSlotWithValue("Zutat", "kartoffel", true));
+
+        ArrayList<String> have = SlotFilter.getIngredient(slotMap);
+        want.add("kartoffel");
+
+        //assert
+        assertEquals(want, have);
+    }
+
+    @Test
+    public void testGetSuppenWahlEmptySlot() {
+        String[] want = new String[]{"", ""};
+        HashMap<String, Slot> slotMap = new HashMap<>();
+        slotMap.put("MOCK", TestHelper.mockEmptySlot("Suppe"));
+
+        String[] have = SlotFilter.getSuppenWahl(slotMap);
+
+        //assert
+        assertEquals(want.length, have.length);
+        for (int i = 0; i < want.length; i++)
+            assertEquals(want[i], have[i]);
+    }
+
+    @Test
+    public void testGetSuppenWahlInvalidSlot() {
+        String[] want = new String[]{"", ""};
+        HashMap<String, Slot> slotMap = new HashMap<>();
+        slotMap.put("MOCK", TestHelper.mockSlotWithValue("Suppe", "kartoffelsuppe", false));
+
+        String[] have = SlotFilter.getSuppenWahl(slotMap);
+
+        //assert
+        assertEquals(want.length, have.length);
+        for (int i = 0; i < want.length; i++)
+            assertEquals(want[i], have[i]);
     }
 }

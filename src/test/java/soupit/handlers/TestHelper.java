@@ -5,7 +5,6 @@ import com.amazon.ask.model.*;
 import com.amazon.ask.model.slu.entityresolution.*;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public final class TestHelper {
     private final static String VALID_SLOT = "ER_SUCCESS_MATCH";
@@ -78,11 +77,36 @@ public final class TestHelper {
     }
 
     /**
+     * HandlerInput mit leerem Slot
+     *
+     * @param slotName:  Name des Slots
+     * @return HandlerInput
+     */
+    public static HandlerInput mockInputWithEmptySlot(String slotName) {
+        //IntentRequest Mock
+        IntentRequest requestMock = IntentRequest.builder()
+                .withIntent(Intent.builder()
+                        .putSlotsItem("MOCK", mockEmptySlot(slotName))
+                        .build())
+                .build();
+
+        //HandlerInput Mock
+        HandlerInput inputMock = HandlerInput.builder()
+                .withRequestEnvelope(RequestEnvelope.builder()
+                        .withRequest(requestMock)
+                        .withSession(Session.builder().build())
+                        .build())
+                .build();
+
+        return inputMock;
+    }
+
+    /**
      * HandlerInput mit mehreren  Slots
      *
      * @param slotNames:  Namen der Slots
      * @param slotValues: Values der Slots ("Name")
-     * @param valid:     true -> valider Slot; false -> invalider Slot
+     * @param valid:      true -> valider Slot; false -> invalider Slot
      * @return HandlerInput
      */
     public static HandlerInput mockInputWithSlots(String[] slotNames, String[] slotValues, boolean[] valid) {
@@ -110,13 +134,13 @@ public final class TestHelper {
      *
      * @param slotNames:  Namen der Slots
      * @param slotValues: Values der Slots ("Name")
-     * @param valid:     true -> valider Slot; false -> invalider Slot
+     * @param valid:      true -> valider Slot; false -> invalider Slot
      * @return Intent
      */
-    private static Intent mockIntentWithSlots(String[] slotNames, String[] slotValues, boolean[] valid){
+    private static Intent mockIntentWithSlots(String[] slotNames, String[] slotValues, boolean[] valid) {
         Intent.Builder builder = Intent.builder();
 
-        for(int i = 0; i < slotNames.length; i++){
+        for (int i = 0; i < slotNames.length; i++) {
             builder.putSlotsItem("MOCK" + i, mockSlotWithValue(slotNames[i], slotValues[i], valid[i]));
         }
 
@@ -153,19 +177,34 @@ public final class TestHelper {
     }
 
     /**
+     * leerer Slot
+     *
+     * @param slotName:  Name des Slots
+     * @return Slot
+     */
+    public static Slot mockEmptySlot(String slotName) {
+        //Slot Mock
+        Slot slotMock = Slot.builder()
+                .withName(slotName)
+                .build();
+
+        return slotMock;
+    }
+
+    /**
      * HandlerInput mit beliebig vielen (aber mindestens einem) Session Attributen
      *
-     * @param keys: keys der Session Attribute
+     * @param keys:       keys der Session Attribute
      * @param attributes: tatsächliche Session Attribute
      * @return HandlerInput
      */
-    public static HandlerInput mockInputWithSessionAttributes(String[] keys, Object[] attributes){
+    public static HandlerInput mockInputWithSessionAttributes(String[] keys, Object[] attributes) {
         if (keys.length == 0 || keys.length != attributes.length)
             throw new IllegalArgumentException("Fehlerhafte Arrays als Input!");
 
         HashMap<String, Object> attributeMap = new HashMap<>();
 
-        for(int i = 0; i < keys.length; i++){
+        for (int i = 0; i < keys.length; i++) {
             attributeMap.put(keys[i], attributes[i]);
         }
 
