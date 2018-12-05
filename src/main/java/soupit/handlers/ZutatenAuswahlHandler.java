@@ -48,7 +48,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
 
         input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, zutatStringList));
-        ArrayList<String> recipies = DbRequest.getRecipies(zutatStringList);
+        ArrayList<String> recipies = (ArrayList<String>) DbRequest.getRecipies(zutatStringList);
 
         if (!recipies.isEmpty()) {
 
