@@ -1,4 +1,4 @@
-package soupit.Hilfsklassen;
+package soupit.hilfsklassen;
 
 import com.amazon.ask.model.Slot;
 import org.junit.Test;
@@ -19,7 +19,7 @@ public class SlotFilterTest {
         HashMap<String, Slot> slotMap = new HashMap<>();
 
         //act
-        ArrayList<String> want = SlotFilter.getIngredient(slotMap);
+        ArrayList<String> want = (ArrayList<String>) SlotFilter.getIngredient(slotMap);
 
         //assert
         assertEquals(want, have);
@@ -31,7 +31,7 @@ public class SlotFilterTest {
         HashMap<String, Slot> slotMap = new HashMap<>();
         slotMap.put("MOCK", TestHelper.mockSlotWithValue("Zutat", "kartoffel", true));
 
-        ArrayList<String> have = SlotFilter.getIngredient(slotMap);
+        ArrayList<String> have = (ArrayList<String>) SlotFilter.getIngredient(slotMap);
         want.add("kartoffel");
 
         //assert
@@ -44,7 +44,7 @@ public class SlotFilterTest {
         HashMap<String, Slot> slotMap = new HashMap<>();
         slotMap.put("MOCK", TestHelper.mockEmptySlot("Zutat"));
 
-        ArrayList<String> have = SlotFilter.getIngredient(slotMap);
+        ArrayList<String> have = (ArrayList<String>) SlotFilter.getIngredient(slotMap);
 
         //assert
         assertEquals(want, have);
@@ -57,7 +57,7 @@ public class SlotFilterTest {
         Map<String, Slot> slotMap = new HashMap<>();
 
         //act
-        ArrayList<String> want = SlotFilter.getIngredient(slotMap);
+        ArrayList<String> want = (ArrayList<String>) SlotFilter.getIngredient(slotMap);
 
         //assert
         assertEquals(want, have);
@@ -70,7 +70,7 @@ public class SlotFilterTest {
         slotMap.put("MOCK", TestHelper.mockSlotWithValue("Zutat", "kartoffel", true));
         slotMap.put("MOCK" + 1, TestHelper.mockSlotWithValue("Zutat", "kartoffel", true));
 
-        ArrayList<String> have = SlotFilter.getIngredient(slotMap);
+        ArrayList<String> have = (ArrayList<String>) SlotFilter.getIngredient(slotMap);
         want.add("kartoffel");
 
         //assert
@@ -103,5 +103,14 @@ public class SlotFilterTest {
         assertEquals(want.length, have.length);
         for (int i = 0; i < want.length; i++)
             assertEquals(want[i], have[i]);
+    }
+
+    @Test
+    public void testGetInstance(){
+        SlotFilter first = SlotFilter.getInstance();
+        SlotFilter second = SlotFilter.getInstance();
+
+        assertNotNull(first);
+        assertEquals(first, second);
     }
 }

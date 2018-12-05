@@ -63,10 +63,8 @@ public class RezeptAuswahlHandlerTest {
 
     @Test
     public void testGetRezepte() {
-        HandlerInput inputMock = Mockito.mock(HandlerInput.class);
-
         String[] want = new String[]{"kartoffelsuppe", "karottensuppe", "tomatensuppe"};
-        String[] have = handler.getRezepte(inputMock);
+        String[] have = handler.getRezepte();
 
         for (int i = 0; i < want.length; i++) {
             assertEquals(want[i], have[i]);
