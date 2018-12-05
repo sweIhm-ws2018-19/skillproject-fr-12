@@ -6,13 +6,19 @@ import com.amazon.ask.model.slu.entityresolution.Resolution;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class SlotFilter {
+public final class SlotFilter {
+
+    private SlotFilter() {
+        throw new IllegalStateException("Utility class");
+    }
 
     public static ArrayList<String> getIngredient(Map<String, Slot> slots) {
 
         final ArrayList<String> zutatStringList = new ArrayList<>();
         final ArrayList<String> returnList = new ArrayList<>();
 
+        if (slots == null || slots.isEmpty())
+            return returnList;
 
         //get ingredient from slots
         for (Map.Entry<String, Slot> slotEntry : slots.entrySet()) {

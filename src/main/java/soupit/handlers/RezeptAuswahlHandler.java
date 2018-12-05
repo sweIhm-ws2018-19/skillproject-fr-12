@@ -24,7 +24,8 @@ public class RezeptAuswahlHandler implements RequestHandler {
         Intent intent = intentRequest.getIntent();
         Map<String, Slot> slots = intent.getSlots();
 
-        String speechText;
+        // Es wurden keine Zutaten genannt -> es können keine Rezepte vorgeschlagen werden -> speechText passt so
+        String speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle zuerst Zutaten aus.";
         String[] rezepte = getRezepte(input);
         String[] suppenWahl = SlotFilter.getSuppenWahl(slots);
 
@@ -34,12 +35,9 @@ public class RezeptAuswahlHandler implements RequestHandler {
             } else if (suppenWahl[0].equals("Suppe")) {
                 speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeText(suppenWahl[1], rezepte));
             } else {
+                // Der Nutzer hat keine valide Suppe ausgewählt
                 speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle zuerst Zutaten aus.";
             }
-
-        } else {
-            // Es wurden noch keine Zutaten genannt -> es können keine Rezepte vorgeschlagen werden
-            speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle zuerst Zutaten aus.";
         }
 
         return input.getResponseBuilder()
