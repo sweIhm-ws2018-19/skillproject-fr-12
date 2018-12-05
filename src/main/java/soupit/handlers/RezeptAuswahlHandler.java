@@ -3,7 +3,7 @@ package soupit.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import soupit.Hilfsklassen.SlotFilter;
+import soupit.hilfsklassen.SlotFilter;
 
 import java.util.Map;
 import java.util.Optional;
@@ -25,11 +25,12 @@ public class RezeptAuswahlHandler implements RequestHandler {
         Map<String, Slot> slots = intent.getSlots();
 
         // Es wurden keine Zutaten genannt -> es können keine Rezepte vorgeschlagen werden -> speechText passt so
-        String speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle zuerst Zutaten aus.";
-        String[] rezepte = getRezepte(input);
+        String speechText;
+        String[] rezepte = getRezepte();
         String[] suppenWahl = SlotFilter.getSuppenWahl(slots);
 
-        //if (rezepte[0] != null && rezepte[0] != "") {
+        // if-bedingung falls rezepte leer hinzufügen
+
         if (suppenWahl[0].equals("Zahl")) {
             speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeZahl(suppenWahl[1], rezepte));
         } else if (suppenWahl[0].equals("Suppe")) {
@@ -38,7 +39,6 @@ public class RezeptAuswahlHandler implements RequestHandler {
             // Der Nutzer hat keine valide Suppe ausgewählt
             speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle zuerst Zutaten aus.";
         }
-        //}
 
         return input.getResponseBuilder()
                 .withSpeech(speechText)
@@ -48,10 +48,11 @@ public class RezeptAuswahlHandler implements RequestHandler {
     }
 
     /**
-     * @param input: HandlerInput
+     * param input: HandlerInput noch hinzufügen
+     *
      * @return falls Rezepete in den Session Attributen gespichert wurden: die ersten drei Rezepte
      */
-    public String[] getRezepte(HandlerInput input) {
+    public String[] getRezepte() {
         String[] rezepte;
 
         //hier mit .getSessionAttributes() die gespeicherten Rezepte holen

@@ -17,8 +17,8 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
-import soupit.Hilfsklassen.DbRequest;
-import soupit.Hilfsklassen.SlotFilter;
+import soupit.hilfsklassen.DbRequest;
+import soupit.hilfsklassen.SlotFilter;
 
 import java.util.*;
 
@@ -40,7 +40,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         Map<String, Slot> slots = intent.getSlots();
 
 
-        final ArrayList<String> zutatStringList = SlotFilter.getIngredient(slots);
+        final ArrayList<String> zutatStringList = (ArrayList<String>) SlotFilter.getIngredient(slots);
 
         final String speechText;
         final String repromptText;
@@ -48,7 +48,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
 
         input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, zutatStringList));
-        ArrayList<String> recipies = DbRequest.getRecipies(zutatStringList);
+        ArrayList<String> recipies = (ArrayList<String>) DbRequest.getRecipies(zutatStringList);
 
         if (!recipies.isEmpty()) {
 

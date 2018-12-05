@@ -1,4 +1,4 @@
-package soupit.Hilfsklassen;
+package soupit.hilfsklassen;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class DbRequestTest {
         ingr.add("karotte");
 
         //act
-        have = DbRequest.getRecipies(ingr);
+        have = (ArrayList<String>) DbRequest.getRecipies(ingr);
 
         //assert
         assertEquals(want, have);
@@ -37,7 +37,7 @@ public class DbRequestTest {
         final ArrayList<String> want = new ArrayList<>();
 
         //act
-        have = DbRequest.getRecipies(null);
+        have = (ArrayList<String>) DbRequest.getRecipies(null);
 
         //assert
         assertEquals(want, have);
@@ -52,9 +52,18 @@ public class DbRequestTest {
         ingrds.add("skibrille");
 
         //act
-        have = DbRequest.getRecipies(ingrds);
+        have = (ArrayList<String>) DbRequest.getRecipies(ingrds);
 
         //assert
         assertEquals(want, have);
+    }
+
+    @Test
+    public void testGetInstance(){
+        DbRequest first = DbRequest.getInstance();
+        DbRequest second = DbRequest.getInstance();
+
+        assertNotNull(first);
+        assertEquals(first, second);
     }
 }
