@@ -77,6 +77,31 @@ public final class TestHelper {
     }
 
     /**
+     * HandlerInput mit leerem Slot
+     *
+     * @param slotName:  Name des Slots
+     * @return HandlerInput
+     */
+    public static HandlerInput mockInputWithEmptySlot(String slotName) {
+        //IntentRequest Mock
+        IntentRequest requestMock = IntentRequest.builder()
+                .withIntent(Intent.builder()
+                        .putSlotsItem("MOCK", mockEmptySlot(slotName))
+                        .build())
+                .build();
+
+        //HandlerInput Mock
+        HandlerInput inputMock = HandlerInput.builder()
+                .withRequestEnvelope(RequestEnvelope.builder()
+                        .withRequest(requestMock)
+                        .withSession(Session.builder().build())
+                        .build())
+                .build();
+
+        return inputMock;
+    }
+
+    /**
      * HandlerInput mit mehreren  Slots
      *
      * @param slotNames:  Namen der Slots
@@ -145,6 +170,21 @@ public final class TestHelper {
                                         .build())
                                 .build())
                         .build())
+                .withName(slotName)
+                .build();
+
+        return slotMock;
+    }
+
+    /**
+     * leerer Slot
+     *
+     * @param slotName:  Name des Slots
+     * @return Slot
+     */
+    public static Slot mockEmptySlot(String slotName) {
+        //Slot Mock
+        Slot slotMock = Slot.builder()
                 .withName(slotName)
                 .build();
 
