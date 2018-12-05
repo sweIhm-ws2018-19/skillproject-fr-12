@@ -29,16 +29,16 @@ public class RezeptAuswahlHandler implements RequestHandler {
         String[] rezepte = getRezepte(input);
         String[] suppenWahl = SlotFilter.getSuppenWahl(slots);
 
-        if (rezepte[0] != null && rezepte[0] != "") {
-            if (suppenWahl[0].equals("Zahl")) {
-                speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeZahl(suppenWahl[1], rezepte));
-            } else if (suppenWahl[0].equals("Suppe")) {
-                speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeText(suppenWahl[1], rezepte));
-            } else {
-                // Der Nutzer hat keine valide Suppe ausgewählt
-                speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle zuerst Zutaten aus.";
-            }
+        //if (rezepte[0] != null && rezepte[0] != "") {
+        if (suppenWahl[0].equals("Zahl")) {
+            speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeZahl(suppenWahl[1], rezepte));
+        } else if (suppenWahl[0].equals("Suppe")) {
+            speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeText(suppenWahl[1], rezepte));
+        } else {
+            // Der Nutzer hat keine valide Suppe ausgewählt
+            speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle zuerst Zutaten aus.";
         }
+        //}
 
         return input.getResponseBuilder()
                 .withSpeech(speechText)
@@ -52,7 +52,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
      * @return falls Rezepete in den Session Attributen gespichert wurden: die ersten drei Rezepte
      */
     public String[] getRezepte(HandlerInput input) {
-        String[] rezepte = new String[3];
+        String[] rezepte;
 
         //hier mit .getSessionAttributes() die gespeicherten Rezepte holen
 

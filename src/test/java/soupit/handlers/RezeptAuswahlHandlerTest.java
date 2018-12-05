@@ -74,9 +74,17 @@ public class RezeptAuswahlHandlerTest {
     }
 
     @Test
-    public void testCheckSuppeZahl() {
+    public void testCheckSuppeZahlValid() {
         String want = "kartoffelsuppe";
         String have = handler.checkSuppeZahl("1", new String[]{"kartoffelsuppe", "karottensuppe", "tomatensuppe"});
+
+        assertEquals(want, have);
+    }
+
+    @Test
+    public void testCheckSuppeZahlInvalid() {
+        String want = "";
+        String have = handler.checkSuppeZahl("17", new String[]{"kartoffelsuppe", "karottensuppe", "tomatensuppe"});
 
         assertEquals(want, have);
     }
