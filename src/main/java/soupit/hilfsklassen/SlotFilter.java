@@ -1,27 +1,42 @@
-package soupit.Hilfsklassen;
+package soupit.hilfsklassen;
 
 import com.amazon.ask.model.Slot;
 import com.amazon.ask.model.slu.entityresolution.Resolution;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-public class SlotFilter {
+public final class SlotFilter {
 
-    public static ArrayList<String> getIngredient(Map<String, Slot> slots) {
+    private static SlotFilter instance;
+
+    private SlotFilter() {
+        //empty
+    }
+
+    public static SlotFilter getInstance() {
+        if (instance == null)
+            instance = new SlotFilter();
+
+        return instance;
+    }
+
+    public static List<String> getIngredient(Map<String, Slot> slots) {
 
         final ArrayList<String> zutatStringList = new ArrayList<>();
         final ArrayList<String> returnList = new ArrayList<>();
 
+        if (slots == null || slots.isEmpty())
+            return returnList;
 
         //get ingredient from slots
         for (Map.Entry<String, Slot> slotEntry : slots.entrySet()) {
-            //check if slot is not empty
-            if (slotEntry.getValue().getResolutions() != null) {
-                // only accept matches from alexa dev console
-                if (slotEntry.getValue().getResolutions().getResolutionsPerAuthority().get(0).getStatus().getCode().toString().equals("ER_SUCCESS_MATCH")) {
-                    zutatStringList.add(slotEntry.getValue().getResolutions().getResolutionsPerAuthority().get(0).getValues().get(0).getValue().getName());
-                }
+            //check if slot is not empty + // only accept matches from alexa dev console
+            if (slotEntry.getValue().getResolutions() != null
+                    && slotEntry.getValue().getResolutions().getResolutionsPerAuthority().get(0).getStatus().getCode().toString().equals("ER_SUCCESS_MATCH")) {
+
+                zutatStringList.add(slotEntry.getValue().getResolutions().getResolutionsPerAuthority().get(0).getValues().get(0).getValue().getName());
             }
         }
         //filters doubles

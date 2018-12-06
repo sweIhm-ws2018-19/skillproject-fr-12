@@ -1,10 +1,24 @@
-package soupit.Hilfsklassen;
+package soupit.hilfsklassen;
 
 import java.util.ArrayList;
+import java.util.List;
 
-public class DbRequest {
+public final class DbRequest {
 
-    public static ArrayList<String> getRecipies(ArrayList<String> ingredientList) {
+    private static DbRequest instance;
+
+    private DbRequest(){
+        //empty
+    }
+
+    public static DbRequest getInstance(){
+        if (instance == null)
+            instance = new DbRequest();
+
+        return instance;
+    }
+
+    public static List<String> getRecipies(List<String> ingredientList) {
         ArrayList<String> recipies = new ArrayList();
         if (ingredientList == null){
             return recipies;

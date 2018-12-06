@@ -5,23 +5,20 @@ import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.ui.SsmlOutputSpeech;
 import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.lang.reflect.Method;
-
-import org.junit.Test;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
-public class LaunchRequestHandlerTest {
-    private final static String phrase1 = "<speak>Willkommen bei Soup-IT! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung.";
-    private LaunchRequestHandler handler;
+public class HelpIntentHandlerTest {
+    private HelpIntentHandler handler;
 
     @Before
     public void setup(){
-        handler = new LaunchRequestHandler();
+        handler = new HelpIntentHandler();
     }
 
     @Test
@@ -39,22 +36,9 @@ public class LaunchRequestHandlerTest {
         SsmlOutputSpeech ssmlOut = (SsmlOutputSpeech) response.getOutputSpeech();
         String have = ssmlOut.getSsml();
 
-        Boolean b = have.contains(phrase1);
+        Boolean b = have.contains("Willkommen bei Soup It! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung.");
+
+        assertFalse(response.getShouldEndSession());
         assertTrue(b);
-    }
-
-    @Test
-    public void testRandomResponse() {
-        String have = "";
-
-        try {
-            Method method = LaunchRequestHandler.class.getDeclaredMethod("randomResponse");
-            method.setAccessible(true);
-            have = (String) method.invoke(handler);
-        } catch (Exception ex) {
-        }
-
-        assertNotNull(have);
-        assertNotEquals("", have);
     }
 }

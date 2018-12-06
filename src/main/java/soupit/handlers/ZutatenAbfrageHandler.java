@@ -36,19 +36,14 @@ public class ZutatenAbfrageHandler implements RequestHandler {
         String speechText;
         ArrayList<String> zutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_KEY);
 
-        if (zutatenListe != null && !zutatenListe.isEmpty()) {
+        if (zutatenListe != null) {
             if (zutatenListe.size() == 1) {
-
-                speechText =
-                        "Deine ausgeählte Zutat ist " + zutatenListe.get(0);
-
+                speechText = "Deine ausgeählte Zutat ist " + zutatenListe.get(0);
             } else {
                 speechText = "Du hast folgende Zutaten ausgewählt: " + zutatenListe.toString();
-
             }
-
         } else {
-            // Since the user's favorite color is not set render an error message.
+            // es wurden noch keine Zutaten genannt
             speechText = "Ich weiss nicht welches Deine ausgewählte Zutat ist. Nenne mir eine Zutat. Sage zum Beispiel: Die Zutat ist Kartoffel.";
         }
 
