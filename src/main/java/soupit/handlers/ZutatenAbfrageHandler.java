@@ -11,7 +11,7 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.soupit.handlers;
+package soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
@@ -36,19 +36,14 @@ public class ZutatenAbfrageHandler implements RequestHandler {
         String speechText;
         ArrayList<String> zutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_KEY);
 
-        if (zutatenListe != null && !zutatenListe.isEmpty()) {
+        if (zutatenListe != null) {
             if (zutatenListe.size() == 1) {
-
-                speechText =
-                        "Deine ausgeählte Zutat ist " + zutatenListe.get(0);
-
+                speechText = "Deine ausgeählte Zutat ist " + zutatenListe.get(0);
             } else {
                 speechText = "Du hast folgende Zutaten ausgewählt: " + zutatenListe.toString();
-
             }
-
         } else {
-            // Since the user's favorite color is not set render an error message.
+            // es wurden noch keine Zutaten genannt
             speechText = "Ich weiss nicht welches Deine ausgewählte Zutat ist. Nenne mir eine Zutat. Sage zum Beispiel: Die Zutat ist Kartoffel.";
         }
 

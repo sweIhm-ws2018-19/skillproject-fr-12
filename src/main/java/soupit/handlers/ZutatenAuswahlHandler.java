@@ -11,19 +11,19 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.soupit.handlers;
+package soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
-import main.java.soupit.Hilfsklassen.DbRequest;
-import main.java.soupit.Hilfsklassen.SlotFilter;
+import soupit.hilfsklassen.DbRequest;
+import soupit.hilfsklassen.SlotFilter;
 
 import java.util.*;
 
 import static com.amazon.ask.request.Predicates.intentName;
-import static main.java.soupit.handlers.ZutatenAbfrageHandler.ZUTAT_KEY;
+import static soupit.handlers.ZutatenAbfrageHandler.ZUTAT_KEY;
 
 public class ZutatenAuswahlHandler implements RequestHandler {
 
@@ -40,7 +40,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         Map<String, Slot> slots = intent.getSlots();
 
 
-        final ArrayList<String> zutatStringList = SlotFilter.getIngredient(slots);
+        final ArrayList<String> zutatStringList = (ArrayList<String>) SlotFilter.getIngredient(slots);
 
         final String speechText;
         final String repromptText;
@@ -48,7 +48,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
 
         input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, zutatStringList));
-        ArrayList<String> recipies = DbRequest.getRecipies(zutatStringList);
+        ArrayList<String> recipies = (ArrayList<String>) DbRequest.getRecipies(zutatStringList);
 
         if (!recipies.isEmpty()) {
 

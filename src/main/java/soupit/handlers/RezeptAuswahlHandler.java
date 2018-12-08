@@ -1,9 +1,9 @@
-package main.java.soupit.handlers;
+package soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import main.java.soupit.Hilfsklassen.SlotFilter;
+import soupit.hilfsklassen.SlotFilter;
 
 import java.util.Map;
 import java.util.Optional;
@@ -24,21 +24,19 @@ public class RezeptAuswahlHandler implements RequestHandler {
         Intent intent = intentRequest.getIntent();
         Map<String, Slot> slots = intent.getSlots();
 
+        // Es wurden keine Zutaten genannt -> es können keine Rezepte vorgeschlagen werden -> speechText passt so
         String speechText;
-        String[] rezepte = getRezepte(input);
+        String[] rezepte = getRezepte();
         String[] suppenWahl = SlotFilter.getSuppenWahl(slots);
 
-        if (rezepte[0] != null && rezepte[0] != "") {
-            if (suppenWahl[0].equals("Zahl")) {
-                speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeZahl(suppenWahl[1], rezepte));
-            } else if (suppenWahl[0].equals("Suppe")) {
-                speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeText(suppenWahl[1], rezepte));
-            } else {
-                speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle zuerst Zutaten aus.";
-            }
+        // if-bedingung falls rezepte leer hinzufügen
 
+        if (suppenWahl[0].equals("Zahl")) {
+            speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeZahl(suppenWahl[1], rezepte));
+        } else if (suppenWahl[0].equals("Suppe")) {
+            speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeText(suppenWahl[1], rezepte));
         } else {
-            // Es wurden noch keine Zutaten genannt -> es können keine Rezepte vorgeschlagen werden
+            // Der Nutzer hat keine valide Suppe ausgewählt
             speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle zuerst Zutaten aus.";
         }
 
@@ -50,11 +48,12 @@ public class RezeptAuswahlHandler implements RequestHandler {
     }
 
     /**
-     * @param input: HandlerInput
+     * param input: HandlerInput noch hinzufügen
+     *
      * @return falls Rezepete in den Session Attributen gespichert wurden: die ersten drei Rezepte
      */
-    private String[] getRezepte(HandlerInput input) {
-        String[] rezepte = new String[3];
+    public String[] getRezepte() {
+        String[] rezepte;
 
         //hier mit .getSessionAttributes() die gespeicherten Rezepte holen
 
@@ -70,7 +69,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
      * @return falls index nicht passt: ""
      * falls index passt: string suppe
      */
-    private String checkSuppeZahl(String suppe, String[] rezepte) {
+    public String checkSuppeZahl(String suppe, String[] rezepte) {
         String dieSuppe = "";
 
         int index = Integer.parseInt(suppe);
@@ -88,7 +87,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
      * @return falls suppe nicht in rezepten: ""
      * falls suppe in rezepten: string suppe
      */
-    private String checkSuppeText(String suppe, String[] rezepte) {
+    public String checkSuppeText(String suppe, String[] rezepte) {
         String dieSuppe = "";
 
         for (String rezept : rezepte) {
