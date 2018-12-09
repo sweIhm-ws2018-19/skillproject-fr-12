@@ -2,19 +2,63 @@ package soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.Response;
+import com.amazon.ask.model.*;
+import com.amazon.ask.response.ResponseBuilder;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
+import static soupit.handlers.ZutatenAbfrageHandler.ZUTAT_KEY;
 
 public class ZutatenAusschliessenHandler implements RequestHandler {
     @Override
-    public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("ZutatenAusschliessenIntent"));    }
+    public boolean canHandle(HandlerInput input) { return input.matches(intentName("ZutatenAusschliessenIntent")); }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        return Optional.empty();
+
+        Request request = input.getRequestEnvelope().getRequest();
+        IntentRequest intentRequest = (IntentRequest) request;
+        Intent intent = intentRequest.getIntent();
+        Map<String, Slot> slots = intent.getSlots();
+
+        final ArrayList<String> zutatStringList = (ArrayList<String>) soupit.hilfsklassen.SlotFilter.getIngredient(slots);
+
+        final String speechText;
+        final String repromptText;
+        boolean isAskResponse = false;
+
+
+        input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, zutatStringList));
+        ArrayList<String> recipies = (ArrayList<String>) soupit.hilfsklassen.DbRequest.getRecipies(zutatStringList);
+
+
+
+
+
+            speechText = "Du möchtest folgende Zutaten aussließen.";
+            repromptText = speechText;
+            isAskResponse = true;
+
+
+
+        ResponseBuilder responseBuilder = input.getResponseBuilder();
+
+        responseBuilder.withSimpleCard("SoupitSession", speechText)
+                .withSpeech(speechText)
+                .withShouldEndSession(false);
+
+        if (isAskResponse) {
+            responseBuilder.withShouldEndSession(false)
+                    .withReprompt(repromptText);
+        }
+
+
+
+
+        return responseBuilder.build();
     }
 }
