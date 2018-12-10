@@ -31,34 +31,56 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
         final String repromptText;
         boolean isAskResponse = false;
 
-
         input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, zutatStringList));
         ArrayList<String> recipies = (ArrayList<String>) soupit.hilfsklassen.DbRequest.getRecipies(zutatStringList);
 
 
+        if (!recipies.isEmpty()) {
 
+            if (zutatStringList.size() == 1) {
 
+                speechText =
+                        "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0);
+                repromptText = speechText;
+            } else {
+                speechText = "Ich kann dir folgende Rezepte vorschlagen " + recipies.toString();
+                repromptText = speechText;
+            }
 
-            speechText = "Du möchtest folgende Zutaten aussließen.";
+        } else {
+            speechText = "Hierzu kann ich dir aktuell leider kein passendes Suppenrezept vorschlagen. Nenne mir eine andere Zutat, zum Beispiel eine Gemüsesorte.";
             repromptText = speechText;
             isAskResponse = true;
 
-
-
-        ResponseBuilder responseBuilder = input.getResponseBuilder();
-
-        responseBuilder.withSimpleCard("SoupitSession", speechText)
-                .withSpeech(speechText)
-                .withShouldEndSession(false);
-
-        if (isAskResponse) {
-            responseBuilder.withShouldEndSession(false)
-                    .withReprompt(repromptText);
         }
 
 
+        return input.getResponseBuilder()
+                .withSpeech(speechText)
+                .withShouldEndSession(false)
+                .withSimpleCard("SoupitSession", speechText)
+                .build();
+    }
+
+    public String[] getIngredient() {
+        String[] ingredient;
+        ingredient= new String[]{"Kartoffel, Tomate, Gurke, Karotte"};
+        return ingredient;
+    }
+
+    public String[] getExcludedIngredient(){
+        String[] excludedIngredient;
+        excludedIngredient= new String[] {"Kartoffel, Karotte"};
+        return excludedIngredient;
+    }
+
+    public String[] removeExcludedIngredient(String[] ingredient, String[] excludedIngredient){
+        String[] ingredientResult;
+        if (ingredient != null){
+
+        }
 
 
-        return responseBuilder.build();
+        return null;
     }
 }
