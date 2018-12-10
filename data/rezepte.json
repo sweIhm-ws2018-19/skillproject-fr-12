@@ -15,7 +15,7 @@
       "name": "tomatensuppe",
       "schritte": ["Reiten", "Golfen", "Lesen"],
       "zutaten": [0, 1, 2],
-      "mengen": [1.0, 14.0, 10.0]
+      "mengen": [1.0, 1.0, 1.0]
     }
   ]
 }

@@ -3,17 +3,17 @@ package soupit.model;
 import org.json.JSONObject;
 
 public class ZutatMenge {
-    private double menge;
+    private String menge;
     private String einheit;
     private String name;
 
-    public ZutatMenge(double menge, String einheit, String name) {
+    public ZutatMenge(String menge, String einheit, String name) {
         this.menge = menge;
         this.einheit = einheit;
         this.name = name;
     }
 
-    public double getMenge() {
+    public String getMenge() {
         return menge;
     }
 
