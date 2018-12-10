@@ -16,7 +16,8 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 public class LaunchRequestHandlerTest {
-    private final static String phrase1 = "<speak>Willkommen bei Soup-IT! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung.";
+    private final static String phrase1 = "Willkommen bei Soup-IT!";
+    private final static String phrase2 = "Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung.";
     private LaunchRequestHandler handler;
 
     @Before
@@ -40,7 +41,8 @@ public class LaunchRequestHandlerTest {
         String have = ssmlOut.getSsml();
 
         Boolean b = have.contains(phrase1);
-        assertTrue(b);
+        Boolean bo = have.contains(phrase2);
+        assertTrue(b && bo);
     }
 
     @Test
