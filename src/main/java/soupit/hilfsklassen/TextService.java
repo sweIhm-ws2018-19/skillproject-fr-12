@@ -26,7 +26,7 @@ public class TextService {
 
         for (ZutatMenge zutat : zutaten) {
             response += SPACE + BREAK_SECOND + SPACE;
-            response += zutat.getMenge() + SPACE + zutat.getEinheit() + SPACE + zutat.getName();
+            response += zutat.getMenge() + (!zutat.getEinheit().equalsIgnoreCase("none") ? ( SPACE + zutat.getEinheit()) : "") + SPACE + zutat.getName();
         }
 
         return response + ".";

@@ -1,5 +1,7 @@
 package soupit.model;
 
+import org.json.JSONObject;
+
 public class ZutatMenge {
     private int menge;
     private String einheit;
@@ -9,6 +11,10 @@ public class ZutatMenge {
         this.menge = menge;
         this.einheit = einheit;
         this.name = name;
+    }
+
+    public ZutatMenge(JSONObject json) {
+        this((int) json.get("menge"), (String) json.get("einheit"), (String) json.get("name"));
     }
 
     public int getMenge() {
