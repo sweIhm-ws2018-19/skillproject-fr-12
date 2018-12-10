@@ -76,9 +76,8 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
 
     public String[] removeExcludedIngredient(String[] ingredient, String[] excludedIngredient){
         String[] ingredientResult;
-        if (ingredient != null){
+        if (ingredient != null){}
 
-        }
 
 
         return null;
