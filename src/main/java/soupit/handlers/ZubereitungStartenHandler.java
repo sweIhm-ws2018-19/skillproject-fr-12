@@ -12,7 +12,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class ZubereitungStartenHandler implements RequestHandler {
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("ZutatenAbfrageIntent"));
+        return input.matches(intentName("ZubereitungStartenIntent"));
     }
 
     @Override
