@@ -3,16 +3,19 @@
     {
       "rezeptID": 0,
       "name": "kartoffelsuppe",
-      "schritte": ["Reiten", "Golfen", "Lesen"],
-      "zutaten": [1, 1, 2, 0],
-      "mengen": [1, 14, 10, 2000000]
+      "schritte": ["Schäle die Zwiebel, den Knoblauch und Karotte und schneide alles klein.", "Putze den den Lauch und Sellerie und schneide es ebenfalls in kleine Stücke.",
+        "Öl im Topf erwärmen. Zwiebel, <break time=\"1s\"/> Knoblauch, <break time=\"1s\"/> Karotte, <break time=\"1s\"/> Lauch und Sellerie hinzugeben und alles bei niedriger Hitze vier Minuten unter gelegentlichem Rühren andünsten. <break time=\"2s\"/> Schäle währenddessen die Kartoffeln und schneide sie in kleine Stücke.",
+        "Gebe die Kartoffelstücke sowie Gemüsebrühe hinzu und lasse die Suppe fünfzehn Minuten bei niedriger Hitze köcheln.", "Die Suppe einige Minuten abkühlen lassen und mit einem Pürierstab pürieren.",
+        "Die Suppe mit Salz und Pfeffer abschmecken, nochmals erwärmen und heiß servieren."],
+      "zutaten": [0,1,2,3,4,5,6,7],
+      "mengen": [100.0,0.25,0.25,0.25,0.25,7.5,212.5,0.5]
     },
     {
       "rezeptID": 1,
       "name": "tomatensuppe",
       "schritte": ["Reiten", "Golfen", "Lesen"],
       "zutaten": [0, 1, 2],
-      "mengen": [1, 14, 10]
+      "mengen": [1.0, 14.0, 10.0]
     }
   ]
 }

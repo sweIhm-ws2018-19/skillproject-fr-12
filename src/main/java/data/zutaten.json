@@ -1,0 +1,68 @@
+{
+  "zutaten":[
+    {
+      "zutatID": 0,
+      "singular": "kartoffel",
+      "plural": "kartoffeln",
+      "einheitSingular": "gramm",
+      "einheitPlural": "gramm",
+      "einheitGeschlecht": "n"
+    },
+    {
+      "zutatID": 1,
+      "singular": "zwiebel",
+      "plural": "zwiebeln",
+      "einheitSingular": "none",
+      "einheitPlural": "none",
+      "einheitGeschlecht": "w"
+    },
+    {
+      "zutatID": 2,
+      "singular": "knoblauchzehe",
+      "plural": "knoblauchzehen",
+      "einheitSingular": "none",
+      "einheitPlural": "none",
+      "einheitGeschlecht": "w"
+    },
+    {
+      "zutatID": 3,
+      "singular": "karotte",
+      "plural": "karotten",
+      "einheitSingular": "none",
+      "einheitPlural": "none",
+      "einheitGeschlecht": "w"
+    },
+    {
+      "zutatID": 4,
+      "singular": "lauch",
+      "plural": "lauch",
+      "einheitSingular": "stück",
+      "einheitPlural": "stück",
+      "einheitGeschlecht": "n"
+    },
+    {
+      "zutatID": 5,
+      "singular": "sellerieknolle",
+      "plural": "sellerieknollen",
+      "einheitSingular": "gramm",
+      "einheitPlural": "gramm",
+      "einheitGeschlecht": "n"
+    },
+    {
+      "zutatID": 6,
+      "singular": "gemüsebrühe",
+      "plural": "gemüsebrühe",
+      "einheitSingular": "milliliter",
+      "einheitPlural": "milliliter",
+      "einheitGeschlecht": "m"
+    },
+    {
+      "zutatID": 7,
+      "singular": "öl",
+      "plural": "öl",
+      "einheitSingular": "esslöffel",
+      "einheitPlural": "esslöffel",
+      "einheitGeschlecht": "m"
+    }
+  ]
+}

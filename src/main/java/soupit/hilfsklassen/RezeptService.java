@@ -25,7 +25,7 @@ public final class RezeptService {
         Rezept rezept = getRezept(rezeptID);
 
         ArrayList<Integer> zutaten = rezept.getZutaten();
-        ArrayList<Integer> mengen = rezept.getMengen();
+        ArrayList<Double> mengen = rezept.getMengen();
 
         ArrayList<ZutatMenge> zutatenMitMenge = new ArrayList<>();
 
@@ -44,7 +44,7 @@ public final class RezeptService {
         return rezepte.get(rezeptID);
     }
 
-    private static ZutatMenge zutatMengeBauen(Zutat zutat, int menge){
+    private static ZutatMenge zutatMengeBauen(Zutat zutat, Double menge){
         return new ZutatMenge(menge, zutat.getEinheitSingular(), zutat.getSingular());
     }
 }

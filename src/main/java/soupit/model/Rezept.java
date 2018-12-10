@@ -10,9 +10,9 @@ public class Rezept {
     private String name;
     private ArrayList<String> schritte;
     private ArrayList<Integer> zutaten;
-    private ArrayList<Integer> mengen;
+    private ArrayList<Double> mengen;
 
-    public Rezept(int rezeptID, String name, ArrayList<String> schritte, ArrayList<Integer> zutaten, ArrayList<Integer> mengen) {
+    public Rezept(int rezeptID, String name, ArrayList<String> schritte, ArrayList<Integer> zutaten, ArrayList<Double> mengen) {
         this.rezeptID = rezeptID;
         this.name = name;
         this.schritte = schritte;
@@ -36,7 +36,7 @@ public class Rezept {
         return zutaten;
     }
 
-    public ArrayList<Integer> getMengen() {
+    public ArrayList<Double> getMengen() {
         return mengen;
     }
 }

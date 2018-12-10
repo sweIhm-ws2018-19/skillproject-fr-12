@@ -33,21 +33,18 @@ public class JsonService {
         FileReader fileReader = null;
         try {
             fileReader = new FileReader("data/rezepte.json");
-
             BufferedReader br = new BufferedReader(fileReader);
 
             String input = "";
 
             String zeile = br.readLine();
-
             while (zeile != null) {
                 input += zeile;
                 zeile = br.readLine();
             }
 
             JSONArray json = new JSONObject(input).getJSONArray("rezepte");
-
-            for(Object j : json){
+            for (Object j : json) {
                 rezepte.add(rezeptParsen((JSONObject) j));
             }
 
@@ -66,40 +63,80 @@ public class JsonService {
         ArrayList<Zutat> zutaten = new ArrayList<>();
 
         //hier Json einlesen
-        zutaten.add(new Zutat(0, "kartoffel", "kartoffeln", "kilogramm",
-                "kilogramm", "n"));
-        zutaten.add(new Zutat(1, "tomate", "tomaten", "none",
-                "none", "w"));
-        zutaten.add(new Zutat(2, "salz", "salz", "prise",
-                "prisen", "w"));
+        FileReader fileReader = null;
+        try {
+            fileReader = new FileReader("data/zutaten.json");
+            BufferedReader br = new BufferedReader(fileReader);
+
+            String input = "";
+
+            String zeile = br.readLine();
+            while (zeile != null) {
+                input += zeile;
+                zeile = br.readLine();
+            }
+
+            JSONArray json = new JSONObject(input).getJSONArray("zutaten");
+            for (Object j : json) {
+                zutaten.add(zutatParsen((JSONObject) j));
+            }
+
+        } catch (FileNotFoundException e) {
+            System.err.println("File nicht vorhanden..");
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Irgendein Fehler in JsonService.zutatenEinlesen()..");
+            e.printStackTrace();
+        }
 
         return zutaten;
     }
 
+    /**
+     * parsed ein JSONObject vom Typ Rezept zu einem Rezept Objekt
+     *
+     * @param j: JSONObject vom Typ Rezept
+     * @return Rezept
+     */
     private static Rezept rezeptParsen(JSONObject j) {
         int newRezeptID = (int) j.get("rezeptID");
         String newName = (String) j.get("name");
         ArrayList<String> newSchritte = new ArrayList<>();
         ArrayList<Integer> newZutaten = new ArrayList<>();
-        ArrayList<Integer> newMengen = new ArrayList<>();
+        ArrayList<Double> newMengen = new ArrayList<>();
 
         JSONArray jsonSchritte = j.getJSONArray("schritte");
         for (Object schritt : jsonSchritte) {
             newSchritte.add((String) schritt);
         }
-
         JSONArray jsonZutaten = j.getJSONArray("zutaten");
         for (Object zutat : jsonZutaten) {
             newZutaten.add((Integer) zutat);
         }
-
         JSONArray jsonMengen = j.getJSONArray("mengen");
         for (Object menge : jsonMengen) {
-            newMengen.add((Integer) menge);
+            newMengen.add((Double) menge);
         }
 
         Rezept r2 = new Rezept(newRezeptID, newName, newSchritte, newZutaten, newMengen);
-
         return r2;
+    }
+
+    /**
+     * parsed ein JSONObject vom Typ Zutat zu einem Zutat Objekt
+     *
+     * @param j: JSONObject vom Typ Zutat
+     * @return Zutat
+     */
+    private static Zutat zutatParsen(JSONObject j) {
+        int newZutatID = (int) j.get("zutatID");
+        String newSingular = (String) j.get("singular");
+        String newPlural = (String) j.get("plural");
+        String newEinheitSingular = (String) j.get("einheitSingular");
+        String newEinheitPlural = (String) j.get("einheitPlural");
+        String newEinheitGeschlecht = (String) j.get("einheitGeschlecht");
+
+        Zutat zutat = new Zutat(newZutatID, newSingular, newPlural, newEinheitSingular, newEinheitPlural, newEinheitGeschlecht);
+        return zutat;
     }
 }
