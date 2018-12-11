@@ -40,15 +40,15 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
             if (zutatStringList.size() == 1) {
 
                 speechText =
-                        "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0);
+                        "Volgendes Rezept enthält eine Zutat, die ausgeschlossen wurden " + recipies.get(0);
                 repromptText = speechText;
             } else {
-                speechText = "Ich kann dir folgende Rezepte vorschlagen " + recipies.toString();
+                speechText = "Volgende Rezepte enthalten Zutaten, die ausgeschlossen wurden " + recipies.toString();
                 repromptText = speechText;
             }
 
         } else {
-            speechText = "Hierzu kann ich dir aktuell leider kein passendes Suppenrezept vorschlagen. Nenne mir eine andere Zutat, zum Beispiel eine Gemüsesorte.";
+            speechText = "Keine Zutaten wurden ausgeschlossen.";
             repromptText = speechText;
             isAskResponse = true;
 
