@@ -11,7 +11,7 @@ import java.util.Map;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
-import static soupit.handlers.ZutatenAbfrageHandler.ZUTAT_KEY;
+import static soupit.handlers.ZutatenAusschliessenAbfrageHandler.ZUTAT_AUSSCHLIESSEN_KEY;
 
 public class ZutatenAusschliessenHandler implements RequestHandler {
     @Override
@@ -31,7 +31,7 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
         final String repromptText;
         boolean isAskResponse = false;
 
-        input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, zutatStringList));
+        input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_AUSSCHLIESSEN_KEY, zutatStringList));
         ArrayList<String> recipies = (ArrayList<String>) soupit.hilfsklassen.DbRequest.getRecipies(zutatStringList);
 
 
