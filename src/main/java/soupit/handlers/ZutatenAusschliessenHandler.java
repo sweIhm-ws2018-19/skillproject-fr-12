@@ -55,11 +55,22 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
         }
 
 
-        return input.getResponseBuilder()
+        ResponseBuilder responseBuilder = input.getResponseBuilder();
+        responseBuilder.withSimpleCard("SoupitSession", speechText)
                 .withSpeech(speechText)
-                .withShouldEndSession(false)
-                .withSimpleCard("SoupitSession", speechText)
-                .build();
+                .withShouldEndSession(false);
+        if (isAskResponse) {
+            responseBuilder.withShouldEndSession(false)
+                    .withReprompt(repromptText);
+        }
+        return responseBuilder.build();
+
+//        return input.getResponseBuilder()
+//                .withSpeech(speechText)
+//                .withSimpleCard("SoupitSession", speechText)
+//                .withShouldEndSession(false)
+//                .build();}
+
     }
 
     public String[] getIngredient() {
@@ -77,9 +88,6 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
     public String[] removeExcludedIngredient(String[] ingredient, String[] excludedIngredient){
         String[] ingredientResult;
         if (ingredient != null){}
-
-
-
         return null;
     }
 }
