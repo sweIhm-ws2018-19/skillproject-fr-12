@@ -18,6 +18,7 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
 import soupit.hilfsklassen.DbRequest;
+import soupit.hilfsklassen.SessionAttributeService;
 import soupit.hilfsklassen.SlotFilter;
 
 import java.util.*;
@@ -69,6 +70,8 @@ public class ZutatenAuswahlHandler implements RequestHandler {
             isAskResponse = true;
 
         }
+
+        SessionAttributeService.updateLastIntent(input, "ZutatenAuswahlIntent");
 
         ResponseBuilder responseBuilder = input.getResponseBuilder();
 

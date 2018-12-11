@@ -17,6 +17,7 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
+import soupit.hilfsklassen.SessionAttributeService;
 
 import java.util.Optional;
 import java.util.Random;
@@ -34,6 +35,9 @@ public class LaunchRequestHandler implements RequestHandler {
         String speechText = "<voice name=\"Hans\">Willkommen bei Soup-IT!</voice> Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung. " +
                 randomResponse();
         String repromptText = randomResponse();
+
+        SessionAttributeService.updateLastIntent(input, "LaunchRequest");
+
         return input.getResponseBuilder()
                 .withSimpleCard("SoupitSession", speechText)
                 .withSpeech(speechText)

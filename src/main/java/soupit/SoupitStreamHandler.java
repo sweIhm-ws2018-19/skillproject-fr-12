@@ -34,6 +34,8 @@ public class SoupitStreamHandler extends SkillStreamHandler {
                         new ZubereitungStartenHandler())
                 // Add your skill id below
                 //.withSkillId("")
+                //.withTableName("soupit_testing")
+                //.withAutoCreateTable(true)
                 .build();
     }
 

@@ -3,6 +3,7 @@ package soupit.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
+import soupit.hilfsklassen.SessionAttributeService;
 import soupit.hilfsklassen.SlotFilter;
 
 import java.util.Map;
@@ -29,7 +30,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
         String[] rezepte = getRezepte();
         String[] suppenWahl = SlotFilter.getSuppenWahl(slots);
 
-        // if-bedingung falls rezepte leer hinzufügen
+        // if-Bedingung falls rezepte leer hinzufügen
 
         if (suppenWahl[0].equals("Zahl")) {
             speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeZahl(suppenWahl[1], rezepte));
@@ -39,6 +40,8 @@ public class RezeptAuswahlHandler implements RequestHandler {
             // Der Nutzer hat keine valide Suppe ausgewählt
             speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle zuerst Zutaten aus.";
         }
+
+        SessionAttributeService.updateLastIntent(input, "RezeptAuswahlIntent");
 
         return input.getResponseBuilder()
                 .withSpeech(speechText)

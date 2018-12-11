@@ -16,6 +16,7 @@ package soupit.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
+import soupit.hilfsklassen.SessionAttributeService;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -46,6 +47,8 @@ public class ZutatenAbfrageHandler implements RequestHandler {
             // es wurden noch keine Zutaten genannt
             speechText = "Ich weiss nicht welches Deine ausgewählte Zutat ist. Nenne mir eine Zutat. Sage zum Beispiel: Die Zutat ist Kartoffel.";
         }
+
+        SessionAttributeService.updateLastIntent(input, "ZutatenAbfrageIntent");
 
         return input.getResponseBuilder()
                 .withSpeech(speechText)

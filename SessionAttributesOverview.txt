@@ -1,0 +1,6 @@
+Übersicht über alle verwendeten sessionAttribute:
+
+"ZUTAT": (ArrayList<String>) von Nutzer genannte Zutaten
+"LAST_INTENT": (String) Name des zuletzt ausgeführten Intents
+"REZEPT": (Rezept) von Nutzer ausgewähltes Rezept
+"PORTIONEN": (int) Anzahl an Portionen die zubereitet werden sollen
