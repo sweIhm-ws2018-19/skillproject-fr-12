@@ -48,7 +48,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         boolean isAskResponse = false;
 
 
-        input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, zutatStringList));
+        SessionAttributeService.setSingleSessionAttribute(input, ZUTAT_KEY, zutatStringList);
         ArrayList<String> recipies = (ArrayList<String>) DbRequest.getRecipies(zutatStringList);
 
         if (!recipies.isEmpty()) {

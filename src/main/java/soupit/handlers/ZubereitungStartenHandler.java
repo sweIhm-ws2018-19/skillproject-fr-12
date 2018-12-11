@@ -25,6 +25,7 @@ public class ZubereitungStartenHandler implements RequestHandler {
         return input.getResponseBuilder()
                 .withSimpleCard("SoupitSession", speechText)
                 .withSpeech(speechText)
+                .withShouldEndSession(false)
                 .build();
     }
 }

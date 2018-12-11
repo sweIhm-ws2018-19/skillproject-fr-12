@@ -63,4 +63,18 @@ public final class SessionAttributeService {
 
         return (String) sessionAttributes.getOrDefault(LAST_INTENT, "none");
     }
+
+    /**
+     * Fügt ein neues Attribut zu den bisherigen SessionAttributen hinzu.
+     * Bei bereits vorhandenen Attributen wird nur der Wert aktualisiert.
+     *
+     * @param input
+     * @param key
+     * @param value
+     */
+    public static void setSingleSessionAttribute(HandlerInput input, String key, Object value){
+        Map<String, Object> sessionAttributes = input.getAttributesManager().getSessionAttributes();
+        sessionAttributes.put(key, value);
+        input.getAttributesManager().setSessionAttributes(sessionAttributes);
+    }
 }

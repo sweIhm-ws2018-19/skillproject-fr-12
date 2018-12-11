@@ -25,7 +25,6 @@ public class RezeptAuswahlHandler implements RequestHandler {
         Intent intent = intentRequest.getIntent();
         Map<String, Slot> slots = intent.getSlots();
 
-        // Es wurden keine Zutaten genannt -> es können keine Rezepte vorgeschlagen werden -> speechText passt so
         String speechText;
         String[] rezepte = getRezepte();
         String[] suppenWahl = SlotFilter.getSuppenWahl(slots);

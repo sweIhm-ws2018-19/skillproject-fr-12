@@ -75,4 +75,25 @@ public final class SlotFilter {
         return ret;
     }
 
+    /**
+     * Liefert den Wert eines einzigen Slots. ("none" falls kein Slot/Wert/... vorhanden)
+     *
+     * @param slots
+     * @param key
+     * @return
+     */
+    public static String getSingleSlotValue(Map<String, Slot> slots, String key){
+        String ret = "none";
+
+        Slot slot = slots.get(key);
+
+        if(slot.getResolutions() != null){
+            Resolution resolution = slot.getResolutions().getResolutionsPerAuthority().get(0);
+            if(resolution.getValues() != null){
+                ret = resolution.getValues().get(0).getValue().getName();
+            }
+        }
+
+        return ret;
+    }
 }
