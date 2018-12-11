@@ -23,13 +23,13 @@ public class ZutatenAusschliessenAbfrageHandler implements RequestHandler {
 
         if (zutatenListe != null) {
             if (zutatenListe.size() == 1) {
-                speechText = "Deine ausgeählte Zutat ist " + zutatenListe.get(0);
+                speechText = "Deine ausgeschlosse Zutat ist " + zutatenListe.get(0);
             } else {
-                speechText = "Du hast folgende Zutaten ausgewählt: " + zutatenListe.toString();
+                speechText = "Deine ausgeschlossenen Zutaten sind: " + zutatenListe.toString();
             }
         } else {
             // es wurden noch keine Zutaten genannt
-            speechText = "Ich weiss nicht welches Deine ausgewählte Zutat ist. Nenne mir eine Zutat. Sage zum Beispiel: Die Zutat ist Kartoffel.";
+            speechText = "Du hast keine Zutaten ausgeschlossen. Nenne mir eine Zutat. Sage zum Beispiel: Ich möchte Kartoffel ausschließen.";
         }
 
         return input.getResponseBuilder()

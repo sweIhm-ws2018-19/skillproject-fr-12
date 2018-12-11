@@ -36,6 +36,7 @@ public class ZutatenAbfrageHandler implements RequestHandler {
         String speechText;
         ArrayList<String> zutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_KEY);
 
+
         if (zutatenListe != null) {
             if (zutatenListe.size() == 1) {
                 speechText = "Deine ausgeählte Zutat ist " + zutatenListe.get(0);
