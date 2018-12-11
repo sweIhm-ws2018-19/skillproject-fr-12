@@ -29,6 +29,7 @@ public class SoupitStreamHandler extends SkillStreamHandler {
                         new HelpIntentHandler(),
                         new FallbackIntentHandler(),
                         new ZutatenAbfrageHandler(),
+                        new ZutatenAusschliessenAbfrageHandler(),
                         new ZutatenAusschliessenHandler(),
                         new ZutatenAuswahlHandler(),
                         new RezeptAuswahlHandler())
