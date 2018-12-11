@@ -73,21 +73,21 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
 
     }
 
-    public String[] getIngredient() {
-        String[] ingredient;
-        ingredient= new String[]{"Kartoffel, Tomate, Gurke, Karotte"};
-        return ingredient;
-    }
-
-    public String[] getExcludedIngredient(){
-        String[] excludedIngredient;
-        excludedIngredient= new String[] {"Kartoffel, Karotte"};
-        return excludedIngredient;
-    }
-
-    public String[] removeExcludedIngredient(String[] ingredient, String[] excludedIngredient){
-        String[] ingredientResult;
-        if (ingredient != null){}
-        return null;
-    }
+//    public String[] getIngredient() {
+//        String[] ingredient;
+//        ingredient= new String[]{"Kartoffel, Tomate, Gurke, Karotte"};
+//        return ingredient;
+//    }
+//
+//    public String[] getExcludedIngredient(){
+//        String[] excludedIngredient;
+//        excludedIngredient= new String[] {"Kartoffel, Karotte"};
+//        return excludedIngredient;
+//    }
+//
+//    public String[] removeExcludedIngredient(String[] ingredient, String[] excludedIngredient){
+//        String[] ingredientResult;
+//        if (ingredient != null){}
+//        return null;
+//    }
 }
