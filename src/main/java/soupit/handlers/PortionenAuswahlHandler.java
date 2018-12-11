@@ -3,10 +3,8 @@ package soupit.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import soupit.hilfsklassen.RezeptService;
 import soupit.hilfsklassen.SessionAttributeService;
 import soupit.hilfsklassen.SlotFilter;
-import soupit.hilfsklassen.TextService;
 
 import java.util.Map;
 import java.util.Optional;
@@ -24,7 +22,7 @@ public class PortionenAuswahlHandler implements RequestHandler {
         IntentRequest intentRequest = (IntentRequest) request;
         Intent intent = intentRequest.getIntent();
         Map<String, Slot> slots = intent.getSlots();
-        String slotValue = SlotFilter.getSingleSlotValue(slots, "Anzahl");
+        String slotValue = SlotFilter.getSingleSlotInputValue(slots, "Anzahl");
 
         String speechText = "test";
 
