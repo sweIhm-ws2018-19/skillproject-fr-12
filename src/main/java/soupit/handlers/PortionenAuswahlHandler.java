@@ -3,8 +3,10 @@ package soupit.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
+import soupit.hilfsklassen.RezeptService;
 import soupit.hilfsklassen.SessionAttributeService;
 import soupit.hilfsklassen.SlotFilter;
+import soupit.hilfsklassen.TextService;
 
 import java.util.Map;
 import java.util.Optional;
@@ -12,6 +14,8 @@ import java.util.Optional;
 import static com.amazon.ask.request.Predicates.intentName;
 
 public class PortionenAuswahlHandler implements RequestHandler {
+    private final static String PORTIONEN = "PORTIONEN";
+
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("PortionenAuswahlIntent"));
     }
@@ -26,11 +30,13 @@ public class PortionenAuswahlHandler implements RequestHandler {
 
         String speechText = "test";
 
-        if(slotValue.equalsIgnoreCase("none")){
+        if (slotValue.equalsIgnoreCase("none")) {
             speechText = "Bitte nenne die Anzahl an Portionen.";
-        } else{
+        } else {
             int anzahl = Integer.parseInt(slotValue);
-            speechText = "Alles klar. Wir kochen eine Suppe für " + anzahl + " Personen.";
+            SessionAttributeService.setSingleSessionAttribute(input, PORTIONEN, anzahl);
+
+            speechText = TextService.zutatenVonRezeptVorlesen(RezeptService.getZutaten(0, anzahl));
         }
 
         SessionAttributeService.updateLastIntent(input, "PortionenAuswahlIntent");

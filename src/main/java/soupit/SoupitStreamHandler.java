@@ -35,8 +35,8 @@ public class SoupitStreamHandler extends SkillStreamHandler {
                         new PortionenAuswahlHandler())
                 // Add your skill id below
                 //.withSkillId("")
-                //.withTableName("soupit_testing")
-                //.withAutoCreateTable(true)
+                .withTableName("soupit_testing")
+                .withAutoCreateTable(true)
                 .build();
     }
 

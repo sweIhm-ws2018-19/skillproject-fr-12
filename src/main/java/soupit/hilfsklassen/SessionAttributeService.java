@@ -54,6 +54,7 @@ public final class SessionAttributeService {
 
     /**
      * Liefert den Wert des SessionAttributs LAST_INTENT
+     * (liefert "none", falls SessionAttribut nicht vorhanden)
      *
      * @param input
      * @return
@@ -62,6 +63,20 @@ public final class SessionAttributeService {
         Map<String, Object> sessionAttributes = input.getAttributesManager().getSessionAttributes();
 
         return (String) sessionAttributes.getOrDefault(LAST_INTENT, "none");
+    }
+
+    /**
+     * liefert den wert eines SessionAttributs
+     * (liefert "none", falls das SessionAttribut nicht vorhanden ist)
+     *
+     * @param input
+     * @param key
+     * @return
+     */
+    public static Object getSingleSessionAttribute(HandlerInput input, String key){
+        Map<String, Object> sessionAttributes = input.getAttributesManager().getSessionAttributes();
+
+        return sessionAttributes.getOrDefault(key, "none");
     }
 
     /**

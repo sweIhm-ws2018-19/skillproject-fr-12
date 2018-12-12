@@ -20,7 +20,7 @@ public final class RezeptService {
         return instance;
     }
 
-    public static ArrayList<ZutatMenge> getZutaten(int rezeptID) {
+    public static ArrayList<ZutatMenge> getZutaten(int rezeptID, int portionen) {
         ArrayList<Zutat> alleZutaten = JsonService.zutatenEinlesen();
         Rezept rezept = getRezept(rezeptID);
 
@@ -32,7 +32,7 @@ public final class RezeptService {
         for (int i = 0; i < zutaten.size(); i++) {
             Zutat ztt = alleZutaten.get(zutaten.get(i));
 
-            zutatenMitMenge.add(zutatMengeBauen(ztt, mengen.get(i)));
+            zutatenMitMenge.add(zutatMengeBauen(ztt, mengen.get(i) * portionen));
         }
 
         return zutatenMitMenge;
