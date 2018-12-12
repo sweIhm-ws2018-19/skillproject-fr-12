@@ -26,7 +26,7 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
         Map<String, Slot> slots = intent.getSlots();
 
         final ArrayList<String> zutatStringList = (ArrayList<String>) soupit.hilfsklassen.SlotFilter.getIngredient(slots);
-
+        ArrayList<String> zutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_AUSSCHLIESSEN_KEY);
         final String speechText;
         final String repromptText;
         boolean isAskResponse = false;
@@ -40,10 +40,10 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
             if (zutatStringList.size() == 1) {
 
                 speechText =
-                        "Volgendes Rezept enthält eine Zutat, die ausgeschlossen wurden " + recipies.get(0);
+                        "Rezepte welche die Zutat " + zutatenListe.get(0) + " enthalten, werden in Zukunft nichtmehr ausgegeben.";
                 repromptText = speechText;
             } else {
-                speechText = "Volgende Rezepte enthalten Zutaten, die ausgeschlossen wurden " + recipies.toString();
+                speechText = "Rezepte welche die Zutaten " + zutatenListe.toString() + " enthalten, werden in Zukunft nichtmehr ausgegeben.";
                 repromptText = speechText;
             }
 
