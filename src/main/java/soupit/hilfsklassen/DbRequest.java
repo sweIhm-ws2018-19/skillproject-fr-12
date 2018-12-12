@@ -59,6 +59,7 @@ public final class DbRequest {
             }
             if (match) {
                 foundRezepte.add(new RezeptCount(rezept, matchCount));
+                match = false;
             }
         }
 
