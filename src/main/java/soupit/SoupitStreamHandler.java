@@ -32,8 +32,7 @@ public class SoupitStreamHandler extends SkillStreamHandler {
                         new ZutatenAusschliessenAbfrageHandler(),
                         new ZutatenAusschliessenHandler(),
                         new ZutatenAuswahlHandler(),
-                        new RezeptAuswahlHandler(),
-                        new ZutatenMengeBerechnenHandler()
+                        new RezeptAuswahlHandler()
                 )
                 // Add your skill id below
                 //.withSkillId("")
