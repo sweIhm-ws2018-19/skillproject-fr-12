@@ -4,6 +4,7 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
+import soupit.hilfsklassen.SlotFilter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,7 +27,6 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
         Map<String, Slot> slots = intent.getSlots();
 
         final ArrayList<String> zutatStringList = (ArrayList<String>) soupit.hilfsklassen.SlotFilter.getIngredient(slots);
-        ArrayList<String> zutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_AUSSCHLIESSEN_KEY);
         final String speechText;
         final String repromptText;
         boolean isAskResponse = false;
@@ -34,16 +34,18 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
         input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_AUSSCHLIESSEN_KEY, zutatStringList));
         ArrayList<String> recipies = (ArrayList<String>) soupit.hilfsklassen.DbRequest.getRecipies(zutatStringList);
 
+        String[] ausgeschlosseneZutat = SlotFilter.getSuppenWahl(slots);
+
 
         if (!recipies.isEmpty()) {
 
             if (zutatStringList.size() == 1) {
 
                 speechText =
-                        "Rezepte welche die Zutat " + zutatenListe.get(0) + " enthalten, werden in Zukunft nichtmehr ausgegeben.";
+                        "Rezepte welche die Zutat " + ausgeschlosseneZutat[0] + " enthalten, werden in Zukunft nichtmehr ausgegeben.";
                 repromptText = speechText;
             } else {
-                speechText = "Rezepte welche die Zutaten " + zutatenListe.toString() + " enthalten, werden in Zukunft nichtmehr ausgegeben.";
+                speechText = "Rezepte welche die Zutaten " + ausgeschlosseneZutat.toString() + " enthalten, werden in Zukunft nichtmehr ausgegeben.";
                 repromptText = speechText;
             }
 
