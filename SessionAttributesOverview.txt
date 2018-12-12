@@ -4,3 +4,4 @@
 "LAST_INTENT": (String) Name des zuletzt ausgeführten Intents
 "REZEPT": (Rezept) von Nutzer ausgewähltes Rezept
 "PORTIONEN": (int) Anzahl an Portionen die zubereitet werden sollen
+"REZEPT_FOUND": ArrayList<Rezept> die gefunden Rezepte
