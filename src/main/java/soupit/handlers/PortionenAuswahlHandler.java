@@ -31,12 +31,14 @@ public class PortionenAuswahlHandler implements RequestHandler {
         String speechText;
 
         if (slotValue.equalsIgnoreCase("none")) {
-            speechText = "Bitte nenne die Anzahl an Portionen.";
+            speechText = "Entschuldigung, ich habe dich nicht verstanden. Wiederhole es bitte noch einmal.";
+            //würde mehr Sinn machen, entspricht jedoch nicht Invocable...
+            //speechText = "Bitte nenne die Anzahl an Portionen.";
         } else {
             int anzahl = Integer.parseInt(slotValue);
             SessionAttributeService.setSingleSessionAttribute(input, PORTIONEN, anzahl);
 
-            speechText = TextService.zutatenVonRezeptVorlesen(RezeptService.getZutaten(0, anzahl));
+            speechText = TextService.zutatenVonRezeptVorlesen(RezeptService.getZutaten(0, anzahl), anzahl);
         }
 
         SessionAttributeService.updateLastIntent(input, "PortionenAuswahlIntent");

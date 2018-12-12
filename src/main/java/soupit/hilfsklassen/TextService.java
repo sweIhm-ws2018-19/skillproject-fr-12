@@ -22,8 +22,8 @@ public class TextService {
         return instance;
     }
 
-    public static String zutatenVonRezeptVorlesen(ArrayList<ZutatMenge> zutaten) {
-        String response = "Für die Zubereitung benötigst du folgende Zutaten";
+    public static String zutatenVonRezeptVorlesen(ArrayList<ZutatMenge> zutaten, int portionen) {
+        String response = "Für die Zubereitung für " + portionen + " Personen benötigst du mehrere Zutaten. Lege dir folgendes bereit: ";
 
         for (ZutatMenge zutat : zutaten) {
             response += SPACE + BREAK_HALF_SECOND + SPACE;
@@ -32,6 +32,6 @@ public class TextService {
                     + SPACE + zutat.getName();
         }
 
-        return response + ".";
+        return response + ". " + BREAK_SECOND + " Hast du alle Zutaten vorrätig?";
     }
 }
