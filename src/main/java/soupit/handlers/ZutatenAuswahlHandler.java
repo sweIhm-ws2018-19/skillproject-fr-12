@@ -20,6 +20,7 @@ import com.amazon.ask.response.ResponseBuilder;
 import soupit.hilfsklassen.DbRequest;
 import soupit.hilfsklassen.SessionAttributeService;
 import soupit.hilfsklassen.SlotFilter;
+import soupit.model.Rezept;
 
 import java.util.*;
 
@@ -49,17 +50,21 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
 
         SessionAttributeService.setSingleSessionAttribute(input, ZUTAT_KEY, zutatStringList);
-        ArrayList<String> recipies = (ArrayList<String>) DbRequest.getRecipies(zutatStringList);
+        ArrayList<Rezept> recipies = DbRequest.dynamoTest(zutatStringList);
 
         if (!recipies.isEmpty()) {
 
             if (zutatStringList.size() == 1) {
 
                 speechText =
-                        "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0);
+                        "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0).getName();
                 repromptText = speechText;
             } else {
-                speechText = "Ich kann dir folgende Rezepte vorschlagen " + recipies.toString();
+                String rezepte = "";
+                for (Rezept rezept : recipies){
+                    rezepte = rezepte.concat(rezept.getName()+ ", ");
+                }
+                speechText = "Ich kann dir folgende Rezepte vorschlagen " + rezepte;
                 repromptText = speechText;
             }
 
