@@ -12,6 +12,7 @@ import java.util.Optional;
 import static com.amazon.ask.request.Predicates.intentName;
 
 public class RezeptAuswahlHandler implements RequestHandler {
+    private final static String WIE_VIELE_PORTIONEN = "Wie viele Portionen möchtest du kochen?";
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -32,9 +33,13 @@ public class RezeptAuswahlHandler implements RequestHandler {
         // if-Bedingung falls rezepte leer hinzufügen
 
         if (suppenWahl[0].equals("Zahl")) {
-            speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeZahl(suppenWahl[1], rezepte));
+            speechText = WIE_VIELE_PORTIONEN;
+            //TODO index der ausgewählten Suppe muss in sessionAttributen gespeichert werden
+                    //String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeZahl(suppenWahl[1], rezepte));
         } else if (suppenWahl[0].equals("Suppe")) {
-            speechText = String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeText(suppenWahl[1], rezepte));
+            speechText = WIE_VIELE_PORTIONEN;
+            //TODO index der ausgewählten Suppe muss in sessionAttributen gespeichert werden
+            //String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeText(suppenWahl[1], rezepte));
         } else {
             // Der Nutzer hat keine valide Suppe ausgewählt
             speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle zuerst Zutaten aus.";

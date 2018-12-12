@@ -8,6 +8,7 @@ public class TextService {
     private TextService instance;
 
     private static final String BREAK_SECOND = "<break time=\"1s\"/>";
+    private static final String BREAK_HALF_SECOND = "<break time=\"500ms\"/>";
     private static final String SPACE = " ";
 
     private TextService() {
@@ -25,8 +26,10 @@ public class TextService {
         String response = "Für die Zubereitung benötigst du folgende Zutaten";
 
         for (ZutatMenge zutat : zutaten) {
-            response += SPACE + BREAK_SECOND + SPACE;
-            response += zutat.getMenge() + (!zutat.getEinheit().equalsIgnoreCase("none") ? (SPACE + zutat.getEinheit()) : "") + SPACE + zutat.getName();
+            response += SPACE + BREAK_HALF_SECOND + SPACE;
+            response += zutat.getMenge()
+                    + (!zutat.getEinheit().equalsIgnoreCase("none") ? (SPACE + zutat.getEinheit()) : "")
+                    + SPACE + zutat.getName();
         }
 
         return response + ".";

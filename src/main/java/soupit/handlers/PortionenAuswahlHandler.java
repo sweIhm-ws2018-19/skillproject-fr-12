@@ -28,7 +28,7 @@ public class PortionenAuswahlHandler implements RequestHandler {
         Map<String, Slot> slots = intent.getSlots();
         String slotValue = SlotFilter.getSingleSlotInputValue(slots, "Anzahl");
 
-        String speechText = "test";
+        String speechText;
 
         if (slotValue.equalsIgnoreCase("none")) {
             speechText = "Bitte nenne die Anzahl an Portionen.";
