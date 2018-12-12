@@ -115,7 +115,7 @@ public class JsonService {
         }
         JSONArray jsonMengen = j.getJSONArray("mengen");
         for (Object menge : jsonMengen) {
-            newMengen.add((Double) menge);
+            newMengen.add(Double.parseDouble(menge.toString()));
         }
 
         Rezept r2 = new Rezept(newRezeptID, newName, newSchritte, newZutaten, newMengen);
