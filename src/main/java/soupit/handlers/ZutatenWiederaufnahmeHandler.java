@@ -39,26 +39,23 @@ public class ZutatenWiederaufnahmeHandler implements RequestHandler {
         final String repromptText;
         boolean isAskResponse = false;
 
-        // TODO: 13.12.2018 If(!AusgeschlosseneZutat isEmpty()) momentan -> If(!wiederherZustellendeZutatAusMomentanemHandler isEmpty())
         // TODO: 13.12.2018  speechText anpassen
-        // TODO: 13.12.2018 entferne "wieder aufzunehmende Zutat" aus List von "auszuschließenden Zutaten"
-        if(!ausgeschlosseneZutatenListe.isEmpty()){
-            if (ausgeschlosseneZutatenListe.containsAll(getIngredient(slots))){
-            ausgeschlosseneZutatenListe.remove(getIngredient(slots).get(0));
+        if (ausgeschlosseneZutatenListe != null
+            //|| !ausgeschlosseneZutatenListe.isEmpty()
+                ) {
+            if (ausgeschlosseneZutatenListe.containsAll(getIngredient(slots))) {
+                ausgeschlosseneZutatenListe.removeAll(getIngredient(slots));
                 speechText = "Die Zutat " + getIngredient(slots).toString() + " soll wiederhergestellt werden." +
-                " Die Liste der Ausgeschlossenen Zutaten enthält noch die folgenden Zutaten " + ausgeschlosseneZutatenListe.toString();
+                        " Die Liste der Ausgeschlossenen Zutaten enthält noch " + ausgeschlosseneZutatenListe.toString();
                 repromptText = speechText;
             } else {
                 speechText = "Zutat wurde nicht ausgeschlossen und konnte deshalb nicht wiederhergestellt werden.";
                 repromptText = speechText;
             }
-//            speechText = "test";
-//            repromptText = speechText;
         } else {
-            //wenn Auszuschließende Zutat kein Amazon.food oder die Liste ist leer -> fehler
-            speechText = "Es wurde keine Zutat ausgeschlossen.";
+            speechText = "Es wurden noch keine Zutaten ausgeschlossen. Sagen Sie zum Beispiel: Ich möchte Kartoffeln ausschließen";
             repromptText = speechText;
-            //isAskResponse = true;
+            isAskResponse = true;
         }
 
 
