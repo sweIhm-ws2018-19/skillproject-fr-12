@@ -296,6 +296,157 @@
           "values": [
             {
               "name": {
+                "value": "käse"
+              }
+            },
+            {
+              "name": {
+                "value": "baguette"
+              }
+            },
+            {
+              "name": {
+                "value": "mehl"
+              }
+            },
+            {
+              "name": {
+                "value": "tomatenmark"
+              }
+            },
+            {
+              "name": {
+                "value": "zucker"
+              }
+            },
+            {
+              "name": {
+                "value": "ingwer"
+              }
+            },
+            {
+              "name": {
+                "value": "kokosmilch"
+              }
+            },
+            {
+              "name": {
+                "value": "oragensaft"
+              }
+            },
+            {
+              "name": {
+                "value": "pinienkerne",
+                "synonyms": [
+                  "pinienkern"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "toastbrot",
+                "synonyms": [
+                  "toast brot",
+                  "toast"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "kürbiskernöl"
+              }
+            },
+            {
+              "name": {
+                "value": "muskat"
+              }
+            },
+            {
+              "name": {
+                "value": "milch"
+              }
+            },
+            {
+              "name": {
+                "value": "butter"
+              }
+            },
+            {
+              "name": {
+                "value": "selleriknolle"
+              }
+            },
+            {
+              "name": {
+                "value": "knoblauchzehe"
+              }
+            },
+            {
+              "name": {
+                "value": "currypulver"
+              }
+            },
+            {
+              "name": {
+                "value": "sonnenblumenkerne",
+                "synonyms": [
+                  "sonnenblumenkern"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "zitronensaft"
+              }
+            },
+            {
+              "name": {
+                "value": "walnussöl"
+              }
+            },
+            {
+              "name": {
+                "value": "minze"
+              }
+            },
+            {
+              "name": {
+                "value": "walnusskern",
+                "synonyms": [
+                  "walnusskerne"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "pfeffer"
+              }
+            },
+            {
+              "name": {
+                "value": "salz"
+              }
+            },
+            {
+              "name": {
+                "value": "mandelmus"
+              }
+            },
+            {
+              "name": {
+                "value": "olivenöl"
+              }
+            },
+            {
+              "name": {
+                "value": "erbsen",
+                "synonyms": [
+                  "erbse"
+                ]
+              }
+            },
+            {
+              "name": {
                 "value": "champignon",
                 "synonyms": [
                   "champignon",
@@ -326,8 +477,7 @@
               "name": {
                 "value": "knoblauch",
                 "synonyms": [
-                  "knoblauch",
-                  "knoblauchzehe"
+                  "knoblauch"
                 ]
               }
             },
@@ -405,6 +555,31 @@
         {
           "name": "SUPPEN",
           "values": [
+            {
+              "name": {
+                "value": "zwiebelsuppe"
+              }
+            },
+            {
+              "name": {
+                "value": "selleriesuppe"
+              }
+            },
+            {
+              "name": {
+                "value": "möhrencremesuppe"
+              }
+            },
+            {
+              "name": {
+                "value": "kürbissuppe"
+              }
+            },
+            {
+              "name": {
+                "value": "erbsensuppe"
+              }
+            },
             {
               "name": {
                 "value": "karottensuppe"
