@@ -13,8 +13,6 @@ public class ZutatenAusschliessenAbfrageHandler implements RequestHandler {
 
     public static final String ZUTAT_AUSSCHLIESSEN_KEY = "ZUTAT_AUSSCHLIESSEN";
 
-    private static ArrayList<String> ausgeschlosseneZutatenListe;
-
     @Override
     public boolean canHandle(HandlerInput input) { return input.matches(intentName("ZutatenAusschliessenAbfrageIntent")); }
 
@@ -22,7 +20,7 @@ public class ZutatenAusschliessenAbfrageHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput input) {
         String speechText;
-        ausgeschlosseneZutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_AUSSCHLIESSEN_KEY);
+        ArrayList<String> ausgeschlosseneZutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_AUSSCHLIESSEN_KEY);
 
         if (ausgeschlosseneZutatenListe != null) {
             if (ausgeschlosseneZutatenListe.size() == 1) {
@@ -40,13 +38,5 @@ public class ZutatenAusschliessenAbfrageHandler implements RequestHandler {
                 .withSimpleCard("SoupitSession", speechText)
                 .withShouldEndSession(false)
                 .build();
-    }
-
-    public static ArrayList<String> getAusgeschlosseneZutatenListe() {
-        return ausgeschlosseneZutatenListe;
-    }
-
-    public static void setAusgeschlosseneZutatenListe(ArrayList<String> ausgeschlosseneZutatenListe) {
-        ZutatenAusschliessenAbfrageHandler.ausgeschlosseneZutatenListe = ausgeschlosseneZutatenListe;
     }
 }
