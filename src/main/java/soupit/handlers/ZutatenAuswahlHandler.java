@@ -50,7 +50,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
 
         SessionAttributeService.setSingleSessionAttribute(input, ZUTAT_KEY, zutatStringList);
-        ArrayList<Rezept> recipies = DbRequest.dynamoTest(zutatStringList);
+        ArrayList<Rezept> recipies = DbRequest.getRecipies(zutatStringList);
 
         if (!recipies.isEmpty()) {
 
