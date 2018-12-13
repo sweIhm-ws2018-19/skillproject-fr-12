@@ -13,19 +13,22 @@ public class ZutatenAusschliessenAbfrageHandler implements RequestHandler {
 
     public static final String ZUTAT_AUSSCHLIESSEN_KEY = "ZUTAT_AUSSCHLIESSEN";
 
+    private static ArrayList<String> ausgeschlosseneZutatenListe;
+
     @Override
     public boolean canHandle(HandlerInput input) { return input.matches(intentName("ZutatenAusschliessenAbfrageIntent")); }
+
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
         String speechText;
-        ArrayList<String> zutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_AUSSCHLIESSEN_KEY);
+        ausgeschlosseneZutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_AUSSCHLIESSEN_KEY);
 
-        if (zutatenListe != null) {
-            if (zutatenListe.size() == 1) {
-                speechText = "Deine ausgeschlosse Zutat ist " + zutatenListe.get(0);
+        if (ausgeschlosseneZutatenListe != null) {
+            if (ausgeschlosseneZutatenListe.size() == 1) {
+                speechText = "Deine ausgeschlosse Zutat ist " + ausgeschlosseneZutatenListe.get(0);
             } else {
-                speechText = "Deine ausgeschlossenen Zutaten sind: " + zutatenListe.toString();
+                speechText = "Deine ausgeschlossenen Zutaten sind: " + ausgeschlosseneZutatenListe.toString();
             }
         } else {
             // es wurden noch keine Zutaten genannt
@@ -37,5 +40,13 @@ public class ZutatenAusschliessenAbfrageHandler implements RequestHandler {
                 .withSimpleCard("SoupitSession", speechText)
                 .withShouldEndSession(false)
                 .build();
+    }
+
+    public static ArrayList<String> getAusgeschlosseneZutatenListe() {
+        return ausgeschlosseneZutatenListe;
+    }
+
+    public static void setAusgeschlosseneZutatenListe(ArrayList<String> ausgeschlosseneZutatenListe) {
+        ZutatenAusschliessenAbfrageHandler.ausgeschlosseneZutatenListe = ausgeschlosseneZutatenListe;
     }
 }

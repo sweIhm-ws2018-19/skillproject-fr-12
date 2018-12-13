@@ -13,6 +13,7 @@ import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static soupit.handlers.ZutatenAusschliessenAbfrageHandler.ZUTAT_AUSSCHLIESSEN_KEY;
+import static soupit.handlers.ZutatenAusschliessenAbfrageHandler.getAusgeschlosseneZutatenListe;
 import static soupit.hilfsklassen.SlotFilter.getIngredient;
 
 public class ZutatenWiederaufnahmeHandler implements RequestHandler {
@@ -41,9 +42,16 @@ public class ZutatenWiederaufnahmeHandler implements RequestHandler {
         // TODO: 13.12.2018 If(!AusgeschlosseneZutat isEmpty()) momentan -> If(!wiederherZustellendeZutatAusMomentanemHandler isEmpty())
         // TODO: 13.12.2018  speechText anpassen
         // TODO: 13.12.2018 entferne "wieder aufzunehmende Zutat" aus List von "auszuschließenden Zutaten"
-        if(!getIngredient(slots).isEmpty()){
-            speechText = "Die Zutat " + getIngredient(slots).toString() + " soll wiederhergestellt werden.";
-            repromptText = speechText;
+        if(!getAusgeschlosseneZutatenListe().isEmpty()){
+            if (getAusgeschlosseneZutatenListe().contains(getIngredient(slots))){
+            getAusgeschlosseneZutatenListe().remove(getIngredient(slots));
+                speechText = "Die Zutat " + getIngredient(slots).toString() + " soll wiederhergestellt werden." +
+                " Die Liste der Ausgeschlossenen Zutaten enthält noch die folgenden Zutaten " + getAusgeschlosseneZutatenListe();
+                repromptText = speechText;
+            } else {
+                speechText = "Zutat wurde nicht ausgeschlossen und konnte deshalb nicht wiederhergestellt werden.";
+                repromptText = speechText;
+            }
         } else {
             speechText = "Es wurde keine Zutat ausgeschlossen.";
             repromptText = speechText;
