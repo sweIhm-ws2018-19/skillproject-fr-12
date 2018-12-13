@@ -1,5 +1,6 @@
 package soupit.hilfsklassen;
 
+import soupit.model.Rezept;
 import soupit.model.ZutatMenge;
 
 import java.util.ArrayList;
@@ -33,5 +34,9 @@ public class TextService {
         }
 
         return response + ". " + BREAK_SECOND + " Hast du alle Zutaten vorrätig?";
+    }
+
+    public static String schritteVonRezeptVorlesen(Rezept rezept){
+        return "hier werden die schritte vorgelesen";
     }
 }

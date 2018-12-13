@@ -3,6 +3,8 @@ package soupit.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
+import soupit.hilfsklassen.SessionAttributeService;
+import soupit.hilfsklassen.TextService;
 
 import java.util.Optional;
 
@@ -16,12 +18,13 @@ public class YesIntentHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Du hast Ja gesagt.";
-        String repromptText = "Welche Zutaten möchtest du verwenden?";
+        String speechText = TextService.schritteVonRezeptVorlesen(null);
+
+        SessionAttributeService.updateLastIntent(input, "YesIntent");
+
         return input.getResponseBuilder()
                 .withSimpleCard("SoupitSession", speechText)
                 .withSpeech(speechText)
-                .withReprompt(repromptText)
                 .withShouldEndSession(false)
                 .build();
     }
