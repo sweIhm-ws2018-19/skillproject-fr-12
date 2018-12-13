@@ -34,10 +34,8 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
         boolean isAskResponse = false;
 
         input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_AUSSCHLIESSEN_KEY, zutatStringList));
-        ArrayList<Rezept> recipies = (ArrayList<Rezept>) soupit.hilfsklassen.DbRequest.getRecipies(zutatStringList);
 
-
-        if (!recipies.isEmpty()) {
+        if (!zutatStringList.isEmpty()) {
 
             if (zutatStringList.size() == 1) {
 
