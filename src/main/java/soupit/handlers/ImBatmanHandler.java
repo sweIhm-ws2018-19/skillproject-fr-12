@@ -27,7 +27,7 @@ public class ImBatmanHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("ZutatenAbfrageIntent"));
+        return input.matches(intentName("ImBatmanIntent"));
     }
 
     @Override
