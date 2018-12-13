@@ -45,6 +45,7 @@ public class ZutatenWiederaufnahmeHandler implements RequestHandler {
         } else {
             speechText = "Es wurde keine Zutat ausgeschlossen.";
             repromptText = speechText;
+            isAskResponse = true;
         }
 
 
