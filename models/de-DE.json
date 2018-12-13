@@ -132,6 +132,8 @@
             }
           ],
           "samples": [
+            "{Anzahl} personen",
+            "{Anzahl} person",
             "{Anzahl} portionen",
             "für {Anzahl} personen",
             "für {Anzahl}",
@@ -146,6 +148,23 @@
             "{Anzahl} leute sollten satt werden",
             "{Anzahl} leute sollen satt werden",
             "ich will {Anzahl} portionen"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "ImBatmanIntent",
+          "slots": [],
+          "samples": [
+            "wer bist du"
+          ]
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": [
+            "Ja"
           ]
         }
       ],
