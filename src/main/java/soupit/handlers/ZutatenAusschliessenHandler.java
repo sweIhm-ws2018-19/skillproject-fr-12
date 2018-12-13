@@ -13,6 +13,7 @@ import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static soupit.handlers.ZutatenAusschliessenAbfrageHandler.ZUTAT_AUSSCHLIESSEN_KEY;
+import static soupit.hilfsklassen.SlotFilter.*;
 
 public class ZutatenAusschliessenHandler implements RequestHandler {
     @Override
@@ -26,7 +27,7 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
         Intent intent = intentRequest.getIntent();
         Map<String, Slot> slots = intent.getSlots();
 
-        final ArrayList<String> zutatStringList = (ArrayList<String>) soupit.hilfsklassen.SlotFilter.getIngredient(slots);
+        final ArrayList<String> zutatStringList = (ArrayList<String>) getIngredient(slots);
         final String speechText;
         final String repromptText;
         boolean isAskResponse = false;
@@ -42,10 +43,10 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
             if (zutatStringList.size() == 1) {
 
                 speechText =
-                        "Rezepte welche die Zutat " + ausgeschlosseneZutat[0] + " enthalten, werden in Zukunft nichtmehr ausgegeben.";
+                        "Rezepte welche die Zutat " + getIngredient(slots).get(0) + " enthalten, werden in Zukunft nichtmehr ausgegeben.";
                 repromptText = speechText;
             } else {
-                speechText = "Rezepte welche die Zutaten " + ausgeschlosseneZutat.toString() + " enthalten, werden in Zukunft nichtmehr ausgegeben.";
+                speechText = "Rezepte welche die Zutaten " + getIngredient(slots).toString() + " enthalten, werden in Zukunft nichtmehr ausgegeben.";
                 repromptText = speechText;
             }
 
