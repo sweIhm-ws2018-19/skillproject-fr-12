@@ -45,6 +45,8 @@ public class TextService {
             response += SPACE + BREAK_SECOND + SPACE + schritt;
         }
 
+        response += "Ich hoffe die Suppe schmeckt und wünsche einen guten Appetit. Bis zum nächsten Mal.";
+
         return response;
     }
 }
