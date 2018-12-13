@@ -41,9 +41,8 @@ public class RezeptAuswahlHandler implements RequestHandler {
             speechText = WIE_VIELE_PORTIONEN;
             //TODO index der ausgewählten Suppe muss in sessionAttributen gespeichert werden
             int suppenIndex = checkSuppeZahl(suppenWahl[1], rezepte);
-            if (suppenIndex >= 0 && suppenIndex <= rezepte.size()) {
+            if (suppenIndex >= 0 && suppenIndex < rezepte.size()) {
                 SessionAttributeService.setSingleSessionAttribute(input, REZEPT_INDEX, suppenIndex);
-                SessionAttributeService.setSingleSessionAttribute(input, REZEPT, rezepte.get(suppenIndex));
             } else {
                 speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle eines der genannten Rezepte aus.";
             }
@@ -51,9 +50,8 @@ public class RezeptAuswahlHandler implements RequestHandler {
             speechText = WIE_VIELE_PORTIONEN;
             //TODO index der ausgewählten Suppe muss in sessionAttributen gespeichert werden
             int suppenIndex = checkSuppeText(suppenWahl[1], rezepte);
-            if (suppenIndex >= 0 && suppenIndex <= rezepte.size()) {
+            if (suppenIndex >= 0 && suppenIndex < rezepte.size()) {
                 SessionAttributeService.setSingleSessionAttribute(input, REZEPT_INDEX, suppenIndex);
-                SessionAttributeService.setSingleSessionAttribute(input, REZEPT, rezepte.get(suppenIndex));
             } else {
                 speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle eines der genannten Rezepte aus.";
             }
@@ -97,7 +95,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
         int index = Integer.parseInt(suppe);
 
         if (index <= rezepte.size()) {
-            suppenIndex = index;
+            suppenIndex = index - 1;
         }
 
         return suppenIndex;

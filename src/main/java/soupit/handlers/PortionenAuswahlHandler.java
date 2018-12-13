@@ -9,6 +9,7 @@ import soupit.hilfsklassen.SlotFilter;
 import soupit.hilfsklassen.TextService;
 import soupit.model.Rezept;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
 
@@ -16,7 +17,8 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class PortionenAuswahlHandler implements RequestHandler {
     private final static String PORTIONEN = "PORTIONEN";
-    private final static String REZEPT = "REZEPT";
+    private final static String REZEPT_FOUND = "REZEPT_FOUND";
+    private final static String REZEPT_INDEX = "REZEPT_INDEX";
 
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("PortionenAuswahlIntent"));
@@ -40,9 +42,12 @@ public class PortionenAuswahlHandler implements RequestHandler {
             int anzahl = Integer.parseInt(slotValue);
             SessionAttributeService.setSingleSessionAttribute(input, PORTIONEN, anzahl);
 
-            Rezept rezept = (Rezept) SessionAttributeService.getSingleSessionAttribute(input, REZEPT);
+            int suppenIndex = (int) SessionAttributeService.getSingleSessionAttribute(input, REZEPT_INDEX);
 
-            speechText = TextService.zutatenVonRezeptVorlesen(RezeptService.getZutaten(rezept, anzahl), anzahl);
+            speechText = ((ArrayList<Rezept>) SessionAttributeService.getSingleSessionAttribute(input, REZEPT_FOUND)).get(suppenIndex).toString();
+
+            //Rezept rezept = ((ArrayList<Rezept>) SessionAttributeService.getSingleSessionAttribute(input, REZEPT_FOUND)).get(suppenIndex);
+            //speechText = TextService.zutatenVonRezeptVorlesen(RezeptService.getZutaten(rezept, anzahl), anzahl);
         }
 
         SessionAttributeService.updateLastIntent(input, "PortionenAuswahlIntent");
