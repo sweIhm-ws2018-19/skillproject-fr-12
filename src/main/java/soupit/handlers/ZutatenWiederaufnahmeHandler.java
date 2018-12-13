@@ -18,7 +18,7 @@ import static soupit.hilfsklassen.SlotFilter.getIngredient;
 public class ZutatenWiederaufnahmeHandler implements RequestHandler {
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("ZutatenAuswahlIntent"));
+        return input.matches(intentName("ZutatenWiederaufnahmeIntent"));
     }
 
     @Override
