@@ -24,7 +24,7 @@ public class ZutatenAusschliessenAbfrageHandler implements RequestHandler {
 
         if (ausgeschlosseneZutatenListe != null) {
             if (ausgeschlosseneZutatenListe.size() == 1) {
-                speechText = "Deine ausgeschlosse Zutat ist " + ausgeschlosseneZutatenListe.get(0);
+                speechText = "Deine ausgeschlossene Zutat ist " + ausgeschlosseneZutatenListe.get(0);
             } else {
                 speechText = "Deine ausgeschlossenen Zutaten sind: " + ausgeschlosseneZutatenListe.toString();
             }
