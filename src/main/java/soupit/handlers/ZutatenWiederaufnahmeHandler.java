@@ -31,14 +31,16 @@ public class ZutatenWiederaufnahmeHandler implements RequestHandler {
 
         final ArrayList<String> zutatStringList = (ArrayList<String>) SlotFilter.getIngredient(slots);
         //ausgeschlossene Zutaten
-        input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_AUSSCHLIESSEN_KEY, zutatStringList));
+        //input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_AUSSCHLIESSEN_KEY, zutatStringList));
 
 
         final String speechText;
         final String repromptText;
         boolean isAskResponse = false;
 
-
+        // TODO: 13.12.2018 If(!AusgeschlosseneZutat isEmpty()) momentan -> If(!wiederherZustellendeZutatAusMomentanemHandler isEmpty())
+        // TODO: 13.12.2018  speechText anpassen
+        // TODO: 13.12.2018 entferne "wieder aufzunehmende Zutat" aus List von "auszuschließenden Zutaten"
         if(!getIngredient(slots).isEmpty()){
             speechText = "Die Zutat " + getIngredient(slots).toString() + " soll wiederhergestellt werden.";
             repromptText = speechText;
