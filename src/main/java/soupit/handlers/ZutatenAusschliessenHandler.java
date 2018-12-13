@@ -35,8 +35,6 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
         input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_AUSSCHLIESSEN_KEY, zutatStringList));
         ArrayList<String> recipies = (ArrayList<String>) soupit.hilfsklassen.DbRequest.getRecipies(zutatStringList);
 
-        String[] ausgeschlosseneZutat = SlotFilter.getSuppenWahl(slots);
-
 
         if (!recipies.isEmpty()) {
 
