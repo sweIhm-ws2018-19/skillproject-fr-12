@@ -38,9 +38,11 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
+
         Request request = input.getRequestEnvelope().getRequest();
         IntentRequest intentRequest = (IntentRequest) request;
         Intent intent = intentRequest.getIntent();
+        //get slots from current intend
         Map<String, Slot> slots = intent.getSlots();
 
 

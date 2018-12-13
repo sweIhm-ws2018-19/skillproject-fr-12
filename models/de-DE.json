@@ -99,6 +99,105 @@
           ]
         },
         {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "ZutatenAusschliessenIntent",
+          "slots": [
+            {
+              "name": "ZutatAusschliessen_eins",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatAusschliessen_zwei",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatAusschliessen_drei",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatAusschliessen_vier",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatAusschliessen_fuenf",
+              "type": "AMAZON.Food"
+            }
+          ],
+          "samples": [
+            "{ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} {ZutatAusschliessen_drei} {ZutatAusschliessen_vier} {ZutatAusschliessen_fuenf} ausschließen",
+            "{ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} {ZutatAusschliessen_drei} {ZutatAusschliessen_vier} ausschließen",
+            "{ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} {ZutatAusschliessen_drei} ausschließen",
+            "{ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} ausschließen",
+            "{ZutatAusschliessen_eins} ausschließen",
+            "Ich möchte {ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} {ZutatAusschliessen_drei} {ZutatAusschliessen_vier} {ZutatAusschliessen_fuenf} ausschließen",
+            "Ich möchte {ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} {ZutatAusschliessen_drei} {ZutatAusschliessen_vier} ausschließen",
+            "Ich möchte {ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} {ZutatAusschliessen_drei} ausschließen",
+            "Ich möchte {ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} ausschließen",
+            "Ich möchte {ZutatAusschliessen_eins} ausschließen"
+          ]
+        },
+        {
+          "name": "ZutatenAusschliessenAbfrageIntent",
+          "slots": [],
+          "samples": [
+            "ausgeschlossene Zutat",
+            "Was sind meine ausgeschlossenen Zutaten",
+            "Was ist meine ausgeschlossene Zutat",
+            "ausgeschlossene Zutaten",
+            "Wie lauten meine ausgeschlossenen Zutaten"
+          ]
+        },
+        {
+          "name": "ZutatenWiederaufnahmeIntent",
+          "slots": [
+            {
+              "name": "ZutatWiederaufnahme_eins",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatWiederaufnahme_zwei",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatWiederaufnahme_drei",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatWiederaufnahme_vier",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatWiederaufnahme_fuenf",
+              "type": "AMAZON.Food"
+            }
+          ],
+          "samples": [
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} {ZutatWiederaufnahme_fuenf} wieder verwenden",
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} wieder verwenden",
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} wieder verwenden",
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} wieder verwenden",
+            "{ZutatWiederaufnahme_eins} wieder verwenden",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} {ZutatWiederaufnahme_fuenf} wieder verwenden können",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} {ZutatWiederaufnahme_fuenf} wieder verwenden",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} wieder verwenden können",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} wieder verwenden",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} wieder verwenden können",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} wieder verwenden",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} wieder verwenden können",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} wieder verwenden",
+            "Ich möchte {ZutatWiederaufnahme_eins} wieder verwenden können",
+            "Ich möchte {ZutatWiederaufnahme_eins} wieder verwenden",
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} {ZutatWiederaufnahme_fuenf} wieder aufnehmen",
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} wieder aufnehmen",
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} wieder aufnehmen",
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} wieder aufnehmen",
+            "{ZutatWiederaufnahme_eins} wieder aufnehmen"
+          ]
+        },
+        {
           "name": "ZubereitungStartenIntent",
           "slots": [],
           "samples": [
@@ -149,10 +248,6 @@
             "{Anzahl} leute sollen satt werden",
             "ich will {Anzahl} portionen"
           ]
-        },
-        {
-          "name": "AMAZON.NavigateHomeIntent",
-          "samples": []
         },
         {
           "name": "ImBatmanIntent",
@@ -293,6 +388,8 @@
               "name": {
                 "value": "kartoffel",
                 "synonyms": [
+                  "Erdäpfel",
+                  "erdäpfel",
                   "kartoffel",
                   "erdapfel",
                   "Erdapfel",

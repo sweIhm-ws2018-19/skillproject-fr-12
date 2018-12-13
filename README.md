@@ -3,7 +3,7 @@
 #### Systemidee:
 
 Soup-IT ist eine Anwendung, die den Nutzer bei der Zubereitung von Suppen unterstützen soll. Da das System für die Amazon Alexa-Plattform entwickelt wird, ist es wichtig, dass die komplette User Interaktion auf verbaler Ebene abläuft.
-Das System sieht vor, dass der Nutzer eine Liste von Zutaten vorschlägt, welche ihm zur Verfügung stehen. Auf Basis dieser Informationen soll Alexa eine Liste mit möglichen Rezepten ausgeben, welche die größten Übereinstimmungen mit der gegebenen Zutatenliste haben.
+Das System sieht vor, dass der Nutzer eine Liste von Zutaten vorschlägt, welche ihm zur Verfügung stehen. Auf Basis dieser Informationen soll Alexa eine Liste mit möglichen Rezepten ausgeben, welche die größten Übereinstimmungen mit der gegebenen ZutatenListe haben.
 Werden keine Zutaten des Nutzers vorgegeben, erfolgt kein Rezeptvorschlag. Zudem soll es dem Nutzer ermöglicht werden seine Essens-Präferenzen zu spezifizieren. Dadurch schlägt Alexa ausschließlich Rezepte auf Basis dieser Präferenzen vor.
 Nach der Wahl eines Rezeptes und Angabe der gewünschten Portionen werden alle benötigten Zutaten mit der jeweiligen Mengenangabe ausgegeben, sodass sich der Nutzer diese zurechtlegen kann. Sollte dem Nutzer für das gewählte Rezept eine Zutat fehlen, so soll es möglich sein, das Rezept zu wechseln oder die fehlende Zutat zur Amazon Einkaufsliste hinzuzufügen und mit dem Rezept zu einem späteren Zeitpunkt fortzufahren. Anderenfalls beginnt die Anwendung den Nutzer Schritt-für-Schritt durch den Kochprozess zu begleiten. Der Nutzer soll den Ausgabefluss der Rezeptzubereitung selbst mit „weiter“ und „zurück“ steuern können.
 
