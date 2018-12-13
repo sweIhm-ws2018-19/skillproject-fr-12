@@ -83,6 +83,8 @@ public final class RezeptService {
                     default:
                         response = "ein";
                 }
+            } else if (mengeInt < 0) {
+                response = "none";
             } else
                 response += mengeInt;
         } else {

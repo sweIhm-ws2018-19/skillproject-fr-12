@@ -5,6 +5,7 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
 import soupit.hilfsklassen.SlotFilter;
+import soupit.model.Rezept;
 
 import java.util.ArrayList;
 import java.util.Collections;

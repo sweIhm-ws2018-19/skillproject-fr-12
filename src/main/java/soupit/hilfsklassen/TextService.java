@@ -1,5 +1,6 @@
 package soupit.hilfsklassen;
 
+import soupit.model.Rezept;
 import soupit.model.ZutatMenge;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ public class TextService {
     private static final String BREAK_SECOND = "<break time=\"1s\"/>";
     private static final String BREAK_HALF_SECOND = "<break time=\"500ms\"/>";
     private static final String SPACE = " ";
+    private static final String NONE = "none";
 
     private TextService() {
         //empty
@@ -27,11 +29,25 @@ public class TextService {
 
         for (ZutatMenge zutat : zutaten) {
             response += SPACE + BREAK_HALF_SECOND + SPACE;
-            response += zutat.getMenge()
-                    + (!zutat.getEinheit().equalsIgnoreCase("none") ? (SPACE + zutat.getEinheit()) : "")
+            response += (!zutat.getMenge().equalsIgnoreCase(NONE) ? (zutat.getMenge()) : "")
+                    + (!zutat.getEinheit().equalsIgnoreCase(NONE) ? (SPACE + zutat.getEinheit()) : "")
                     + SPACE + zutat.getName();
         }
 
         return response + ". " + BREAK_SECOND + " Hast du alle Zutaten vorrätig?";
+    }
+
+    public static String schritteVonRezeptVorlesen(Rezept rezept){
+        String response = "Alles klar. Lass uns mit der Zubereitung der " + rezept.getName() + " beginnen.";
+
+        ArrayList<String> schritte = rezept.getSchritte();
+
+        for(String schritt: schritte){
+            response += SPACE + BREAK_SECOND + SPACE + schritt;
+        }
+
+        response += "Ich hoffe die Suppe schmeckt und wünsche einen guten Appetit. Bis zum nächsten Mal.";
+
+        return response;
     }
 }
