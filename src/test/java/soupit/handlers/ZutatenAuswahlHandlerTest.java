@@ -43,7 +43,7 @@ public class ZutatenAuswahlHandlerTest {
         Response response = handler.handle(inputMock).get();
 
         assertFalse(response.getShouldEndSession());
-        assertTrue(response.getOutputSpeech().toString().contains("Ich kann dir folgendes Rezept vorschlagen"));
+        assertTrue(response.getOutputSpeech().toString().contains("Ich kann dir anhand der genannten Zutaten"));
     }
 
     @Test
@@ -56,6 +56,6 @@ public class ZutatenAuswahlHandlerTest {
         Response response = handler.handle(inputMock).get();
 
         assertFalse(response.getShouldEndSession());
-        assertTrue(response.getOutputSpeech().toString().contains("Ich kann dir folgende Rezepte vorschlagen"));
+        assertTrue(response.getOutputSpeech().toString().contains("Ich kann dir anhand der genannten Zutaten"));
     }
 }

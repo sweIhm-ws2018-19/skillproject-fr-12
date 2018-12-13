@@ -68,11 +68,8 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
 
         if (!recipies.isEmpty()) {
-
             if (recipies.size() == 1) {
-
-                speechText =
-                        "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0).getName();
+                speechText = "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0).getName();
             } else {
                 String rezepte = this.suppenToString(recipies);
                 speechText = "Ich kann dir anhand der genannten Zutaten " + recipies.size() +  " Rezepte vorschlagen: " + rezepte;

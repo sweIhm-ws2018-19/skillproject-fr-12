@@ -16,7 +16,7 @@ import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
 public class LaunchRequestHandlerTest {
-    private final static String phrase1 = "Willkommen bei Soup-It!";
+    private final static String phrase1 = "Willkommen";
     private final static String phrase2 = "Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung.";
     private LaunchRequestHandler handler;
 

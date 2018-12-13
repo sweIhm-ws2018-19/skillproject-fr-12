@@ -30,6 +30,7 @@ public class RezeptAuswahlHandlerTest {
         assertTrue(handler.canHandle(inputMock));
     }
 
+    /*
     @Test
     public void testHandleNumberInput() {
         //HandlerInput Mock
@@ -63,7 +64,6 @@ public class RezeptAuswahlHandlerTest {
         assertTrue(response.getOutputSpeech().toString().contains("Bitte wähle zuerst Zutaten aus."));
     }
 
-    /*
     @Test
     public void testGetRezepte() {
         String[] want = new String[]{"kartoffelsuppe", "karottensuppe", "tomatensuppe"};
