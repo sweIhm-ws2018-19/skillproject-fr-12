@@ -43,8 +43,8 @@ public class ZutatenWiederaufnahmeHandler implements RequestHandler {
         // TODO: 13.12.2018  speechText anpassen
         // TODO: 13.12.2018 entferne "wieder aufzunehmende Zutat" aus List von "auszuschließenden Zutaten"
         if(!ausgeschlosseneZutatenListe.isEmpty()){
-            if (ausgeschlosseneZutatenListe.contains(getIngredient(slots))){
-            ausgeschlosseneZutatenListe.remove(getIngredient(slots));
+            if (ausgeschlosseneZutatenListe.containsAll(getIngredient(slots))){
+            ausgeschlosseneZutatenListe.remove(getIngredient(slots).get(0));
                 speechText = "Die Zutat " + getIngredient(slots).toString() + " soll wiederhergestellt werden." +
                 " Die Liste der Ausgeschlossenen Zutaten enthält noch die folgenden Zutaten " + ausgeschlosseneZutatenListe.toString();
                 repromptText = speechText;
@@ -55,6 +55,7 @@ public class ZutatenWiederaufnahmeHandler implements RequestHandler {
 //            speechText = "test";
 //            repromptText = speechText;
         } else {
+            //wenn Auszuschließende Zutat kein Amazon.food oder die Liste ist leer -> fehler
             speechText = "Es wurde keine Zutat ausgeschlossen.";
             repromptText = speechText;
             //isAskResponse = true;
