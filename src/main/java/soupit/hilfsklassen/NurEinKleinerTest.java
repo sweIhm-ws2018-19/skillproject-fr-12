@@ -13,6 +13,7 @@ import java.util.Arrays;
 
 public class NurEinKleinerTest {
 
+    /*
     public static void main(String... args){
         System.out.println(TextService.zutatenVonRezeptVorlesen(RezeptService.getZutaten(1, 1), 1));
     }
@@ -100,4 +101,5 @@ public class NurEinKleinerTest {
         System.out.println(r2.getMengen());
 
     }
+    */
 }

@@ -18,7 +18,7 @@ public class ZubereitungStartenHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = TextService.zutatenVonRezeptVorlesen(RezeptService.getZutaten(0, 1), 1);
+        String speechText = "pen1s";//TextService.zutatenVonRezeptVorlesen(RezeptService.getZutaten(0, 1), 1);
 
         SessionAttributeService.updateLastIntent(input, "ZubereitungStartenIntent");
 

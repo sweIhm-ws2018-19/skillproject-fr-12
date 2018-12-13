@@ -3,7 +3,6 @@ package soupit.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import jdk.internal.org.objectweb.asm.Handle;
 import soupit.hilfsklassen.SessionAttributeService;
 import soupit.hilfsklassen.SlotFilter;
 import soupit.model.Rezept;
@@ -33,7 +32,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
         Map<String, Slot> slots = intent.getSlots();
 
         String speechText;
-        Rezept[] rezepte = getRezepte(input);
+        ArrayList<Rezept> rezepte = getRezepte(input);
         String[] suppenWahl = SlotFilter.getSuppenWahl(slots);
 
         // if-Bedingung falls rezepte leer hinzufügen
@@ -42,9 +41,9 @@ public class RezeptAuswahlHandler implements RequestHandler {
             speechText = WIE_VIELE_PORTIONEN;
             //TODO index der ausgewählten Suppe muss in sessionAttributen gespeichert werden
             int suppenIndex = checkSuppeZahl(suppenWahl[1], rezepte);
-            if (suppenIndex >= 0 && suppenIndex <= rezepte.length) {
+            if (suppenIndex >= 0 && suppenIndex <= rezepte.size()) {
                 SessionAttributeService.setSingleSessionAttribute(input, REZEPT_INDEX, suppenIndex);
-                SessionAttributeService.setSingleSessionAttribute(input, REZEPT, rezepte[suppenIndex]);
+                SessionAttributeService.setSingleSessionAttribute(input, REZEPT, rezepte.get(suppenIndex));
             } else {
                 speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle eines der genannten Rezepte aus.";
             }
@@ -52,9 +51,9 @@ public class RezeptAuswahlHandler implements RequestHandler {
             speechText = WIE_VIELE_PORTIONEN;
             //TODO index der ausgewählten Suppe muss in sessionAttributen gespeichert werden
             int suppenIndex = checkSuppeText(suppenWahl[1], rezepte);
-            if (suppenIndex >= 0 && suppenIndex <= rezepte.length) {
+            if (suppenIndex >= 0 && suppenIndex <= rezepte.size()) {
                 SessionAttributeService.setSingleSessionAttribute(input, REZEPT_INDEX, suppenIndex);
-                SessionAttributeService.setSingleSessionAttribute(input, REZEPT, rezepte[suppenIndex]);
+                SessionAttributeService.setSingleSessionAttribute(input, REZEPT, rezepte.get(suppenIndex));
             } else {
                 speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle eines der genannten Rezepte aus.";
             }
@@ -77,11 +76,11 @@ public class RezeptAuswahlHandler implements RequestHandler {
      *
      * @return falls Rezepete in den Session Attributen gespichert wurden: die ersten drei Rezepte
      */
-    public Rezept[] getRezepte(HandlerInput input) {
-        Rezept[] rezepte;
+    public ArrayList<Rezept> getRezepte(HandlerInput input) {
+        ArrayList<Rezept> rezepte;
 
         //hier mit .getSessionAttributes() die gespeicherten Rezepte holen
-        rezepte = (Rezept[]) SessionAttributeService.getSingleSessionAttribute(input, REZEPT_FOUND);
+        rezepte = (ArrayList<Rezept>) SessionAttributeService.getSingleSessionAttribute(input, REZEPT_FOUND);
 
         return rezepte;
     }
@@ -92,12 +91,12 @@ public class RezeptAuswahlHandler implements RequestHandler {
      * @return falls index nicht passt: ""
      * falls index passt: string suppe
      */
-    public int checkSuppeZahl(String suppe, Rezept[] rezepte) {
+    public int checkSuppeZahl(String suppe, ArrayList<Rezept> rezepte) {
         int suppenIndex = -1;
 
         int index = Integer.parseInt(suppe);
 
-        if (index <= rezepte.length) {
+        if (index <= rezepte.size()) {
             suppenIndex = index;
         }
 
@@ -110,11 +109,11 @@ public class RezeptAuswahlHandler implements RequestHandler {
      * @return falls suppe nicht in rezepten: ""
      * falls suppe in rezepten: string suppe
      */
-    public int checkSuppeText(String suppe, Rezept[] rezepte) {
+    public int checkSuppeText(String suppe, ArrayList<Rezept> rezepte) {
         int suppenIndex = -1;
 
-        for (int i = 0; i < rezepte.length; i++){
-            if (suppe.equals(rezepte[i].getName()))
+        for (int i = 0; i < rezepte.size(); i++){
+            if (suppe.equals(rezepte.get(i).getName()))
                 suppenIndex = i;
         }
 
