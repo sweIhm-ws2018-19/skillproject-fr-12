@@ -37,7 +37,7 @@ public class TextService {
     }
 
     public static String schritteVonRezeptVorlesen(Rezept rezept){
-        String response = "Alles klar. Lass uns mit der Zubereitung der Kartoffelcremesuppe beginnen.";
+        String response = "Alles klar. Lass uns mit der Zubereitung der " + rezept.getName() + " beginnen.";
 
         ArrayList<String> schritte = rezept.getSchritte();
 
