@@ -56,7 +56,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
         if (!recipies.isEmpty()) {
 
-            if (zutatStringList.size() == 1) {
+            if (recipies.size() == 1) {
 
                 speechText =
                         "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0).getName();
