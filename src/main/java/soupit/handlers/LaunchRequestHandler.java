@@ -32,7 +32,7 @@ public class LaunchRequestHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "<voice name=\"Hans\">Willkommen bei Soup-It!</voice> Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung. " +
+        String speechText = "<say-as interpret-as=\"interjection\">Willkommen</say-as> bei <lang xml:lang=\"en-US\">Soup It</lang> ! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung. " +
                 randomResponse();
         String repromptText = randomResponse();
 

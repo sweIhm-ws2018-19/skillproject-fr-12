@@ -8,6 +8,7 @@ import java.util.ArrayList;
 public class TextService {
     private TextService instance;
 
+    private static final String BREAK_TWO_SECONDS = "<break time=\"2s\"/>";
     private static final String BREAK_SECOND = "<break time=\"1s\"/>";
     private static final String BREAK_HALF_SECOND = "<break time=\"500ms\"/>";
     private static final String SPACE = " ";
@@ -43,10 +44,10 @@ public class TextService {
         ArrayList<String> schritte = rezept.getSchritte();
 
         for(String schritt: schritte){
-            response += SPACE + BREAK_SECOND + SPACE + schritt;
+            response += SPACE + BREAK_TWO_SECONDS + SPACE + schritt;
         }
 
-        response += "Ich hoffe die Suppe schmeckt und wünsche einen guten Appetit. Bis zum nächsten Mal.";
+        response += SPACE + "Ich hoffe die Suppe schmeckt und wünsche einen guten Appetit. Bis zum nächsten Mal.";
 
         return response;
     }
