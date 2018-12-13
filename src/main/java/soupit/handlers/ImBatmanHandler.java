@@ -15,48 +15,32 @@ package soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 import soupit.hilfsklassen.SessionAttributeService;
 
+import java.util.ArrayList;
 import java.util.Optional;
-import java.util.Random;
 
-import static com.amazon.ask.request.Predicates.requestType;
+import static com.amazon.ask.request.Predicates.intentName;
 
-public class LaunchRequestHandler implements RequestHandler {
+public class ImBatmanHandler implements RequestHandler {
+
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(requestType(LaunchRequest.class));
+        return input.matches(intentName("ImBatmanIntent"));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "<voice name=\"Hans\">Willkommen bei Soup-It!</voice> Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung. " +
-                randomResponse();
-        String repromptText = randomResponse();
+        String speechText = "<audio src=\"https://www.jovo.tech/audio/5z8RiZ9U-im-batman.mp3\" />";
 
-        SessionAttributeService.updateLastIntent(input, "LaunchRequest");
+
+        SessionAttributeService.updateLastIntent(input, "ImBatmanIntent ");
 
         return input.getResponseBuilder()
-                .withSimpleCard("SoupitSession", speechText)
                 .withSpeech(speechText)
-                .withReprompt(repromptText)
+                .withSimpleCard("SoupitSession", speechText)
+                .withShouldEndSession(false)
                 .build();
-    }
-
-    /**
-     *
-     * @return String response
-     */
-    private String randomResponse(){
-        String[] phrases = {"Welche Zutaten möchtest du verwenden?", "Nenne mir Zutaten, die du zum Kochen verwenden möchtest.",
-                "Mit welchen Zutaten möchtest du eine Suppe kochen?"};
-        String response;
-
-        int rnd = new Random().nextInt(phrases.length);
-        response = phrases[rnd];
-
-        return response;
     }
 }
