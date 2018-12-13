@@ -3,15 +3,21 @@ package soupit.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
+import jdk.internal.org.objectweb.asm.Handle;
 import soupit.hilfsklassen.SessionAttributeService;
 import soupit.hilfsklassen.SlotFilter;
+import soupit.model.Rezept;
 
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
 public class RezeptAuswahlHandler implements RequestHandler {
+    private final static String REZEPT_FOUND = "REZEPT_FOUND";
+    private final static String REZEPT = "REZEPT";
+    private final static String REZEPT_INDEX = "REZEPT_INDEX";
     private final static String WIE_VIELE_PORTIONEN = "Wie viele Portionen möchtest du kochen?";
 
     @Override
@@ -27,7 +33,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
         Map<String, Slot> slots = intent.getSlots();
 
         String speechText;
-        String[] rezepte = getRezepte();
+        Rezept[] rezepte = getRezepte(input);
         String[] suppenWahl = SlotFilter.getSuppenWahl(slots);
 
         // if-Bedingung falls rezepte leer hinzufügen
@@ -35,11 +41,23 @@ public class RezeptAuswahlHandler implements RequestHandler {
         if (suppenWahl[0].equals("Zahl")) {
             speechText = WIE_VIELE_PORTIONEN;
             //TODO index der ausgewählten Suppe muss in sessionAttributen gespeichert werden
-                    //String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeZahl(suppenWahl[1], rezepte));
+            int suppenIndex = checkSuppeZahl(suppenWahl[1], rezepte);
+            if (suppenIndex >= 0 && suppenIndex <= rezepte.length) {
+                SessionAttributeService.setSingleSessionAttribute(input, REZEPT_INDEX, suppenIndex);
+                SessionAttributeService.setSingleSessionAttribute(input, REZEPT, rezepte[suppenIndex]);
+            } else {
+                speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle eines der genannten Rezepte aus.";
+            }
         } else if (suppenWahl[0].equals("Suppe")) {
             speechText = WIE_VIELE_PORTIONEN;
             //TODO index der ausgewählten Suppe muss in sessionAttributen gespeichert werden
-            //String.format("Alles klar. Wir werden eine %s kochen.", checkSuppeText(suppenWahl[1], rezepte));
+            int suppenIndex = checkSuppeText(suppenWahl[1], rezepte);
+            if (suppenIndex >= 0 && suppenIndex <= rezepte.length) {
+                SessionAttributeService.setSingleSessionAttribute(input, REZEPT_INDEX, suppenIndex);
+                SessionAttributeService.setSingleSessionAttribute(input, REZEPT, rezepte[suppenIndex]);
+            } else {
+                speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle eines der genannten Rezepte aus.";
+            }
         } else {
             // Der Nutzer hat keine valide Suppe ausgewählt
             speechText = "Ich kann dir kein Rezept vorschlagen. Bitte wähle zuerst Zutaten aus.";
@@ -59,13 +77,11 @@ public class RezeptAuswahlHandler implements RequestHandler {
      *
      * @return falls Rezepete in den Session Attributen gespichert wurden: die ersten drei Rezepte
      */
-    public String[] getRezepte() {
-        String[] rezepte;
+    public Rezept[] getRezepte(HandlerInput input) {
+        Rezept[] rezepte;
 
         //hier mit .getSessionAttributes() die gespeicherten Rezepte holen
-
-        //übergangslosung
-        rezepte = new String[]{"kartoffelsuppe", "karottensuppe", "tomatensuppe"};
+        rezepte = (Rezept[]) SessionAttributeService.getSingleSessionAttribute(input, REZEPT_FOUND);
 
         return rezepte;
     }
@@ -76,16 +92,16 @@ public class RezeptAuswahlHandler implements RequestHandler {
      * @return falls index nicht passt: ""
      * falls index passt: string suppe
      */
-    public String checkSuppeZahl(String suppe, String[] rezepte) {
-        String dieSuppe = "";
+    public int checkSuppeZahl(String suppe, Rezept[] rezepte) {
+        int suppenIndex = -1;
 
         int index = Integer.parseInt(suppe);
 
         if (index <= rezepte.length) {
-            dieSuppe = rezepte[index - 1];
+            suppenIndex = index;
         }
 
-        return dieSuppe;
+        return suppenIndex;
     }
 
     /**
@@ -94,15 +110,15 @@ public class RezeptAuswahlHandler implements RequestHandler {
      * @return falls suppe nicht in rezepten: ""
      * falls suppe in rezepten: string suppe
      */
-    public String checkSuppeText(String suppe, String[] rezepte) {
-        String dieSuppe = "";
+    public int checkSuppeText(String suppe, Rezept[] rezepte) {
+        int suppenIndex = -1;
 
-        for (String rezept : rezepte) {
-            if (suppe.equals(rezept))
-                dieSuppe = suppe;
+        for (int i = 0; i < rezepte.length; i++){
+            if (suppe.equals(rezepte[i].getName()))
+                suppenIndex = i;
         }
 
-        return dieSuppe;
+        return suppenIndex;
     }
 
 }
