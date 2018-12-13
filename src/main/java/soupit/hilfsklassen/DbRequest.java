@@ -23,13 +23,14 @@ public final class DbRequest {
         return instance;
     }
 
-    public static ArrayList<Rezept> getRecipies(ArrayList<String> ingrdsStringList) {
+    public static ArrayList<Rezept> getRecipies(ArrayList<String> ingrdsStringList, ArrayList<String> woIngrList) {
 
         //find indrdID for the string ingrids
         ArrayList<Integer> ingrdID = DbRequest.getIngrId(ingrdsStringList);
+        ArrayList<Integer> woIngrdID = DbRequest.getIngrId(woIngrList);
 
         //searching recipes for all recipies that contain the ingids
-        ArrayList<RezeptCount> foundRezepte = DbRequest.searchMatching(ingrdID);
+        ArrayList<RezeptCount> foundRezepte = DbRequest.searchMatching(ingrdID, woIngrdID);
 
 
         //sorts list and returns top 3 elements
@@ -65,7 +66,7 @@ public final class DbRequest {
     }
 
 
-    private static ArrayList<RezeptCount> searchMatching(ArrayList<Integer> ingrdID){
+    private static ArrayList<RezeptCount> searchMatching(ArrayList<Integer> ingrdID, ArrayList<Integer> woIngrdID){
         ArrayList<Rezept> allRezepte = JsonService.rezepteEinlesen();
         ArrayList<RezeptCount> foundRezepte = new ArrayList<>();
 
@@ -76,6 +77,12 @@ public final class DbRequest {
                 if (rezept.getZutaten().contains(currIngId)) {
                     matchCount++;
                     match = true;
+                }
+            }
+
+            for (Integer currIngId : woIngrdID) {
+                if (rezept.getZutaten().contains(currIngId)) {
+                    match = false;
                 }
             }
 

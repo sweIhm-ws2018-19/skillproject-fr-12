@@ -28,6 +28,7 @@ import java.util.*;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static soupit.handlers.ZutatenAbfrageHandler.ZUTAT_KEY;
+import static soupit.handlers.ZutatenAusschliessenAbfrageHandler.ZUTAT_AUSSCHLIESSEN_KEY;
 
 public class ZutatenAuswahlHandler implements RequestHandler {
 
@@ -52,9 +53,14 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         final String repromptText;
         boolean isAskResponse = false;
 
+        ArrayList<String> ausgeschlosseneZutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_AUSSCHLIESSEN_KEY);
+
+        if (ausgeschlosseneZutatenListe == null){
+            ausgeschlosseneZutatenListe = new ArrayList<String>();
+        }
 
         SessionAttributeService.setSingleSessionAttribute(input, ZUTAT_KEY, zutatStringList);
-        ArrayList<Rezept> recipies = DbRequest.getRecipies(zutatStringList);
+        ArrayList<Rezept> recipies = DbRequest.getRecipies(zutatStringList, ausgeschlosseneZutatenListe);
 
         String json = new JSONArray(recipies).toString();
         SessionAttributeService.setSingleSessionAttribute(input, "REZEPT_FOUND", json);
