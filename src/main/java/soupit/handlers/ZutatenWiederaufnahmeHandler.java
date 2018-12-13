@@ -40,7 +40,7 @@ public class ZutatenWiederaufnahmeHandler implements RequestHandler {
                 //entfernt die Zutaten, von der Liste der ausgeschlossenenZutaten, sodass sie wieder verwendet werden können.
                 ausgeschlosseneZutatenListe.removeAll(getIngredient(slots));
                 //prüft ob die Liste der ausgeschlossenen Zutaten leer ist. -> individueller speechText
-                if (ausgeschlosseneZutatenListe.isEmpty()) {
+                if (!ausgeschlosseneZutatenListe.isEmpty()) {
                     speechText = "Die Zutat " + getIngredient(slots).toString() + " wurde wiederhergestellt." +
                             " Die Liste der Ausgeschlossenen Zutaten enthält noch " + ausgeschlosseneZutatenListe.toString();
                     repromptText = speechText;
