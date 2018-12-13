@@ -3,6 +3,8 @@ package soupit.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
+import org.json.JSONArray;
+import soupit.hilfsklassen.JsonService;
 import soupit.hilfsklassen.SessionAttributeService;
 import soupit.hilfsklassen.SlotFilter;
 import soupit.model.Rezept;
@@ -78,7 +80,7 @@ public class RezeptAuswahlHandler implements RequestHandler {
         ArrayList<Rezept> rezepte;
 
         //hier mit .getSessionAttributes() die gespeicherten Rezepte holen
-        rezepte = (ArrayList<Rezept>) SessionAttributeService.getSingleSessionAttribute(input, REZEPT_FOUND);
+        rezepte = JsonService.rezepteParsen(new JSONArray((String)SessionAttributeService.getSingleSessionAttribute(input, REZEPT_FOUND)));
 
         return rezepte;
     }

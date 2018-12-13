@@ -3,10 +3,8 @@ package soupit.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import soupit.hilfsklassen.RezeptService;
-import soupit.hilfsklassen.SessionAttributeService;
-import soupit.hilfsklassen.SlotFilter;
-import soupit.hilfsklassen.TextService;
+import org.json.JSONArray;
+import soupit.hilfsklassen.*;
 import soupit.model.Rezept;
 
 import java.util.ArrayList;
@@ -43,11 +41,10 @@ public class PortionenAuswahlHandler implements RequestHandler {
             SessionAttributeService.setSingleSessionAttribute(input, PORTIONEN, anzahl);
 
             int suppenIndex = (int) SessionAttributeService.getSingleSessionAttribute(input, REZEPT_INDEX);
+            ArrayList<Rezept> rezepte = JsonService.rezepteParsen(new JSONArray((String)SessionAttributeService.getSingleSessionAttribute(input, REZEPT_FOUND)));
+            Rezept rezept = rezepte.get(suppenIndex);
 
-            speechText = ((ArrayList<Rezept>) SessionAttributeService.getSingleSessionAttribute(input, REZEPT_FOUND)).get(suppenIndex).toString();
-
-            //Rezept rezept = ((ArrayList<Rezept>) SessionAttributeService.getSingleSessionAttribute(input, REZEPT_FOUND)).get(suppenIndex);
-            //speechText = TextService.zutatenVonRezeptVorlesen(RezeptService.getZutaten(rezept, anzahl), anzahl);
+            speechText = TextService.zutatenVonRezeptVorlesen(RezeptService.getZutaten(rezept, anzahl), anzahl);
         }
 
         SessionAttributeService.updateLastIntent(input, "PortionenAuswahlIntent");

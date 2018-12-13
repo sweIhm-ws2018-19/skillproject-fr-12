@@ -59,6 +59,16 @@ public class JsonService {
         return rezepte;
     }
 
+    public static ArrayList<Rezept> rezepteParsen(JSONArray json){
+        ArrayList<Rezept> rezepte = new ArrayList<>();
+
+        for (Object j : json) {
+            rezepte.add(rezeptParsen((JSONObject) j));
+        }
+
+        return rezepte;
+    }
+
     public static ArrayList<Zutat> zutatenEinlesen() {
         ArrayList<Zutat> zutaten = new ArrayList<>();
 

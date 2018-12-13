@@ -17,6 +17,8 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import soupit.hilfsklassen.DbRequest;
 import soupit.hilfsklassen.SessionAttributeService;
 import soupit.hilfsklassen.SlotFilter;
@@ -51,7 +53,9 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
         SessionAttributeService.setSingleSessionAttribute(input, ZUTAT_KEY, zutatStringList);
         ArrayList<Rezept> recipies = DbRequest.getRecipies(zutatStringList);
-        SessionAttributeService.setSingleSessionAttribute(input, "REZEPT_FOUND", recipies);
+
+        String json = new JSONArray(recipies).toString();
+        SessionAttributeService.setSingleSessionAttribute(input, "REZEPT_FOUND", json);
 
 
         if (!recipies.isEmpty()) {
