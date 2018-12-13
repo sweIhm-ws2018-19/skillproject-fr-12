@@ -11,6 +11,7 @@ public class TextService {
     private static final String BREAK_SECOND = "<break time=\"1s\"/>";
     private static final String BREAK_HALF_SECOND = "<break time=\"500ms\"/>";
     private static final String SPACE = " ";
+    private static final String NONE = "none";
 
     private TextService() {
         //empty
@@ -28,8 +29,8 @@ public class TextService {
 
         for (ZutatMenge zutat : zutaten) {
             response += SPACE + BREAK_HALF_SECOND + SPACE;
-            response += zutat.getMenge()
-                    + (!zutat.getEinheit().equalsIgnoreCase("none") ? (SPACE + zutat.getEinheit()) : "")
+            response += (!zutat.getMenge().equalsIgnoreCase(NONE) ? (zutat.getMenge()) : "")
+                    + (!zutat.getEinheit().equalsIgnoreCase(NONE) ? (SPACE + zutat.getEinheit()) : "")
                     + SPACE + zutat.getName();
         }
 
