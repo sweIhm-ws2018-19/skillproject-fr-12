@@ -31,6 +31,7 @@ import static soupit.handlers.ZutatenAbfrageHandler.ZUTAT_KEY;
 import static soupit.handlers.ZutatenAusschliessenAbfrageHandler.ZUTAT_AUSSCHLIESSEN_KEY;
 
 public class ZutatenAuswahlHandler implements RequestHandler {
+    private static final String BREAK_SECOND = "<break time=\"1s\"/>";
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -49,7 +50,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
         final ArrayList<String> zutatStringList = (ArrayList<String>) SlotFilter.getIngredient(slots);
 
-        final String speechText;
+        String speechText;
         final String repromptText;
         boolean isAskResponse = false;
 
@@ -72,12 +73,12 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
                 speechText =
                         "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0).getName();
-                repromptText = speechText;
             } else {
                 String rezepte = this.suppenToString(recipies);
                 speechText = "Ich kann dir anhand der genannten Zutaten " + recipies.size() +  " Rezepte vorschlagen: " + rezepte;
-                repromptText = speechText;
             }
+            speechText += BREAK_SECOND + " Welche Suppe wählst du?";
+            repromptText = speechText;
 
         } else {
             speechText = "Hierzu kann ich dir aktuell leider kein passendes Suppenrezept vorschlagen. Nenne mir eine andere Zutat, zum Beispiel eine Gemüsesorte.";
