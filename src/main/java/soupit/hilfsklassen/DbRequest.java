@@ -5,6 +5,8 @@ import soupit.model.RezeptCount;
 import soupit.model.Zutat;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public final class DbRequest {
 
@@ -23,15 +25,24 @@ public final class DbRequest {
 
     public static ArrayList<Rezept> getRecipies(ArrayList<String> ingrdsStringList) {
 
+        //find indrdID for the string ingrids
         ArrayList<Integer> ingrdID = DbRequest.getIngrId(ingrdsStringList);
 
+        //searching recipes for all recipies that contain the ingids
         ArrayList<RezeptCount> foundRezepte = DbRequest.searchMatching(ingrdID);
 
 
-        //here should be some best match algoritmic which returns max 3 elements
+        //sorts list and returns top 3 elements
+        Collections.sort(foundRezepte, new Comparator<RezeptCount>() {
+            @Override
+            public int compare(RezeptCount o1, RezeptCount o2) {
+                return o2.getCount()-o1.getCount();
+            }
+        });
+
         ArrayList<Rezept> returnRecipies = new ArrayList<>();
-        for (RezeptCount rc : foundRezepte){
-            returnRecipies.add(rc.getRezept());
+        for (int index = 0; index < 3 && index < foundRezepte.size(); index++){
+            returnRecipies.add(foundRezepte.get(index).getRezept());
         }
 
 

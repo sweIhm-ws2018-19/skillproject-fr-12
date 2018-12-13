@@ -51,6 +51,8 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
         SessionAttributeService.setSingleSessionAttribute(input, ZUTAT_KEY, zutatStringList);
         ArrayList<Rezept> recipies = DbRequest.getRecipies(zutatStringList);
+        SessionAttributeService.setSingleSessionAttribute(input, "REZEPT_FOUND", recipies);
+
 
         if (!recipies.isEmpty()) {
 
@@ -64,6 +66,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
                 for (Rezept rezept : recipies){
                     rezepte = rezepte.concat(rezept.getName()+ ", ");
                 }
+
                 speechText = "Ich kann dir folgende Rezepte vorschlagen " + rezepte;
                 repromptText = speechText;
             }
