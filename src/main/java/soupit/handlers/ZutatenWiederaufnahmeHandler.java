@@ -4,10 +4,8 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
-import soupit.hilfsklassen.SlotFilter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
@@ -29,9 +27,7 @@ public class ZutatenWiederaufnahmeHandler implements RequestHandler {
         //get slots from current intend
         Map<String, Slot> slots = intent.getSlots();
 
-        final ArrayList<String> zutatStringList = (ArrayList<String>) SlotFilter.getIngredient(slots);
-        //ausgeschlossene Zutaten
-        //input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_AUSSCHLIESSEN_KEY, zutatStringList));
+        //ausgeschlossene Zutaten bekommen
         ArrayList<String> ausgeschlosseneZutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_AUSSCHLIESSEN_KEY);
 
 
@@ -39,10 +35,7 @@ public class ZutatenWiederaufnahmeHandler implements RequestHandler {
         final String repromptText;
         boolean isAskResponse = false;
 
-        // TODO: 13.12.2018  speechText anpassen
-        if (ausgeschlosseneZutatenListe != null
-            //|| !ausgeschlosseneZutatenListe.isEmpty()
-                ) {
+        if (ausgeschlosseneZutatenListe != null) {
             if (ausgeschlosseneZutatenListe.containsAll(getIngredient(slots))) {
                 //entfernt die Zutaten, von der Liste der ausgeschlossenenZutaten, sodass sie wieder verwendet werden können.
                 ausgeschlosseneZutatenListe.removeAll(getIngredient(slots));
@@ -65,8 +58,6 @@ public class ZutatenWiederaufnahmeHandler implements RequestHandler {
             repromptText = speechText;
             isAskResponse = true;
         }
-
-
 
         ResponseBuilder responseBuilder = input.getResponseBuilder();
 
