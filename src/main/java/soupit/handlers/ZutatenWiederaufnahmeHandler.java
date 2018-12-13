@@ -13,7 +13,6 @@ import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static soupit.handlers.ZutatenAusschliessenAbfrageHandler.ZUTAT_AUSSCHLIESSEN_KEY;
-import static soupit.handlers.ZutatenAusschliessenAbfrageHandler.getAusgeschlosseneZutatenListe;
 import static soupit.hilfsklassen.SlotFilter.getIngredient;
 
 public class ZutatenWiederaufnahmeHandler implements RequestHandler {
