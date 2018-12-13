@@ -40,7 +40,7 @@ public class ZutatenWiederaufnahmeHandler implements RequestHandler {
 
 
         if(!getIngredient(slots).isEmpty()){
-            speechText = "";
+            speechText = "Die Zutat " + getIngredient(slots).toString() + " soll wiederhergestellt werden.";
             repromptText = speechText;
         } else {
             speechText = "Es wurde keine Zutat ausgeschlossen.";
