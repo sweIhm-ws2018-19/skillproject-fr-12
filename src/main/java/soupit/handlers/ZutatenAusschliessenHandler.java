@@ -5,6 +5,7 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
 import soupit.hilfsklassen.SlotFilter;
+import soupit.model.Rezept;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,7 +34,7 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
         boolean isAskResponse = false;
 
         input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_AUSSCHLIESSEN_KEY, zutatStringList));
-        ArrayList<String> recipies = (ArrayList<String>) soupit.hilfsklassen.DbRequest.getRecipies(zutatStringList);
+        ArrayList<Rezept> recipies = (ArrayList<Rezept>) soupit.hilfsklassen.DbRequest.getRecipies(zutatStringList);
 
 
         if (!recipies.isEmpty()) {
