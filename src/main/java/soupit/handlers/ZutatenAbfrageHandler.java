@@ -25,7 +25,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class ZutatenAbfrageHandler implements RequestHandler {
     public static final String ZUTAT_KEY = "ZUTAT";
-    public static final String ZUTAT_SLOT = "Zutat";
+
 
     @Override
     public boolean canHandle(HandlerInput input) {

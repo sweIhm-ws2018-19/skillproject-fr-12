@@ -66,12 +66,8 @@ public class ZutatenAuswahlHandler implements RequestHandler {
                         "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0).getName();
                 repromptText = speechText;
             } else {
-                String rezepte = "";
-                for (Rezept rezept : recipies){
-                    rezepte = rezepte.concat(rezept.getName()+ ", ");
-                }
-
-                speechText = "Ich kann dir folgende Rezepte vorschlagen " + rezepte;
+                String rezepte = this.suppenToString(recipies);
+                speechText = "Ich kann dir anhand der genannten Zutaten " + recipies.size() +  " Rezepte vorschlagen: " + rezepte;
                 repromptText = speechText;
             }
 
@@ -97,6 +93,18 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         }
 
         return responseBuilder.build();
+    }
+
+    private String suppenToString(ArrayList<Rezept> rezepts){
+        String returnString = "";
+        for (int index = 0; index < rezepts.size(); index ++){
+            if (index == rezepts.size() -1 ){
+                returnString = returnString.substring(0,returnString.length()-2) + " und " + rezepts.get(index).getName();
+            } else {
+                returnString = returnString.concat(rezepts.get(index).getName()).concat(", ");
+            }
+        }
+    return returnString;
     }
 
 }
