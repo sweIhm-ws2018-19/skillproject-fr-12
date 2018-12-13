@@ -23,32 +23,19 @@ import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
-public class ZutatenAbfrageHandler implements RequestHandler {
-    public static final String ZUTAT_KEY = "ZUTAT";
-
+public class ImBatmanHandler implements RequestHandler {
 
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("ZutatenAbfrageIntent"));
+        return input.matches(intentName("ImBatmanIntent"));
     }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText;
-        ArrayList<String> zutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_KEY);
+        String speechText = "<audio src=\"https://www.jovo.tech/audio/5z8RiZ9U-im-batman.mp3\" />";
 
-        if (zutatenListe != null) {
-            if (zutatenListe.size() == 1) {
-                speechText = "Deine ausgeählte Zutat ist " + zutatenListe.get(0);
-            } else {
-                speechText = "Du hast folgende Zutaten ausgewählt: " + zutatenListe.toString();
-            }
-        } else {
-            // es wurden noch keine Zutaten genannt
-            speechText = "Ich weiss nicht welches Deine ausgewählte Zutat ist. Nenne mir eine Zutat. Sage zum Beispiel: Die Zutat ist Kartoffel.";
-        }
 
-        SessionAttributeService.updateLastIntent(input, "ZutatenAbfrageIntent");
+        SessionAttributeService.updateLastIntent(input, "ImBatmanIntent ");
 
         return input.getResponseBuilder()
                 .withSpeech(speechText)

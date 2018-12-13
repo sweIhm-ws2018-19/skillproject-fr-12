@@ -97,6 +97,75 @@
             "Ich möchte Rezept {Zahl} kochen",
             "Rezept {Zahl}"
           ]
+        },
+        {
+          "name": "ZubereitungStartenIntent",
+          "slots": [],
+          "samples": [
+            "mit der zubereitung beginnen",
+            "mit der zubereitung starten",
+            "zubereitung anfangen",
+            "zubereitung beginnen",
+            "zubereitung starten",
+            "starten",
+            "mit dem rezept starten",
+            "mit dem rezept beginnen",
+            "mit dem rezept anfangen",
+            "mit dem kochen starten",
+            "mit dem kochen anfangen",
+            "mit dem kochen beginnen",
+            "es kann losgehen",
+            "starte die zubereitung",
+            "los gehts",
+            "ich bin startklar",
+            "start",
+            "starte",
+            "rezept starten"
+          ]
+        },
+        {
+          "name": "PortionenAuswahlIntent",
+          "slots": [
+            {
+              "name": "Anzahl",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "{Anzahl} personen",
+            "{Anzahl} person",
+            "{Anzahl} portionen",
+            "für {Anzahl} personen",
+            "für {Anzahl}",
+            "es sollte für {Anzahl} personen reichen",
+            "ich will {Anzahl} portionen zubereiten",
+            "gerne für {Anzahl}",
+            "es müssen {Anzahl} personen satt werden",
+            "schön wären {Anzahl} portionen",
+            "{Anzahl} portionen wären toll",
+            "ich suche nach einem rezept für {Anzahl} personen",
+            "ich will {Anzahl} portion",
+            "{Anzahl} leute sollten satt werden",
+            "{Anzahl} leute sollen satt werden",
+            "ich will {Anzahl} portionen"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "ImBatmanIntent",
+          "slots": [],
+          "samples": [
+            "wer bist du"
+          ]
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": [
+            "Ja"
+          ]
         }
       ],
       "types": [

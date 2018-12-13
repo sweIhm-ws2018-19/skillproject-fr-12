@@ -17,8 +17,12 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import soupit.hilfsklassen.DbRequest;
+import soupit.hilfsklassen.SessionAttributeService;
 import soupit.hilfsklassen.SlotFilter;
+import soupit.model.Rezept;
 
 import java.util.*;
 
@@ -47,18 +51,23 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         boolean isAskResponse = false;
 
 
-        input.getAttributesManager().setSessionAttributes(Collections.singletonMap(ZUTAT_KEY, zutatStringList));
-        ArrayList<String> recipies = (ArrayList<String>) DbRequest.getRecipies(zutatStringList);
+        SessionAttributeService.setSingleSessionAttribute(input, ZUTAT_KEY, zutatStringList);
+        ArrayList<Rezept> recipies = DbRequest.getRecipies(zutatStringList);
+
+        String json = new JSONArray(recipies).toString();
+        SessionAttributeService.setSingleSessionAttribute(input, "REZEPT_FOUND", json);
+
 
         if (!recipies.isEmpty()) {
 
-            if (zutatStringList.size() == 1) {
+            if (recipies.size() == 1) {
 
                 speechText =
-                        "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0);
+                        "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0).getName();
                 repromptText = speechText;
             } else {
-                speechText = "Ich kann dir folgende Rezepte vorschlagen " + recipies.toString();
+                String rezepte = this.suppenToString(recipies);
+                speechText = "Ich kann dir anhand der genannten Zutaten " + recipies.size() +  " Rezepte vorschlagen: " + rezepte;
                 repromptText = speechText;
             }
 
@@ -69,6 +78,8 @@ public class ZutatenAuswahlHandler implements RequestHandler {
             isAskResponse = true;
 
         }
+
+        SessionAttributeService.updateLastIntent(input, "ZutatenAuswahlIntent");
 
         ResponseBuilder responseBuilder = input.getResponseBuilder();
 
@@ -82,6 +93,18 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         }
 
         return responseBuilder.build();
+    }
+
+    private String suppenToString(ArrayList<Rezept> rezepts){
+        String returnString = "";
+        for (int index = 0; index < rezepts.size(); index ++){
+            if (index == rezepts.size() -1 ){
+                returnString = returnString.substring(0,returnString.length()-2) + " und " + rezepts.get(index).getName();
+            } else {
+                returnString = returnString.concat(rezepts.get(index).getName()).concat(", ");
+            }
+        }
+    return returnString;
     }
 
 }
