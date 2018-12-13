@@ -1,0 +1,45 @@
+Zutaten auswählen:
+Die Zutat ist {Zutat}
+Meine Zutat ist {Zutat}
+Meine Zutaten sind {Zutat} //bis zu 5 Zutaten
+
+Rezepte Auswählen:
+Ich möchte eine {Suppe} kochen
+Ich will eine {Suppe} kochen
+ich will die {Suppe} kochen
+ich will die {Suppe} kochen
+ich will die {Suppe} kochen
+Ich will Rezept {Zahl} kochen
+Ich möchte Rezept {Zahl} kochen
+Rezept {Zahl}
+
+Zutaten ausschließen:
+{Zutat} ausschließen //bis zu 5 Zutaten
+Ich möchte {Zutat} ausschließen //bis zu 5 Zutaten
+
+Abfrage der ausgeschlossenen Zutaten:
+Ausgeschlossene Zutat
+Was sind meine ausgeschlossenen Zutaten
+Was ist meine ausgeschlossene Zutat
+Ausgeschlossene Zutaten
+Wie lauten meine ausgeschlossenen Zutaten
+
+Zutaten aus der Liste der ausgeschlossenen Zutaten entfernen:
+{Zutat} wieder verwenden //bis zu 5 Zutaten
+Ich möchte {Zutat} wieder verwenden können //bis zu 5 Zutaten
+Ich möchte {Zutat} wieder verwenden //bis zu 5 Zutaten
+{Zutat} wieder aufnehmen //bis zu 5 Zutaten
+
+Zubereitung starten:
+Mit der Zubereitung beginnen
+Mit der Zubereitung starten
+Zubereitung anfangen
+Zubereitung beginnen
+Zubereitung starten
+
+Portionen auswählen:
+{Anzahl} Personen
+{Anzahl} Person
+{Anzahl} Portionen
+Für {Anzahl} Personen
+Für {Anzahl}
