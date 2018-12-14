@@ -30,11 +30,7 @@ public class JsonService {
         ArrayList<Rezept> rezepte = new ArrayList<>();
 
         //hier Json einlesen
-        FileReader fileReader = null;
-        try {
-            fileReader = new FileReader("data/rezepte.json");
-            BufferedReader br = new BufferedReader(fileReader);
-
+        try (BufferedReader br = new BufferedReader(new FileReader("data/rezepte.json"))){
             String input = "";
 
             String zeile = br.readLine();
