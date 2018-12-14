@@ -97,6 +97,171 @@
             "Ich möchte Rezept {Zahl} kochen",
             "Rezept {Zahl}"
           ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "ZutatenAusschliessenIntent",
+          "slots": [
+            {
+              "name": "ZutatAusschliessen_eins",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatAusschliessen_zwei",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatAusschliessen_drei",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatAusschliessen_vier",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatAusschliessen_fuenf",
+              "type": "AMAZON.Food"
+            }
+          ],
+          "samples": [
+            "{ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} {ZutatAusschliessen_drei} {ZutatAusschliessen_vier} {ZutatAusschliessen_fuenf} ausschließen",
+            "{ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} {ZutatAusschliessen_drei} {ZutatAusschliessen_vier} ausschließen",
+            "{ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} {ZutatAusschliessen_drei} ausschließen",
+            "{ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} ausschließen",
+            "{ZutatAusschliessen_eins} ausschließen",
+            "Ich möchte {ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} {ZutatAusschliessen_drei} {ZutatAusschliessen_vier} {ZutatAusschliessen_fuenf} ausschließen",
+            "Ich möchte {ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} {ZutatAusschliessen_drei} {ZutatAusschliessen_vier} ausschließen",
+            "Ich möchte {ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} {ZutatAusschliessen_drei} ausschließen",
+            "Ich möchte {ZutatAusschliessen_eins} {ZutatAusschliessen_zwei} ausschließen",
+            "Ich möchte {ZutatAusschliessen_eins} ausschließen"
+          ]
+        },
+        {
+          "name": "ZutatenAusschliessenAbfrageIntent",
+          "slots": [],
+          "samples": [
+            "ausgeschlossene Zutat",
+            "Was sind meine ausgeschlossenen Zutaten",
+            "Was ist meine ausgeschlossene Zutat",
+            "ausgeschlossene Zutaten",
+            "Wie lauten meine ausgeschlossenen Zutaten"
+          ]
+        },
+        {
+          "name": "ZutatenWiederaufnahmeIntent",
+          "slots": [
+            {
+              "name": "ZutatWiederaufnahme_eins",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatWiederaufnahme_zwei",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatWiederaufnahme_drei",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatWiederaufnahme_vier",
+              "type": "AMAZON.Food"
+            },
+            {
+              "name": "ZutatWiederaufnahme_fuenf",
+              "type": "AMAZON.Food"
+            }
+          ],
+          "samples": [
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} {ZutatWiederaufnahme_fuenf} wiederverwenden",
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} wiederverwenden",
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} wiederverwenden",
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} wiederverwenden",
+            "{ZutatWiederaufnahme_eins} wiederverwenden",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} {ZutatWiederaufnahme_fuenf} wiederverwenden können",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} {ZutatWiederaufnahme_fuenf} wiederverwenden",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} wiederverwenden können",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} wiederverwenden",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} wiederverwenden können",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} wiederverwenden",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} wiederverwenden können",
+            "Ich möchte {ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} wiederverwenden",
+            "Ich möchte {ZutatWiederaufnahme_eins} wiederverwenden können",
+            "Ich möchte {ZutatWiederaufnahme_eins} wiederverwenden",
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} {ZutatWiederaufnahme_fuenf} wieder aufnehmen",
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} {ZutatWiederaufnahme_vier} wieder aufnehmen",
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} {ZutatWiederaufnahme_drei} wieder aufnehmen",
+            "{ZutatWiederaufnahme_eins} {ZutatWiederaufnahme_zwei} wieder aufnehmen",
+            "{ZutatWiederaufnahme_eins} wieder aufnehmen"
+          ]
+        },
+        {
+          "name": "ZubereitungStartenIntent",
+          "slots": [],
+          "samples": [
+            "mit der zubereitung beginnen",
+            "mit der zubereitung starten",
+            "zubereitung anfangen",
+            "zubereitung beginnen",
+            "zubereitung starten",
+            "starten",
+            "mit dem rezept starten",
+            "mit dem rezept beginnen",
+            "mit dem rezept anfangen",
+            "mit dem kochen starten",
+            "mit dem kochen anfangen",
+            "mit dem kochen beginnen",
+            "es kann losgehen",
+            "starte die zubereitung",
+            "los gehts",
+            "ich bin startklar",
+            "start",
+            "starte",
+            "rezept starten"
+          ]
+        },
+        {
+          "name": "PortionenAuswahlIntent",
+          "slots": [
+            {
+              "name": "Anzahl",
+              "type": "AMAZON.NUMBER"
+            }
+          ],
+          "samples": [
+            "{Anzahl} personen",
+            "{Anzahl} person",
+            "{Anzahl} portionen",
+            "für {Anzahl} personen",
+            "für {Anzahl}",
+            "es sollte für {Anzahl} personen reichen",
+            "ich will {Anzahl} portionen zubereiten",
+            "gerne für {Anzahl}",
+            "es müssen {Anzahl} personen satt werden",
+            "schön wären {Anzahl} portionen",
+            "{Anzahl} portionen wären toll",
+            "ich suche nach einem rezept für {Anzahl} personen",
+            "ich will {Anzahl} portion",
+            "{Anzahl} leute sollten satt werden",
+            "{Anzahl} leute sollen satt werden",
+            "ich will {Anzahl} portionen"
+          ]
+        },
+        {
+          "name": "ImBatmanIntent",
+          "slots": [],
+          "samples": [
+            "wer bist du"
+          ]
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": [
+            "klar",
+            "Ja"
+          ]
         }
       ],
       "types": [
@@ -131,6 +296,157 @@
           "values": [
             {
               "name": {
+                "value": "käse"
+              }
+            },
+            {
+              "name": {
+                "value": "baguette"
+              }
+            },
+            {
+              "name": {
+                "value": "mehl"
+              }
+            },
+            {
+              "name": {
+                "value": "tomatenmark"
+              }
+            },
+            {
+              "name": {
+                "value": "zucker"
+              }
+            },
+            {
+              "name": {
+                "value": "ingwer"
+              }
+            },
+            {
+              "name": {
+                "value": "kokosmilch"
+              }
+            },
+            {
+              "name": {
+                "value": "oragensaft"
+              }
+            },
+            {
+              "name": {
+                "value": "pinienkerne",
+                "synonyms": [
+                  "pinienkern"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "toastbrot",
+                "synonyms": [
+                  "toast brot",
+                  "toast"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "kürbiskernöl"
+              }
+            },
+            {
+              "name": {
+                "value": "muskat"
+              }
+            },
+            {
+              "name": {
+                "value": "milch"
+              }
+            },
+            {
+              "name": {
+                "value": "butter"
+              }
+            },
+            {
+              "name": {
+                "value": "selleriknolle"
+              }
+            },
+            {
+              "name": {
+                "value": "knoblauchzehe"
+              }
+            },
+            {
+              "name": {
+                "value": "currypulver"
+              }
+            },
+            {
+              "name": {
+                "value": "sonnenblumenkerne",
+                "synonyms": [
+                  "sonnenblumenkern"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "zitronensaft"
+              }
+            },
+            {
+              "name": {
+                "value": "walnussöl"
+              }
+            },
+            {
+              "name": {
+                "value": "minze"
+              }
+            },
+            {
+              "name": {
+                "value": "walnusskern",
+                "synonyms": [
+                  "walnusskerne"
+                ]
+              }
+            },
+            {
+              "name": {
+                "value": "pfeffer"
+              }
+            },
+            {
+              "name": {
+                "value": "salz"
+              }
+            },
+            {
+              "name": {
+                "value": "mandelmus"
+              }
+            },
+            {
+              "name": {
+                "value": "olivenöl"
+              }
+            },
+            {
+              "name": {
+                "value": "erbsen",
+                "synonyms": [
+                  "erbse"
+                ]
+              }
+            },
+            {
+              "name": {
                 "value": "champignon",
                 "synonyms": [
                   "champignon",
@@ -161,8 +477,7 @@
               "name": {
                 "value": "knoblauch",
                 "synonyms": [
-                  "knoblauch",
-                  "knoblauchzehe"
+                  "knoblauch"
                 ]
               }
             },
@@ -224,6 +539,8 @@
               "name": {
                 "value": "kartoffel",
                 "synonyms": [
+                  "Erdäpfel",
+                  "erdäpfel",
                   "kartoffel",
                   "erdapfel",
                   "Erdapfel",
@@ -238,6 +555,31 @@
         {
           "name": "SUPPEN",
           "values": [
+            {
+              "name": {
+                "value": "zwiebelsuppe"
+              }
+            },
+            {
+              "name": {
+                "value": "selleriesuppe"
+              }
+            },
+            {
+              "name": {
+                "value": "möhrencremesuppe"
+              }
+            },
+            {
+              "name": {
+                "value": "kürbissuppe"
+              }
+            },
+            {
+              "name": {
+                "value": "erbsensuppe"
+              }
+            },
             {
               "name": {
                 "value": "karottensuppe"
