@@ -1,9 +1,18 @@
 package soupit.hilfsklassen;
 
 import org.junit.Test;
+import soupit.handlers.LaunchRequestHandler;
+import soupit.handlers.TestHelper;
+import soupit.model.Rezept;
+import soupit.model.Zutat;
+import soupit.model.ZutatMenge;
+
+import java.lang.reflect.Method;
+import java.util.ArrayList;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class RezeptServiceTest {
     @Test
@@ -13,5 +22,57 @@ public class RezeptServiceTest {
 
         assertNotNull(first);
         assertEquals(first, second);
+    }
+
+    @Test
+    public void testGetZutaten(){
+        Rezept rezept = TestHelper.generateRezept("test", 0);
+
+        ArrayList<ZutatMenge> have = RezeptService.getZutaten(rezept, 2);
+
+        assertTrue(have.size() == 3);
+    }
+
+    @Test
+    public void testGetRezept(){
+        Rezept have = RezeptService.getRezept(0);
+
+        assertNotNull(have);
+        assertNotNull(have.getName());
+        assertNotNull(have.getZutaten());
+    }
+
+    @Test
+    public void testZutatMengeBauen(){
+        ZutatMenge have = null;
+
+        Zutat zutat =  TestHelper.generateDummyZutat();
+        Double menge = 2.0;
+
+        try {
+            Method method = RezeptService.class.getDeclaredMethod("zutatMengeBauen", Zutat.class, Double.class);
+            method.setAccessible(true);
+            have = (ZutatMenge) method.invoke(null, zutat, menge);
+        } catch (Exception ex) {
+        }
+
+        assertNotNull(have);
+    }
+
+    @Test
+    public void testMengeFormatieren(){
+        String have = null;
+
+        Zutat zutat =  TestHelper.generateDummyZutat();
+        Double menge = 2.0;
+
+        try {
+            Method method = RezeptService.class.getDeclaredMethod("mengeFormatieren", Zutat.class, Double.class);
+            method.setAccessible(true);
+            have = (String) method.invoke(null, zutat, menge);
+        } catch (Exception ex) {
+        }
+
+        assertNotNull(have);
     }
 }

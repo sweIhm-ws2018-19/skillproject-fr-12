@@ -4,6 +4,7 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.*;
 import com.amazon.ask.model.slu.entityresolution.*;
 import soupit.model.Rezept;
+import soupit.model.Zutat;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -228,5 +229,9 @@ public final class TestHelper {
         ArrayList<Integer> zutaten = new ArrayList<>(Arrays.asList(new Integer[]{0, 1, 2}));
         ArrayList<Double> mengen = new ArrayList<>(Arrays.asList(new Double[]{1., 14., 10.}));
         return new Rezept(id, name, schritte, zutaten, mengen);
+    }
+
+    public static Zutat generateDummyZutat(){
+        return new Zutat(0, "zutat", "zutaten", "einheit", "einheiten", "g");
     }
 }
