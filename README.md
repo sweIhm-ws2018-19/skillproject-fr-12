@@ -1,6 +1,6 @@
 # Soup-IT
 
-## Präsentation Tourismus
+##  Präsentation Tourismus
 [Präsentation Tourismus](https://github.com/sweIhm-ws2018-19/skillproject-fr-12/blob/master/UML/soupit_praesentation.pdf)
 
 #### Systemidee:
