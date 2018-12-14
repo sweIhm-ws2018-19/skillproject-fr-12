@@ -16,7 +16,9 @@ import static soupit.hilfsklassen.SlotFilter.*;
 
 public class ZutatenAusschliessenHandler implements RequestHandler {
     @Override
-    public boolean canHandle(HandlerInput input) { return input.matches(intentName("ZutatenAusschliessenIntent")); }
+    public boolean canHandle(HandlerInput input) {
+        return input.matches(intentName("ZutatenAusschliessenIntent"));
+    }
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
@@ -62,30 +64,5 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
                     .withReprompt(repromptText);
         }
         return responseBuilder.build();
-
-//        return input.getResponseBuilder()
-//                .withSpeech(speechText)
-//                .withSimpleCard("SoupitSession", speechText)
-//                .withShouldEndSession(false)
-//                .build();}
-
     }
-
-//    public String[] getIngredient() {
-//        String[] ingredient;
-//        ingredient= new String[]{"Kartoffel, Tomate, Gurke, Karotte"};
-//        return ingredient;
-//    }
-//
-//    public String[] getExcludedIngredient(){
-//        String[] excludedIngredient;
-//        excludedIngredient= new String[] {"Kartoffel, Karotte"};
-//        return excludedIngredient;
-//    }
-//
-//    public String[] removeExcludedIngredient(String[] ingredient, String[] excludedIngredient){
-//        String[] ingredientResult;
-//        if (ingredient != null){}
-//        return null;
-//    }
 }
