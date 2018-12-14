@@ -169,4 +169,21 @@ public class RezeptServiceTest {
         assertNotNull(have);
         assertEquals(want, have);
     }
+
+    @Test
+    public void testMengeFormatierenInfinite(){
+        String have = null;
+
+        Zutat zutat =  TestHelper.generateDummyZutat();
+        Double menge = Double.POSITIVE_INFINITY;
+
+        try {
+            Method method = RezeptService.class.getDeclaredMethod("mengeFormatieren", Zutat.class, Double.class);
+            method.setAccessible(true);
+            have = (String) method.invoke(null, zutat, menge);
+        } catch (Exception ex) {
+        }
+
+        assertNotNull(have);
+    }
 }
