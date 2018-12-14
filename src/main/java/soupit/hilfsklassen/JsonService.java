@@ -46,10 +46,8 @@ public class JsonService {
 
         } catch (FileNotFoundException e) {
             System.err.println("File nicht vorhanden..");
-            e.printStackTrace();
         } catch (IOException e) {
             System.err.println("Irgendein Fehler in JsonService.rezepteEinlesen()..");
-            e.printStackTrace();
         }
 
         return rezepte;
@@ -89,10 +87,8 @@ public class JsonService {
 
         } catch (FileNotFoundException e) {
             System.err.println("File nicht vorhanden..");
-            e.printStackTrace();
         } catch (IOException e) {
             System.err.println("Irgendein Fehler in JsonService.zutatenEinlesen()..");
-            e.printStackTrace();
         }
 
         return zutaten;
