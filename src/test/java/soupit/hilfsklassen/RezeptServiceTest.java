@@ -1,7 +1,6 @@
 package soupit.hilfsklassen;
 
 import org.junit.Test;
-import soupit.handlers.LaunchRequestHandler;
 import soupit.handlers.TestHelper;
 import soupit.model.Rezept;
 import soupit.model.Zutat;
@@ -74,5 +73,100 @@ public class RezeptServiceTest {
         }
 
         assertNotNull(have);
+    }
+
+    @Test
+    public void testMengeFormatierenNegativ(){
+        String want = "none";
+        String have = null;
+
+        Zutat zutat =  TestHelper.generateDummyZutat();
+        Double menge = -2.0;
+
+        try {
+            Method method = RezeptService.class.getDeclaredMethod("mengeFormatieren", Zutat.class, Double.class);
+            method.setAccessible(true);
+            have = (String) method.invoke(null, zutat, menge);
+        } catch (Exception ex) {
+        }
+
+        assertNotNull(have);
+        assertEquals(want, have);
+    }
+
+    @Test
+    public void testMengeFormatierenNoInteger(){
+        String want = "2.5";
+        String have = null;
+
+        Zutat zutat =  TestHelper.generateDummyZutat();
+        Double menge = 2.5;
+
+        try {
+            Method method = RezeptService.class.getDeclaredMethod("mengeFormatieren", Zutat.class, Double.class);
+            method.setAccessible(true);
+            have = (String) method.invoke(null, zutat, menge);
+        } catch (Exception ex) {
+        }
+
+        assertNotNull(have);
+        assertEquals(want, have);
+    }
+
+    @Test
+    public void testMengeFormatierenOne(){
+        String want = "ein";
+        String have = null;
+
+        Zutat zutat =  TestHelper.generateDummyZutat();
+        Double menge = 1.0;
+
+        try {
+            Method method = RezeptService.class.getDeclaredMethod("mengeFormatieren", Zutat.class, Double.class);
+            method.setAccessible(true);
+            have = (String) method.invoke(null, zutat, menge);
+        } catch (Exception ex) {
+        }
+
+        assertNotNull(have);
+        assertEquals(want, have);
+    }
+
+    @Test
+    public void testMengeFormatierenOneFemale(){
+        String want = "eine";
+        String have = null;
+
+        Zutat zutat =  TestHelper.generateDummyZutat("w");
+        Double menge = 1.0;
+
+        try {
+            Method method = RezeptService.class.getDeclaredMethod("mengeFormatieren", Zutat.class, Double.class);
+            method.setAccessible(true);
+            have = (String) method.invoke(null, zutat, menge);
+        } catch (Exception ex) {
+        }
+
+        assertNotNull(have);
+        assertEquals(want, have);
+    }
+
+    @Test
+    public void testMengeFormatierenOneMale(){
+        String want = "einen";
+        String have = null;
+
+        Zutat zutat =  TestHelper.generateDummyZutat("m");
+        Double menge = 1.0;
+
+        try {
+            Method method = RezeptService.class.getDeclaredMethod("mengeFormatieren", Zutat.class, Double.class);
+            method.setAccessible(true);
+            have = (String) method.invoke(null, zutat, menge);
+        } catch (Exception ex) {
+        }
+
+        assertNotNull(have);
+        assertEquals(want, have);
     }
 }

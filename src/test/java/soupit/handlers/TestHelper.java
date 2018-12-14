@@ -234,4 +234,8 @@ public final class TestHelper {
     public static Zutat generateDummyZutat(){
         return new Zutat(0, "zutat", "zutaten", "einheit", "einheiten", "g");
     }
+
+    public static Zutat generateDummyZutat(String geschlecht){
+        return new Zutat(0, "zutat", "zutaten", "einheit", "einheiten", geschlecht);
+    }
 }
