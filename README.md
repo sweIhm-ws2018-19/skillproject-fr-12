@@ -1,5 +1,8 @@
 # Soup-IT
 
+## Präsentation Tourismus
+[Präsentation Tourismus](https://github.com/sweIhm-ws2018-19/skillproject-fr-12/blob/master/UML/soupit_praesentation.pdf)
+
 #### Systemidee:
 
 Soup-IT ist eine Anwendung, die den Nutzer bei der Zubereitung von Suppen unterstützen soll. Da das System für die Amazon Alexa-Plattform entwickelt wird, ist es wichtig, dass die komplette User Interaktion auf verbaler Ebene abläuft.
