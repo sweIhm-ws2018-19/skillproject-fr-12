@@ -6,7 +6,7 @@ import soupit.model.ZutatMenge;
 import java.util.ArrayList;
 
 public class TextService {
-    private TextService instance;
+    private static TextService instance;
 
     private static final String BREAK_TWO_SECONDS = "<break time=\"2s\"/>";
     private static final String BREAK_SECOND = "<break time=\"1s\"/>";
@@ -18,7 +18,7 @@ public class TextService {
         //empty
     }
 
-    public TextService getInstance() {
+    public static TextService getInstance() {
         if (instance == null)
             instance = new TextService();
 
