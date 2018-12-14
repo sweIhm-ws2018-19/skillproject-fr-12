@@ -51,7 +51,7 @@ public final class RezeptService {
         String response = "";
         int mengeInt = menge.intValue();
 
-        if ((menge == mengeInt) && !Double.isInfinite(menge)) {
+        if ((menge == mengeInt)) {
             if (mengeInt == 1) {
                 switch (zutat.getEinheitGeschlecht()) {
                     case "w":
