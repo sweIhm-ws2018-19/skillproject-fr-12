@@ -73,7 +73,7 @@ public final class SessionAttributeService {
      * @param key
      * @return
      */
-    public static Object getSingleSessionAttribute(HandlerInput input, String key){
+    public static Object getSingleSessionAttribute(HandlerInput input, String key) {
         Map<String, Object> sessionAttributes = input.getAttributesManager().getSessionAttributes();
 
         return sessionAttributes.getOrDefault(key, "none");
@@ -87,7 +87,7 @@ public final class SessionAttributeService {
      * @param key
      * @param value
      */
-    public static void setSingleSessionAttribute(HandlerInput input, String key, Object value){
+    public static void setSingleSessionAttribute(HandlerInput input, String key, Object value) {
         Map<String, Object> sessionAttributes = input.getAttributesManager().getSessionAttributes();
         sessionAttributes.put(key, value);
         input.getAttributesManager().setSessionAttributes(sessionAttributes);

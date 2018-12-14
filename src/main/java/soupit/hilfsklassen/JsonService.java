@@ -10,7 +10,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class JsonService {
     private JsonService instance;
@@ -30,7 +29,7 @@ public class JsonService {
         ArrayList<Rezept> rezepte = new ArrayList<>();
 
         //hier Json einlesen
-        try (BufferedReader br = new BufferedReader(new FileReader("data/rezepte.json"))){
+        try (BufferedReader br = new BufferedReader(new FileReader("data/rezepte.json"))) {
             String input = "";
 
             String zeile = br.readLine();
@@ -53,7 +52,7 @@ public class JsonService {
         return rezepte;
     }
 
-    public static ArrayList<Rezept> rezepteParsen(JSONArray json){
+    public static ArrayList<Rezept> rezepteParsen(JSONArray json) {
         ArrayList<Rezept> rezepte = new ArrayList<>();
 
         for (Object j : json) {

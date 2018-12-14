@@ -82,14 +82,14 @@ public final class SlotFilter {
      * @param key
      * @return
      */
-    public static String getSingleSlotCheckedValue(Map<String, Slot> slots, String key){
+    public static String getSingleSlotCheckedValue(Map<String, Slot> slots, String key) {
         String ret = "none";
 
         Slot slot = slots.get(key);
 
-        if(slot != null && slot.getResolutions() != null){
+        if (slot != null && slot.getResolutions() != null) {
             Resolution resolution = slot.getResolutions().getResolutionsPerAuthority().get(0);
-            if(resolution.getValues() != null){
+            if (resolution.getValues() != null) {
                 ret = resolution.getValues().get(0).getValue().getName();
             }
         }
@@ -104,11 +104,11 @@ public final class SlotFilter {
      * @param key
      * @return
      */
-    public static String getSingleSlotInputValue(Map<String, Slot> slots, String key){
+    public static String getSingleSlotInputValue(Map<String, Slot> slots, String key) {
         String ret = "none";
 
         Slot slot = slots.get(key);
-        if(slot != null){
+        if (slot != null) {
             ret = slot.getValue();
         }
 

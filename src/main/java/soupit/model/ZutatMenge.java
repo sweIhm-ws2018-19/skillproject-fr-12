@@ -1,7 +1,5 @@
 package soupit.model;
 
-import org.json.JSONObject;
-
 public class ZutatMenge {
     private String menge;
     private String einheit;

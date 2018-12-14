@@ -5,7 +5,6 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 import org.json.JSONArray;
 import soupit.hilfsklassen.JsonService;
-import soupit.hilfsklassen.RezeptService;
 import soupit.hilfsklassen.SessionAttributeService;
 import soupit.hilfsklassen.TextService;
 import soupit.model.Rezept;

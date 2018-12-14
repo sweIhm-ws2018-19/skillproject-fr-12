@@ -38,12 +38,12 @@ public class TextService {
         return response + ". " + BREAK_SECOND + " Hast du alle Zutaten vorrätig?";
     }
 
-    public static String schritteVonRezeptVorlesen(Rezept rezept){
+    public static String schritteVonRezeptVorlesen(Rezept rezept) {
         String response = "Alles klar. Lass uns mit der Zubereitung der " + rezept.getName() + " beginnen.";
 
         ArrayList<String> schritte = rezept.getSchritte();
 
-        for(String schritt: schritte){
+        for (String schritt : schritte) {
             response += SPACE + BREAK_TWO_SECONDS + SPACE + schritt;
         }
 
