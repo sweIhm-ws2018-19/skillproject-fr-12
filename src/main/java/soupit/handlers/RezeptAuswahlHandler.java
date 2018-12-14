@@ -88,8 +88,8 @@ public class RezeptAuswahlHandler implements RequestHandler {
     /**
      * @param suppe:   Index der Suppe (als String)
      * @param rezepte: alle vorgeschlagenen Rezepte
-     * @return falls Index nicht passt: ""
-     * falls Index passt: String Suppe
+     * @return falls Index nicht passt: -1
+     * falls Index passt: suppenIndex
      */
     public int checkSuppeZahl(String suppe, ArrayList<Rezept> rezepte) {
         int suppenIndex = -1;

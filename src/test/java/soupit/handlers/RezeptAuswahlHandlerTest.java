@@ -6,6 +6,11 @@ import com.amazon.ask.model.slu.entityresolution.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import soupit.model.Rezept;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -73,29 +78,36 @@ public class RezeptAuswahlHandlerTest {
             assertEquals(want[i], have[i]);
         }
     }
+    */
 
     @Test
     public void testCheckSuppeZahlValid() {
-        String want = "kartoffelsuppe";
-        String have = handler.checkSuppeZahl("1", new String[]{"kartoffelsuppe", "karottensuppe", "tomatensuppe"});
+        int want = 0;
+
+        Rezept r = TestHelper.generateRezept("kartoffelsuppe", 0);
+        int have = handler.checkSuppeZahl("1", new ArrayList<>(Arrays.asList(new Rezept[]{r, r, r})));
 
         assertEquals(want, have);
     }
 
     @Test
     public void testCheckSuppeZahlInvalid() {
-        String want = "";
-        String have = handler.checkSuppeZahl("17", new String[]{"kartoffelsuppe", "karottensuppe", "tomatensuppe"});
+        int want = -1;
+
+        Rezept r = TestHelper.generateRezept("kartoffelsuppe", 0);
+        int have = handler.checkSuppeZahl("17", new ArrayList<>(Arrays.asList(new Rezept[]{r, r, r})));
 
         assertEquals(want, have);
     }
 
     @Test
     public void testCheckSuppeText() {
-        String want = "tomatensuppe";
-        String have = handler.checkSuppeText("tomatensuppe", new String[]{"kartoffelsuppe", "karottensuppe", "tomatensuppe"});
+        int want = 0;
+
+        Rezept r = TestHelper.generateRezept("kartoffelsuppe", 0);
+        Rezept rez = TestHelper.generateRezept("tomatensuppe", 1);
+        int have = handler.checkSuppeText("kartoffelsuppe", new ArrayList<>(Arrays.asList(new Rezept[]{r, rez, rez})));
 
         assertEquals(want, have);
     }
-    */
 }
