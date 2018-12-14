@@ -3,9 +3,11 @@ package soupit.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.model.*;
 import com.amazon.ask.model.slu.entityresolution.*;
+import org.json.JSONArray;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import soupit.hilfsklassen.JsonService;
 import soupit.model.Rezept;
 
 import java.util.ArrayList;
@@ -35,50 +37,20 @@ public class RezeptAuswahlHandlerTest {
         assertTrue(handler.canHandle(inputMock));
     }
 
-    /*
-    @Test
-    public void testHandleNumberInput() {
-        //HandlerInput Mock
-        HandlerInput inputMock = TestHelper.mockInputWithSlot("Zahl", "2", true);
-
-        Response response = handler.handle(inputMock).get();
-
-        assertFalse(response.getShouldEndSession());
-        assertTrue(response.getOutputSpeech().toString().contains(WIE_VIELE_PORTIONEN));
-    }
-
-    @Test
-    public void testHandleTextInput() {
-        //HandlerInput Mock
-        HandlerInput inputMock = TestHelper.mockInputWithSlot("Suppe", "kartoffelsuppe", true);
-
-        Response response = handler.handle(inputMock).get();
-
-        assertFalse(response.getShouldEndSession());
-        assertTrue(response.getOutputSpeech().toString().contains(WIE_VIELE_PORTIONEN));
-    }
-
-    @Test
-    public void testHandleWrongInput() {
-        //HandlerInput Mock
-        HandlerInput inputMock = TestHelper.mockInputWithSlot("Zutat", "karotten", true);
-
-        Response response = handler.handle(inputMock).get();
-
-        assertFalse(response.getShouldEndSession());
-        assertTrue(response.getOutputSpeech().toString().contains("Bitte wähle zuerst Zutaten aus."));
-    }
-
     @Test
     public void testGetRezepte() {
-        String[] want = new String[]{"kartoffelsuppe", "karottensuppe", "tomatensuppe"};
-        String[] have = handler.getRezepte();
+        ArrayList<Rezept> want = new ArrayList<>();
 
-        for (int i = 0; i < want.length; i++) {
-            assertEquals(want[i], have[i]);
+        Rezept r = TestHelper.generateRezept("kartoffelsuppe", 0);
+        JSONArray j = new JSONArray(new Rezept[]{r});
+        HandlerInput inputmock = TestHelper.mockInputWithSessionAttributes(new String[]{"REZEPT_FOUND"}, new Object[]{j.toString()});
+
+        ArrayList<Rezept> have = handler.getRezepte(inputmock);
+
+        for (int i = 0; i < want.size(); i++) {
+            assertEquals(want.get(i), have.get(i));
         }
     }
-    */
 
     @Test
     public void testCheckSuppeZahlValid() {
