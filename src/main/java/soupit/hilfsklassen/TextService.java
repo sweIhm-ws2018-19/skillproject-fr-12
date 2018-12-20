@@ -26,29 +26,31 @@ public class TextService {
     }
 
     public static String zutatenVonRezeptVorlesen(ArrayList<ZutatMenge> zutaten, int portionen) {
-        String response = "Für die Zubereitung für " + portionen + " Personen benötigst du mehrere Zutaten. Lege dir folgendes bereit: ";
+        StringBuilder response = new StringBuilder();
+        response.append("Für die Zubereitung für " + portionen + " Personen benötigst du mehrere Zutaten. Lege dir folgendes bereit: ");
 
         for (ZutatMenge zutat : zutaten) {
-            response += SPACE + BREAK_HALF_SECOND + SPACE;
-            response += (!zutat.getMenge().equalsIgnoreCase(NONE) ? (zutat.getMenge()) : "")
+            response.append(SPACE + BREAK_HALF_SECOND + SPACE);
+            response.append((!zutat.getMenge().equalsIgnoreCase(NONE) ? (zutat.getMenge()) : "")
                     + (!zutat.getEinheit().equalsIgnoreCase(NONE) ? (SPACE + zutat.getEinheit()) : "")
-                    + SPACE + zutat.getName();
+                    + SPACE + zutat.getName());
         }
 
-        return response + ". " + BREAK_SECOND + " Hast du alle Zutaten vorrätig?";
+        return response.toString() + ". " + BREAK_SECOND + " Hast du alle Zutaten vorrätig?";
     }
 
     public static String schritteVonRezeptVorlesen(Rezept rezept) {
-        String response = "Alles klar. Lass uns mit der Zubereitung der " + rezept.getName() + " beginnen.";
+        StringBuilder response = new StringBuilder();
+        response.append("Alles klar. Lass uns mit der Zubereitung der " + rezept.getName() + " beginnen.");
 
         ArrayList<String> schritte = rezept.getSchritte();
 
         for (String schritt : schritte) {
-            response += SPACE + BREAK_TWO_SECONDS + SPACE + schritt;
+            response.append(SPACE + BREAK_TWO_SECONDS + SPACE + schritt);
         }
 
-        response += SPACE + "Ich hoffe die Suppe schmeckt und wünsche einen guten Appetit. Bis zum nächsten Mal.";
+        response.append(SPACE + "Ich hoffe die Suppe schmeckt und wünsche einen guten Appetit. Bis zum nächsten Mal.");
 
-        return response;
+        return response.toString();
     }
 }
