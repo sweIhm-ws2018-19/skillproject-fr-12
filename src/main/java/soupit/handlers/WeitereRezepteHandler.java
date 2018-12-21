@@ -54,19 +54,25 @@ public class WeitereRezepteHandler implements RequestHandler {
         final String repromptText;
         boolean isAskResponse = false;
 
-        ArrayList<Rezept> allRecipies = JsonService.rezepteParsen(new JSONArray((String) SessionAttributeService.getSingleSessionAttribute(input, ALL_MATCHED_RECIPIES)));
+
+        final String allRecipiesString = (String) SessionAttributeService.getSingleSessionAttribute(input, ALL_MATCHED_RECIPIES);
         Integer moreRead = (Integer) SessionAttributeService.getSingleSessionAttribute(input, MORE_RECIPIES_GIVEN);
 
-        ArrayList<Rezept> recipies = DbRequest.recipiesOutputSizeLimiter(allRecipies, moreRead, moreRead + 3);
-
-        SessionAttributeService.setSingleSessionAttribute(input, MORE_RECIPIES_GIVEN, moreRead + recipies.size());
-        SessionAttributeService.setSingleSessionAttribute(input, REZEPT_FOUND, recipies);
-
-
-        if (moreRead == null || recipies == null || allRecipies == null) {
+        if (moreRead == null || allRecipiesString == null) {
             speechText = "Das weiß ich gerade nicht!";
             repromptText = speechText;
         } else {
+
+        ArrayList<Rezept> allRecipies = JsonService.rezepteParsen(new JSONArray(allRecipiesString));
+        ArrayList<Rezept> recipies = DbRequest.recipiesOutputSizeLimiter(allRecipies, moreRead, moreRead + 3);
+
+        SessionAttributeService.setSingleSessionAttribute(input, MORE_RECIPIES_GIVEN, moreRead + recipies.size());
+
+        final String json = new JSONArray(recipies).toString();
+        SessionAttributeService.setSingleSessionAttribute(input, REZEPT_FOUND, json);
+
+
+
 
 
             if (recipies.isEmpty()) {
