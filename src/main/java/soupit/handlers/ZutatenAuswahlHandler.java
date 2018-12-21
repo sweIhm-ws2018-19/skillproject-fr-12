@@ -80,7 +80,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
             if (recipies.size() == 1) {
                 speechText = "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0).getName();
             } else {
-                String rezepte = this.suppenToString(recipies);
+                String rezepte = DbRequest.suppenToString(recipies);
                 speechText = "Ich kann dir anhand der genannten Zutaten " + recipies.size() + " Rezepte vorschlagen: " + rezepte;
             }
             speechText += BREAK_SECOND + " Welche Suppe wählst du?";
@@ -110,17 +110,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         return responseBuilder.build();
     }
 
-    private String suppenToString(ArrayList<Rezept> rezepts) {
-        String returnString = "";
-        for (int index = 0; index < 3; index++) {
-            if (index == rezepts.size() - 1) {
-                returnString = returnString.substring(0, returnString.length() - 2) + " und " + rezepts.get(index).getName();
-            } else {
-                returnString = returnString.concat(rezepts.get(index).getName()).concat(", ");
-            }
-        }
-        return returnString;
-    }
+
 
 
 }

@@ -54,34 +54,30 @@ public class WeitereRezepteHandler implements RequestHandler {
         final String repromptText;
         boolean isAskResponse = false;
 
-        ArrayList<Rezept> recipies = JsonService.rezepteParsen(new JSONArray((String) SessionAttributeService.getSingleSessionAttribute(input, ALL_MATCHED_RECIPIES)));
+        ArrayList<Rezept> allRecipies = JsonService.rezepteParsen(new JSONArray((String) SessionAttributeService.getSingleSessionAttribute(input, ALL_MATCHED_RECIPIES)));
         int moreRead = (int) SessionAttributeService.getSingleSessionAttribute(input, MORE_RECIPIES_GIVEN);
 
-        if (recipies.size() <= moreRead) {
+        ArrayList<Rezept> recipies = DbRequest.recipiesOutputSizeLimiter(allRecipies, moreRead, moreRead +3);
+
+        SessionAttributeService.setSingleSessionAttribute(input, MORE_RECIPIES_GIVEN, moreRead + recipies.size());
+
+
+        if (recipies.isEmpty()) {
             speechText = "Hierzu kann ich dir leider kein weiteres Suppenrezept vorschlagen. Nenne mir eine andere Zutat, zum Beispiel eine Gemüsesorte.";
             repromptText = speechText;
             isAskResponse = true;
 
         } else {
-            ArrayList<Rezept> newRezepts = new ArrayList<>();
-
-            for (int index = moreRead; index < recipies.size() && index < moreRead + 3; index++){
-                newRezepts.add(recipies.get(index));
-            }
-            moreRead = moreRead + newRezepts.size();
-
-            if (recipies.size() == 1) {
+          if (recipies.size() == 1) {
                 speechText = "Ich kann dir noch folgendes Rezept vorschlagen " + recipies.get(0).getName();
             } else {
-                String rezepte = this.suppenToString(recipies);
+                String rezepte = DbRequest.suppenToString(recipies);
                 speechText = "Ich kann dir anhand der genannten Zutaten " + recipies.size() +  " Rezepte vorschlagen: " + rezepte;
             }
             speechText += BREAK_SECOND + " Welche Suppe wählst du?";
             repromptText = speechText;
 
         }
-
-
 
         SessionAttributeService.updateLastIntent(input, "WeitereRezepteIntent");
 
@@ -97,18 +93,6 @@ public class WeitereRezepteHandler implements RequestHandler {
         }
 
         return responseBuilder.build();
-    }
-
-    private String suppenToString(ArrayList<Rezept> rezepts) {
-        String returnString = "";
-        for (int index = 0; index < 3; index++) {
-            if (index == rezepts.size() - 1) {
-                returnString = returnString.substring(0, returnString.length() - 2) + " und " + rezepts.get(index).getName();
-            } else {
-                returnString = returnString.concat(rezepts.get(index).getName()).concat(", ");
-            }
-        }
-        return returnString;
     }
 
 }
