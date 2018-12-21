@@ -48,7 +48,7 @@ public class WeitereRezepteHandler implements RequestHandler {
 
         Request request = input.getRequestEnvelope().getRequest();
         IntentRequest intentRequest = (IntentRequest) request;
-        Intent intent = intentRequest.getIntent();
+
 
         String speechText;
         final String repromptText;
