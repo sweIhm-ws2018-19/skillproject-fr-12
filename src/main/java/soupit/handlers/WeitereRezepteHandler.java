@@ -58,6 +58,7 @@ public class WeitereRezepteHandler implements RequestHandler {
         final String allRecipiesString = (String) SessionAttributeService.getSingleSessionAttribute(input, ALL_MATCHED_RECIPIES);
         Integer moreRead = (Integer) SessionAttributeService.getSingleSessionAttribute(input, MORE_RECIPIES_GIVEN);
 
+        //check for nullpointers
         if (moreRead == null || allRecipiesString == null) {
             speechText = "Das weiß ich gerade nicht!";
             repromptText = speechText;
