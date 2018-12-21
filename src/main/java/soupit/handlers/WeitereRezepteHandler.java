@@ -19,25 +19,28 @@ import com.amazon.ask.model.*;
 import com.amazon.ask.response.ResponseBuilder;
 import org.json.JSONArray;
 import soupit.hilfsklassen.DbRequest;
+import soupit.hilfsklassen.JsonService;
 import soupit.hilfsklassen.SessionAttributeService;
 import soupit.hilfsklassen.SlotFilter;
 import soupit.model.Rezept;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 import static soupit.handlers.ZutatenAbfrageHandler.ZUTAT_KEY;
 import static soupit.handlers.ZutatenAusschliessenAbfrageHandler.ZUTAT_AUSSCHLIESSEN_KEY;
 
-public class ZutatenAuswahlHandler implements RequestHandler {
+public class WeitereRezepteHandler implements RequestHandler {
     private static final String BREAK_SECOND = "<break time=\"1s\"/>";
-    private final static String REZEPT_FOUND = "REZEPT_FOUND"; // ausgegebene Rezepte
-    private final static String MORE_RECIPIES_GIVEN = "MORE_RECIPIES_GIVEN"; // Zaehler ausgegebene Rezepte
+    private final static String REZEPT_FOUND = "REZEPT_FOUND";
+    private final static String MORE_RECIPIES_GIVEN = "MORE_RECIPIES_GIVEN";
     private final static String ALL_MATCHED_RECIPIES = "ALL_MATCHED_RECIPIES";
 
     @Override
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("ZutatenAuswahlIntent"));
+        return input.matches(intentName("WeitereRezepteIntent"));
     }
 
     @Override
@@ -46,55 +49,41 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         Request request = input.getRequestEnvelope().getRequest();
         IntentRequest intentRequest = (IntentRequest) request;
         Intent intent = intentRequest.getIntent();
-        //get slots from current intent
-        Map<String, Slot> slots = intent.getSlots();
-
-
-        final ArrayList<String> zutatStringList = (ArrayList<String>) SlotFilter.getIngredient(slots);
 
         String speechText;
         final String repromptText;
         boolean isAskResponse = false;
 
-        ArrayList<String> ausgeschlosseneZutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_AUSSCHLIESSEN_KEY);
+        ArrayList<Rezept> recipies = JsonService.rezepteParsen(new JSONArray((String) SessionAttributeService.getSingleSessionAttribute(input, ALL_MATCHED_RECIPIES)));
+        int moreRead = (int) SessionAttributeService.getSingleSessionAttribute(input, MORE_RECIPIES_GIVEN);
 
-        if (ausgeschlosseneZutatenListe == null) {
-            ausgeschlosseneZutatenListe = new ArrayList<>();
-        }
+        if (recipies.size() <= moreRead) {
+            speechText = "Hierzu kann ich dir leider kein weiteres Suppenrezept vorschlagen. Nenne mir eine andere Zutat, zum Beispiel eine Gemüsesorte.";
+            repromptText = speechText;
+            isAskResponse = true;
 
-        SessionAttributeService.setSingleSessionAttribute(input, ZUTAT_KEY, zutatStringList);
-        ArrayList<Rezept> allRecipies = DbRequest.getRecipies(zutatStringList, ausgeschlosseneZutatenListe);
+        } else {
+            ArrayList<Rezept> newRezepts = new ArrayList<>();
 
-       final String allRecipiesJson = new JSONArray(allRecipies).toString();
-        SessionAttributeService.setSingleSessionAttribute(input, ALL_MATCHED_RECIPIES, allRecipiesJson);
+            for (int index = moreRead; index < recipies.size() && index < moreRead + 3; index++){
+                newRezepts.add(recipies.get(index));
+            }
+            moreRead = moreRead + newRezepts.size();
 
-        ArrayList<Rezept> recipies = DbRequest.recipiesOutputSizeLimiter(allRecipies, 0, 3);
-
-       final String json = new JSONArray(recipies).toString();
-        SessionAttributeService.setSingleSessionAttribute(input, REZEPT_FOUND, json);
-
-        SessionAttributeService.setSingleSessionAttribute(input, MORE_RECIPIES_GIVEN, recipies.size());
-
-
-        if (!recipies.isEmpty()) {
             if (recipies.size() == 1) {
-                speechText = "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0).getName();
+                speechText = "Ich kann dir noch folgendes Rezept vorschlagen " + recipies.get(0).getName();
             } else {
                 String rezepte = this.suppenToString(recipies);
-                speechText = "Ich kann dir anhand der genannten Zutaten " + recipies.size() + " Rezepte vorschlagen: " + rezepte;
+                speechText = "Ich kann dir anhand der genannten Zutaten " + recipies.size() +  " Rezepte vorschlagen: " + rezepte;
             }
             speechText += BREAK_SECOND + " Welche Suppe wählst du?";
             repromptText = speechText;
 
-        } else {
-            speechText = "Hierzu kann ich dir aktuell leider kein passendes Suppenrezept vorschlagen. Nenne mir eine andere Zutat, zum Beispiel eine Gemüsesorte.";
-            repromptText =
-                    "Hierzu kann ich dir aktuell leider kein passendes Suppenrezept vorschlagen. Nenne mir eine andere Zutat, zum Beispiel eine Gemüsesorte.";
-            isAskResponse = true;
-
         }
 
-        SessionAttributeService.updateLastIntent(input, "ZutatenAuswahlIntent");
+
+
+        SessionAttributeService.updateLastIntent(input, "WeitereRezepteIntent");
 
         ResponseBuilder responseBuilder = input.getResponseBuilder();
 
@@ -121,6 +110,5 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         }
         return returnString;
     }
-
 
 }
