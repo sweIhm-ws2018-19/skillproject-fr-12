@@ -37,7 +37,8 @@ public class SoupitStreamHandler extends SkillStreamHandler {
                         new ZubereitungStartenHandler(),
                         new PortionenAuswahlHandler(),
                         new ImBatmanHandler(),
-                        new YesIntentHandler())
+                        new YesIntentHandler(),
+                        new WeitereRezepteHandler())
                 // Add your skill id below
                 //.withSkillId("")
                 //.withTableName("soupit_testing")

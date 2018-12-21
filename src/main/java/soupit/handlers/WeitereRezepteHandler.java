@@ -55,28 +55,36 @@ public class WeitereRezepteHandler implements RequestHandler {
         boolean isAskResponse = false;
 
         ArrayList<Rezept> allRecipies = JsonService.rezepteParsen(new JSONArray((String) SessionAttributeService.getSingleSessionAttribute(input, ALL_MATCHED_RECIPIES)));
-        int moreRead = (int) SessionAttributeService.getSingleSessionAttribute(input, MORE_RECIPIES_GIVEN);
+        Integer moreRead = (Integer) SessionAttributeService.getSingleSessionAttribute(input, MORE_RECIPIES_GIVEN);
 
-        ArrayList<Rezept> recipies = DbRequest.recipiesOutputSizeLimiter(allRecipies, moreRead, moreRead +3);
+        ArrayList<Rezept> recipies = DbRequest.recipiesOutputSizeLimiter(allRecipies, moreRead, moreRead + 3);
 
         SessionAttributeService.setSingleSessionAttribute(input, MORE_RECIPIES_GIVEN, moreRead + recipies.size());
+        SessionAttributeService.setSingleSessionAttribute(input, REZEPT_FOUND, recipies);
 
 
-        if (recipies.isEmpty()) {
-            speechText = "Hierzu kann ich dir leider kein weiteres Suppenrezept vorschlagen. Nenne mir eine andere Zutat, zum Beispiel eine Gemüsesorte.";
+        if (moreRead == null || recipies == null || allRecipies == null) {
+            speechText = "Das weiß ich gerade nicht!";
             repromptText = speechText;
-            isAskResponse = true;
-
         } else {
-          if (recipies.size() == 1) {
-                speechText = "Ich kann dir noch folgendes Rezept vorschlagen " + recipies.get(0).getName();
-            } else {
-                String rezepte = DbRequest.suppenToString(recipies);
-                speechText = "Ich kann dir anhand der genannten Zutaten " + recipies.size() +  " Rezepte vorschlagen: " + rezepte;
-            }
-            speechText += BREAK_SECOND + " Welche Suppe wählst du?";
-            repromptText = speechText;
 
+
+            if (recipies.isEmpty()) {
+                speechText = "Hierzu kann ich dir leider kein weiteres Suppenrezept vorschlagen. Nenne mir eine andere Zutat, zum Beispiel eine Gemüsesorte.";
+                repromptText = speechText;
+                isAskResponse = true;
+
+            } else {
+                if (recipies.size() == 1) {
+                    speechText = "Ich kann dir noch folgendes Rezept vorschlagen " + recipies.get(0).getName();
+                } else {
+                    String rezepte = DbRequest.suppenToString(recipies);
+                    speechText = "Ich kann dir anhand der genannten Zutaten " + recipies.size() + " Rezepte vorschlagen: " + rezepte;
+                }
+                speechText += BREAK_SECOND + " Welche Suppe wählst du?";
+                repromptText = speechText;
+
+            }
         }
 
         SessionAttributeService.updateLastIntent(input, "WeitereRezepteIntent");

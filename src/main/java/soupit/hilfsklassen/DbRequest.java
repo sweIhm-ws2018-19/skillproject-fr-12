@@ -110,7 +110,7 @@ public final class DbRequest {
 
     public static String suppenToString(ArrayList<Rezept> rezepts) {
         String returnString = "";
-        for (int index = 0; index < 3; index++) {
+        for (int index = 0; index < 3 && index < rezepts.size(); index++) {
             if (index == rezepts.size() - 1) {
                 returnString = returnString.substring(0, returnString.length() - 2) + " und " + rezepts.get(index).getName();
             } else {
