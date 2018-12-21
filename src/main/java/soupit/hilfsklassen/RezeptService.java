@@ -67,6 +67,7 @@ public final class RezeptService {
                 response = "none";
             } else
                 response += mengeInt;
+            // TODO: 21.12.2018 Mengenangabe formatieren 
         } else {
             response += menge;
         }
