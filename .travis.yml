@@ -11,8 +11,7 @@ addons:
     organization: "sweihmws2018-19"
     branches:
     - master
-    - sprint2
-    - feature_testing
+    - sprint3
 
 script:
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Pdev sonar:sonar

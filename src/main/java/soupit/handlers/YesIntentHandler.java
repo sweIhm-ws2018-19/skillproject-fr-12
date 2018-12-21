@@ -10,8 +10,7 @@ import java.util.Optional;
 import static com.amazon.ask.request.Predicates.intentName;
 
 public class YesIntentHandler implements RequestHandler {
-    private static final String BREAK_HALF_SECOND = "<break time=\"500ms\"/>";
-
+    private final static String BREAK_HALF_SECOND = "<break time=\"500ms\"/>";
     private final static String PORTIONEN_AUSWAHL_INTENT = "PortionenAuswahlIntent";
 
     @Override
