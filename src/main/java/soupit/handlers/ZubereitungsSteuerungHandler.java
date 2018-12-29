@@ -14,11 +14,10 @@ import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
-public class ZubereitungStartenHandler implements RequestHandler {
+public class ZubereitungsSteuerungHandler implements RequestHandler {
     private final static String PORTIONEN_YES_INTENT = "PortionenYesIntent";
     private final static String REZEPT_FOUND = "REZEPT_FOUND";
     private final static String REZEPT_INDEX = "REZEPT_INDEX";
-    private final static String CURRENT_REZEPT = "CURRENT_REZEPT";
 
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("ZubereitungStartenIntent"));
@@ -35,12 +34,9 @@ public class ZubereitungStartenHandler implements RequestHandler {
             ArrayList<Rezept> rezepte = JsonService.rezepteParsen(new JSONArray((String)SessionAttributeService.getSingleSessionAttribute(input, REZEPT_FOUND)));
             Rezept rezept = rezepte.get(suppenIndex);
 
-            // rezept should also be stored to dyndb
-            SessionAttributeService.setSingleSessionAttribute(input, "");
-
             speechText = TextService.schritteVonRezeptVorlesen(rezept);
 
-            SessionAttributeService.updateLastIntent(input, "ZubereitungStartenIntent");
+            SessionAttributeService.updateLastIntent(input, "ZubereitungsteuerungIntent");
         } else {
             speechText = "Entschuldigung, das habe ich nicht verstanden. Könntest du das bitte wiederholen?";
         }

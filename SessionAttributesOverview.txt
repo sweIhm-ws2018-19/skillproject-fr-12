@@ -6,3 +6,6 @@
 "REZEPT_INDEX": (int) Index des ausgewählten Rezepts
 "PORTIONEN": (int) Anzahl an Portionen die zubereitet werden sollen
 "REZEPT_FOUND": ArrayList<Rezept> die gefunden Rezepte
+"CURRENT_REZEPT": Rezept, das aktuell zubereitet wird // wenn slot leer, wird in dynamo db gesucht
+"MORE_RECIPIES_GIVEN": anzahl der rezepte die mit weitere rezepte vorgeschlagen wurden (index)
+"ALL_MATCHED_RECIPIES": alle rezepte auf die ein Kriterium zutrifft
