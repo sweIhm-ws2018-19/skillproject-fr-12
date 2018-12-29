@@ -29,13 +29,25 @@ public class ZubereitungsSteuerungHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput input) {
         String speechText;
-    SessionAttributeService.getSingleSessionAttribute(input, CURRENT_REZEPT);
-    SessionAttributeService.getSingleSessionAttribute(input, CURRENT_REZEPT_STEP);
+        Rezept rezept = (Rezept) SessionAttributeService.getSingleSessionAttribute(input, CURRENT_REZEPT);
+        Integer currStep = (Integer) SessionAttributeService.getSingleSessionAttribute(input, CURRENT_REZEPT_STEP);
 
-    if ()
+        if (rezept == null || currStep == null) {
+            speechText = "Das weiß ich leider nicht!";
+        } else {
+            ArrayList<String> steps = rezept.getSchritte();
+            if (currStep < 0 || currStep >= steps.size()) {
+                speechText = "Die Zubereitung ist bereits Abgeschlossen.";
+            } else {
+                if (steps.size() == currStep - 1) {
+                    speechText = steps.get(currStep) + "Ich hoffe die Suppe schmeckt und wünsche einen guten Appetit. Bis zum nächsten Mal.";
+                } else {
+                    speechText = steps.get(currStep);
+                }
 
+            }
 
-
+        }
 
 
         SessionAttributeService.updateLastIntent(input, "ZubereitungsSteuerungHandler");
