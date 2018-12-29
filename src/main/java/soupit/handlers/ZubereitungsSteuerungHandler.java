@@ -18,6 +18,9 @@ public class ZubereitungsSteuerungHandler implements RequestHandler {
     private final static String PORTIONEN_YES_INTENT = "PortionenYesIntent";
     private final static String REZEPT_FOUND = "REZEPT_FOUND";
     private final static String REZEPT_INDEX = "REZEPT_INDEX";
+    private final static String CURRENT_REZEPT_STEP = "CURRENT_REZEPT_STEP";
+    private final static String CURRENT_REZEPT = "CURRENT_REZEPT";
+
 
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("ZubereitungStartenIntent"));
@@ -26,21 +29,16 @@ public class ZubereitungsSteuerungHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput input) {
         String speechText;
+    SessionAttributeService.getSingleSessionAttribute(input, CURRENT_REZEPT);
+    SessionAttributeService.getSingleSessionAttribute(input, CURRENT_REZEPT_STEP);
 
-        String lastIntent = SessionAttributeService.getLastIntent(input);
+    if ()
 
-        if (lastIntent.equalsIgnoreCase(PORTIONEN_YES_INTENT)) {
-            int suppenIndex = (int) SessionAttributeService.getSingleSessionAttribute(input, REZEPT_INDEX);
-            ArrayList<Rezept> rezepte = JsonService.rezepteParsen(new JSONArray((String)SessionAttributeService.getSingleSessionAttribute(input, REZEPT_FOUND)));
-            Rezept rezept = rezepte.get(suppenIndex);
 
-            speechText = TextService.schritteVonRezeptVorlesen(rezept);
 
-            SessionAttributeService.updateLastIntent(input, "ZubereitungsteuerungIntent");
-        } else {
-            speechText = "Entschuldigung, das habe ich nicht verstanden. Könntest du das bitte wiederholen?";
-        }
 
+
+        SessionAttributeService.updateLastIntent(input, "ZubereitungsSteuerungHandler");
         return input.getResponseBuilder()
                 .withSimpleCard("SoupitSession", speechText)
                 .withSpeech(speechText)

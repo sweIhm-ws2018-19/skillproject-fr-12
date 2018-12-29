@@ -36,7 +36,7 @@ public class ZubereitungStartenHandler implements RequestHandler {
             Rezept rezept = rezepte.get(suppenIndex);
 
             // rezept should also be stored to dyndb
-            SessionAttributeService.setSingleSessionAttribute(input, "");
+            SessionAttributeService.setSingleSessionAttribute(input, CURRENT_REZEPT, rezept.toString());
 
             speechText = TextService.schritteVonRezeptVorlesen(rezept);
 
