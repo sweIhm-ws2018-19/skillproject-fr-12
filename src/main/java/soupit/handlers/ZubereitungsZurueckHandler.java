@@ -2,19 +2,14 @@ package soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.*;
-import org.json.JSONArray;
-import soupit.hilfsklassen.*;
-import soupit.model.Rezept;
-import soupit.model.RezeptCount;
+import com.amazon.ask.model.Response;
+import soupit.hilfsklassen.SessionAttributeService;
 
-import java.util.ArrayList;
-import java.util.Map;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
-public class ZubereitungsWeiterHandler implements RequestHandler {
+public class ZubereitungsZurueckHandler implements RequestHandler {
     private final static String PORTIONEN_YES_INTENT = "PortionenYesIntent";
     private final static String REZEPT_FOUND = "REZEPT_FOUND";
     private final static String REZEPT_INDEX = "REZEPT_INDEX";
@@ -22,7 +17,7 @@ public class ZubereitungsWeiterHandler implements RequestHandler {
 
 
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("ZubereitungsWeiterIntent"));
+        return input.matches(intentName("ZubereitungsZurueckIntent"));
     }
 
     @Override
@@ -42,9 +37,9 @@ public class ZubereitungsWeiterHandler implements RequestHandler {
 //        final int stepsToGo;
 //
 //        if (slotValue.equals("none"))
-//            stepsToGo = 1;
+//            stepsToGo = -1;
 //        else
-//            stepsToGo = Integer.parseInt(slotValue);
+//            stepsToGo = Integer.parseInt(slotValue)*-1;
 //
 //        if (rezept == null) {
 //            rezept = DbRequest.getRezeptFromDynDB();
@@ -73,7 +68,7 @@ public class ZubereitungsWeiterHandler implements RequestHandler {
 //        }
 String speechText = "fuck this shit im out";
 
-        SessionAttributeService.updateLastIntent(input, "ZubereitungsWeiterHandler");
+        SessionAttributeService.updateLastIntent(input, "ZubereitungsZurueckHandler");
         return input.getResponseBuilder()
                 .withSimpleCard("SoupitSession", speechText)
                 .withSpeech(speechText)
