@@ -17,7 +17,9 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
+import soupit.hilfsklassen.DbRequest;
 import soupit.hilfsklassen.SessionAttributeService;
+import soupit.model.RezeptCount;
 
 import java.util.Optional;
 import java.util.Random;
@@ -25,6 +27,8 @@ import java.util.Random;
 import static com.amazon.ask.request.Predicates.requestType;
 
 public class LaunchRequestHandler implements RequestHandler {
+    private final static String CURRENT_REZEPT = "CURRENT_REZEPT";
+
     @Override
     public boolean canHandle(HandlerInput input) {
         return input.matches(requestType(LaunchRequest.class));
@@ -32,9 +36,22 @@ public class LaunchRequestHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "<say-as interpret-as=\"interjection\">Willkommen</say-as> bei <lang xml:lang=\"en-US\">Soup It</lang> ! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung. " +
-                randomResponse();
-        String repromptText = randomResponse();
+        RezeptCount rezeptCount = DbRequest.getRezeptFromDynDB();
+
+        final String speechText;
+        final  String repromptText;
+        if (rezeptCount == null) {
+
+           speechText =  "<say-as interpret-as=\"interjection\">Willkommen</say-as> bei <lang xml:lang=\"en-US\">Soup It</lang> ! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung. " +
+                    randomResponse();
+            repromptText = randomResponse();
+        }
+        else {
+            SessionAttributeService.setSingleSessionAttribute(input, CURRENT_REZEPT, rezeptCount);
+            speechText = "Wir kochen die " + rezeptCount.getRezept().getName() + " weiter";
+            repromptText = null;
+        }
+
 
         SessionAttributeService.updateLastIntent(input, "LaunchRequest");
 
