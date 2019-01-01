@@ -8,6 +8,7 @@ import soupit.hilfsklassen.JsonService;
 import soupit.hilfsklassen.SessionAttributeService;
 import soupit.hilfsklassen.TextService;
 import soupit.model.Rezept;
+import soupit.model.RezeptCount;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -37,11 +38,13 @@ public class ZubereitungStartenHandler implements RequestHandler {
             Rezept rezept = rezepte.get(suppenIndex);
 
             // rezept should also be stored to dyndb
-            SessionAttributeService.setSingleSessionAttribute(input, CURRENT_REZEPT, rezept.toString());
+            RezeptCount rezeptCount = new RezeptCount(rezept, 0);
+
+            SessionAttributeService.setSingleSessionAttribute(input, CURRENT_REZEPT, rezeptCount.toString());
 
             speechText = rezept.getSchritte().get(0);
 
-            SessionAttributeService.setSingleSessionAttribute(input, CURRENT_REZEPT_STEP, 1);
+
             SessionAttributeService.updateLastIntent(input, "ZubereitungStartenIntent");
         } else {
             speechText = "Entschuldigung, das habe ich nicht verstanden. Könntest du das bitte wiederholen?";
