@@ -14,7 +14,7 @@ import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
-public class ZubereitungsSteuerungHandler implements RequestHandler {
+public class ZubereitungsWeiterHandler implements RequestHandler {
     private final static String PORTIONEN_YES_INTENT = "PortionenYesIntent";
     private final static String REZEPT_FOUND = "REZEPT_FOUND";
     private final static String REZEPT_INDEX = "REZEPT_INDEX";
@@ -23,7 +23,7 @@ public class ZubereitungsSteuerungHandler implements RequestHandler {
 
 
     public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("ZubereitungStartenIntent"));
+        return input.matches(intentName("ZubereitungsSteuerungIntent"));
     }
 
     @Override
@@ -44,13 +44,15 @@ public class ZubereitungsSteuerungHandler implements RequestHandler {
                 } else {
                     speechText = steps.get(currStep);
                 }
+                currStep++;
+                SessionAttributeService.setSingleSessionAttribute(input, CURRENT_REZEPT_STEP, currStep);
 
             }
 
         }
 
 
-        SessionAttributeService.updateLastIntent(input, "ZubereitungsSteuerungHandler");
+        SessionAttributeService.updateLastIntent(input, "ZubereitungsWeiterHandler");
         return input.getResponseBuilder()
                 .withSimpleCard("SoupitSession", speechText)
                 .withSpeech(speechText)

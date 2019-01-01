@@ -19,6 +19,7 @@ public class ZubereitungStartenHandler implements RequestHandler {
     private final static String REZEPT_FOUND = "REZEPT_FOUND";
     private final static String REZEPT_INDEX = "REZEPT_INDEX";
     private final static String CURRENT_REZEPT = "CURRENT_REZEPT";
+    private final static String CURRENT_REZEPT_STEP = "CURRENT_REZEPT_STEP";
 
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("ZubereitungStartenIntent"));
@@ -38,8 +39,9 @@ public class ZubereitungStartenHandler implements RequestHandler {
             // rezept should also be stored to dyndb
             SessionAttributeService.setSingleSessionAttribute(input, CURRENT_REZEPT, rezept.toString());
 
-            speechText = TextService.schritteVonRezeptVorlesen(rezept);
+            speechText = rezept.getSchritte().get(0);
 
+            SessionAttributeService.setSingleSessionAttribute(input, CURRENT_REZEPT_STEP, 1);
             SessionAttributeService.updateLastIntent(input, "ZubereitungStartenIntent");
         } else {
             speechText = "Entschuldigung, das habe ich nicht verstanden. Könntest du das bitte wiederholen?";
