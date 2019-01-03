@@ -50,10 +50,12 @@ public class ZutatenWiederaufnahmeHandler implements RequestHandler {
                     repromptText = speechText;
                 }
             } else {
+                // TODO: 03.01.2019 replace speechText "Entschuldigung, das habe ich nicht verstanden. Könntest du das bitte wiederholen?"
                 speechText = "Zutat wurde nicht ausgeschlossen und konnte deshalb nicht wiederhergestellt werden.";
                 repromptText = speechText;
             }
         } else {
+            // TODO: 03.01.2019 replace speechText "Entschuldigung, das habe ich nicht verstanden. Könntest du das bitte wiederholen?"
             speechText = "Es wurden noch keine Zutaten ausgeschlossen. Sagen Sie zum Beispiel: Ich möchte Kartoffeln ausschließen";
             repromptText = speechText;
             isAskResponse = true;
