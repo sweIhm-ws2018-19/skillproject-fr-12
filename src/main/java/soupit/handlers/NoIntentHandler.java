@@ -57,7 +57,7 @@ public class NoIntentHandler implements RequestHandler {
     public String getRezipes(ArrayList<Rezept> rezepte){
         String alleRezepte = "";
         for (Rezept aRezepte : rezepte) {
-            new StringBuilder().append(alleRezepte).append(" ").append(aRezepte.getName());
+            alleRezepte = alleRezepte + " " + aRezepte.getName();
         }
         return alleRezepte;
     }
