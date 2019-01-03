@@ -38,6 +38,7 @@ public class SoupitStreamHandler extends SkillStreamHandler {
                         new PortionenAuswahlHandler(),
                         new ImBatmanHandler(),
                         new YesIntentHandler(),
+                        new NoIntentHandler(),
                         new WeitereRezepteHandler())
                 // Add your skill id below
                 //.withSkillId("")

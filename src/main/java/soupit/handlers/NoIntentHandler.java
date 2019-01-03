@@ -37,7 +37,7 @@ public class NoIntentHandler implements RequestHandler {
             ArrayList<Rezept> rezepte = JsonService.rezepteParsen(new JSONArray((String) SessionAttributeService.getSingleSessionAttribute(input, REZEPT_FOUND)));
             Rezept rezept = rezepte.get(suppenIndex);
 
-            speechText = "Welches Rezept möchtest du statdessen kochen? Ich kann dir folgende Rezepte vorschlagen: " + rezepte;
+            speechText = "Welches Rezept möchtest du statdessen kochen? Ich kann dir folgende Rezepte vorschlagen: " + getRezipes(rezepte);
             repromptText = speechText;
 
             SessionAttributeService.updateLastIntent(input, "PortionenNoIntent");
@@ -52,6 +52,14 @@ public class NoIntentHandler implements RequestHandler {
                 .withReprompt(repromptText)
                 .withShouldEndSession(false)
                 .build();
+    }
+
+    public String getRezipes(ArrayList<Rezept> rezepte){
+        String alleRezepte = "";
+        for (Rezept aRezepte : rezepte) {
+            new StringBuilder().append(alleRezepte).append(" ").append(aRezepte.getName());
+        }
+        return alleRezepte;
     }
 
 }
