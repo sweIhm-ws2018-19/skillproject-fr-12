@@ -4,7 +4,10 @@ import soupit.model.Rezept;
 import soupit.model.Zutat;
 import soupit.model.ZutatMenge;
 
+import java.math.RoundingMode;
 import java.util.ArrayList;
+
+import static jdk.nashorn.internal.objects.NativeMath.round;
 
 public final class RezeptService {
     private static RezeptService instance;
@@ -50,6 +53,7 @@ public final class RezeptService {
     private static String mengeFormatieren(Zutat zutat, Double menge) {
         String response = "";
         int mengeInt = menge.intValue();
+        double mengeRounded = round(menge, 1);
 
         if ((menge == mengeInt)) {
             if (mengeInt == 1) {
@@ -66,9 +70,13 @@ public final class RezeptService {
             } else if (mengeInt < 0) {
                 response = "none";
             } else
+                //gerade Zahl groesser 1
                 response += mengeInt;
             // TODO: 21.12.2018 Mengenangabe formatieren
         } else {
+            //wenn nicht gerade && nicht 1, 0 oder kleiner 0
+
+
             response += menge;
         }
 
