@@ -100,8 +100,11 @@ public final class RezeptService {
             response = "ein Drittel";
 
         } else if (formattedThreeDouble <= 0.500) {
-
-            response = "ein halb";
+            if (zutat.getSingular().equals("Zwiebel")){
+                response = "eine halbe";
+            }else {
+                response = "ein halb";
+            }
 
         } else if (formattedThreeDouble < 1.000) {
 
