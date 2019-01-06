@@ -53,9 +53,8 @@ public final class RezeptService {
     private static String mengeFormatieren(Zutat zutat, Double menge) {
         // TODO: 06.01.2019 formatieren
         String response = "";
-        double mengeRoundedThree = round(menge, 3);
-        double mengeRoundedTwo = round(menge, 2);
-        double mengeRoundedOne = round(menge, 1);
+        Double mengeRoundedThree = round(menge, 3);
+
 
         if (mengeRoundedThree < 0.000) {
             //kleiner 0
@@ -72,20 +71,19 @@ public final class RezeptService {
 
             response = "ein Viertel";
 
-        }else if (mengeRoundedThree <= 0.334) {
+        } else if (mengeRoundedThree <= 0.334) {
 
             response = "ein Drittel";
 
-        }else if (mengeRoundedThree <= 0.500) {
+        } else if (mengeRoundedThree <= 0.500) {
 
             response = "ein halb";
 
-        }
-        else if (mengeRoundedThree < 1.000) {
+        } else if (mengeRoundedThree < 1.000) {
 
             response = "ein halb";
 
-        }else if (mengeRoundedThree == 1.000) {
+        } else if (mengeRoundedThree == 1.000) {
             switch (zutat.getEinheitGeschlecht()) {
                 case "w":
                     response = "eine";
@@ -96,11 +94,11 @@ public final class RezeptService {
                 default:
                     response = "ein";
             }
-        } else
+        } else {
             //groesser 1
             round(menge, 0);
-        response += menge;
-
+            response += menge;
+        }
 
         return response;
     }
