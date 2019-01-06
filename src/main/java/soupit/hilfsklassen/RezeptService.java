@@ -76,7 +76,6 @@ public final class RezeptService {
         } else {
             //wenn nicht gerade && nicht 1, 0 oder kleiner 0
 
-
             response += menge;
         }
 
