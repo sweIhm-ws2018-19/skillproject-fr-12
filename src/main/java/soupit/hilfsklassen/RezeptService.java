@@ -51,33 +51,56 @@ public final class RezeptService {
     }
 
     private static String mengeFormatieren(Zutat zutat, Double menge) {
+        // TODO: 06.01.2019 formatieren
         String response = "";
-        int mengeInt = menge.intValue();
-        double mengeRounded = round(menge, 1);
+        double mengeRoundedThree = round(menge, 3);
+        double mengeRoundedTwo = round(menge, 2);
+        double mengeRoundedOne = round(menge, 1);
 
-        if ((menge == mengeInt)) {
-            if (mengeInt == 1) {
-                switch (zutat.getEinheitGeschlecht()) {
-                    case "w":
-                        response = "eine";
-                        break;
-                    case "m":
-                        response = "einen";
-                        break;
-                    default:
-                        response = "ein";
-                }
-            } else if (mengeInt < 0) {
-                response = "none";
-            } else
-                //gerade Zahl groesser 1
-                response += mengeInt;
-            // TODO: 21.12.2018 Mengenangabe formatieren
-        } else {
-            //wenn nicht gerade && nicht 1, 0 oder kleiner 0
+        if (mengeRoundedThree < 0.000) {
+            //kleiner 0
+            response = "none";
+        } else if (mengeRoundedThree <= 0.125) {
 
-            response += menge;
+            response = "ein achtel";
+
+        } else if (mengeRoundedThree <= 0.167) {
+
+            response = "ein sechstel";
+
+        } else if (mengeRoundedThree <= 0.250) {
+
+            response = "ein viertel";
+
+        }else if (mengeRoundedThree <= 0.334) {
+
+            response = "ein drittel";
+
+        }else if (mengeRoundedThree <= 0.500) {
+
+            response = "ein halb";
+
         }
+        else if (mengeRoundedThree < 1.000) {
+
+            response = "ein halb";
+
+        }else if (mengeRoundedThree == 1.000) {
+            switch (zutat.getEinheitGeschlecht()) {
+                case "w":
+                    response = "eine";
+                    break;
+                case "m":
+                    response = "einen";
+                    break;
+                default:
+                    response = "ein";
+            }
+        } else
+            //groesser 1
+            round(menge, 0);
+        response += menge;
+
 
         return response;
     }
