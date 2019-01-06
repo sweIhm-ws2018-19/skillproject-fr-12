@@ -62,19 +62,19 @@ public final class RezeptService {
             response = "none";
         } else if (mengeRoundedThree <= 0.125) {
 
-            response = "ein achtel";
+            response = "ein Achtel";
 
         } else if (mengeRoundedThree <= 0.167) {
 
-            response = "ein sechstel";
+            response = "ein Sechstel";
 
         } else if (mengeRoundedThree <= 0.250) {
 
-            response = "ein viertel";
+            response = "ein Viertel";
 
         }else if (mengeRoundedThree <= 0.334) {
 
-            response = "ein drittel";
+            response = "ein Drittel";
 
         }else if (mengeRoundedThree <= 0.500) {
 
