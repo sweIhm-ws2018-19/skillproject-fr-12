@@ -7,6 +7,8 @@ import soupit.model.ZutatMenge;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Locale;
 
 import static jdk.nashorn.internal.objects.NativeMath.round;
@@ -100,7 +102,10 @@ public final class RezeptService {
             response = "ein Drittel";
 
         } else if (formattedThreeDouble <= 0.500) {
-            if (zutat.getSingular().equals("Zwiebel")){
+            String[] strs = { "zwiebel","knoblauchzehe","karotte" };
+            List<String> list = new ArrayList<>(Arrays.asList(strs));
+
+            if (list.contains(zutat.getSingular())){
                 response = "eine halbe";
             }else {
                 response = "ein halb";
@@ -121,7 +126,7 @@ public final class RezeptService {
                 default:
                     response = "ein";
             }
-            response = "" + "genau eins";
+            //response = "" + "genau eins";
         } else {
             //groesser 1
 
