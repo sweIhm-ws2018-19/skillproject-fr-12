@@ -93,7 +93,7 @@ public final class RezeptService {
                     response = "eine Achtel";
                     break;
                 case "m":
-                    response = "einen Achtel";
+                    response = "ein Achtel";
                     break;
                 default:
                     response = "ein Achtel";
@@ -153,15 +153,19 @@ public final class RezeptService {
                     response = "ein halbes";
             }
         } else if (formattedThreeDouble < 1.000){
+            //
             switch (zutat.getEinheitGeschlecht()) {
                 case "w":
-                    response = "drei Viertel";
+                    //Bsp. die Tomate
+                    response = "eine drei Viertelte";
                     break;
                 case "m":
-                    response = "drei Viertel";
+                    //Bsp. der Salat
+                    response = "ein drei Viertelter";
                     break;
                 default:
-                    response = "drei Viertel";
+                    //Bsp. das Ei
+                    response = "ein drei Vierteltes";
             }
         } else if (formattedThreeDouble == 1.000) {
             switch (zutat.getEinheitGeschlecht()) {
@@ -174,7 +178,7 @@ public final class RezeptService {
                 default:
                     response = "ein";
             }
-        } else {
+        }  else {
             //groesser 1
             response = formattedZeroString;
         }
