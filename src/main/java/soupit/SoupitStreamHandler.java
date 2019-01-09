@@ -40,10 +40,9 @@ public class SoupitStreamHandler extends SkillStreamHandler {
                         new PortionenAuswahlHandler(),
                         new ImBatmanHandler(),
                         new YesIntentHandler(),
-                        new WeitereRezepteHandler()
-                        )
+                        new WeitereRezepteHandler())
                 // Add your skill id below
-                //.withSkillId("")
+               // .withSkillId("fuckingsuppentopf")
                 //.withTableName("soupit_testing")
                 //.withAutoCreateTable(true)
                 .build();

@@ -120,7 +120,7 @@ public final class DbRequest {
         return returnString;
     }
 
-    public static RezeptCount getRezeptFromDynDB(){
+    public static String getRezeptFromDynDB(){
         return null;
     }
 

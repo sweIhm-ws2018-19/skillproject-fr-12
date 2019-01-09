@@ -17,8 +17,11 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
+import org.json.JSONObject;
 import soupit.hilfsklassen.DbRequest;
+import soupit.hilfsklassen.JsonService;
 import soupit.hilfsklassen.SessionAttributeService;
+import soupit.model.Rezept;
 import soupit.model.RezeptCount;
 
 import java.util.Optional;
@@ -36,19 +39,20 @@ public class LaunchRequestHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        RezeptCount rezeptCount = DbRequest.getRezeptFromDynDB();
+        String rezeptCountString = DbRequest.getRezeptFromDynDB();
 
         final String speechText;
         final  String repromptText;
-        if (rezeptCount == null) {
+        if (rezeptCountString == null) {
 
            speechText =  "<say-as interpret-as=\"interjection\">Willkommen</say-as> bei <lang xml:lang=\"en-US\">Soup It</lang> ! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung. " +
                     randomResponse();
             repromptText = randomResponse();
         }
         else {
-            SessionAttributeService.setSingleSessionAttribute(input, CURRENT_REZEPT, rezeptCount);
-            speechText = "Wir kochen die " + rezeptCount.getRezept().getName() + " weiter";
+            RezeptCount rezeptCount = JsonService.rezeptCountParsen(new JSONObject(rezeptCountString));
+            SessionAttributeService.setSingleSessionAttribute(input, CURRENT_REZEPT, rezeptCountString);
+            speechText = "Du hast die " + rezeptCount.getRezept().getName() + " nochnicht abgeschlossen. Sage weiter für den nächsten Schritt!";
             repromptText = null;
         }
 

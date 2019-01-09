@@ -3,6 +3,7 @@ package soupit.hilfsklassen;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import soupit.model.Rezept;
+import soupit.model.RezeptCount;
 import soupit.model.Zutat;
 
 import java.io.BufferedReader;
@@ -98,6 +99,7 @@ public class JsonService {
     private static Rezept rezeptParsen(JSONObject j) {
         int newRezeptID = (int) j.get("rezeptID");
         String newName = (String) j.get("name");
+
         ArrayList<String> newSchritte = new ArrayList<>();
         ArrayList<Integer> newZutaten = new ArrayList<>();
         ArrayList<Double> newMengen = new ArrayList<>();
@@ -136,4 +138,12 @@ public class JsonService {
         Zutat zutat = new Zutat(newZutatID, newSingular, newPlural, newEinheitSingular, newEinheitPlural, newEinheitGeschlecht);
         return zutat;
     }
+
+    public static RezeptCount rezeptCountParsen(JSONObject j) {
+        JSONObject rezeptString = (JSONObject) j.get("rezept");
+        int count = j.getInt("count");
+
+        return  new RezeptCount(JsonService.rezeptParsen(rezeptString), count);
+    }
+
 }
