@@ -53,7 +53,7 @@ public class LaunchRequestHandler implements RequestHandler {
         else {
             RezeptCount rezeptCount = JsonService.rezeptCountParsen(new JSONObject(rezeptCountString));
             SessionAttributeService.setSingleSessionAttribute(input, CURRENT_REZEPT, rezeptCountString);
-            speechText = "Du hast die " + rezeptCount.getRezept().getName() + " nochnicht abgeschlossen. Sage weiter für den nächsten Schritt!";
+            speechText = "Du hast die " + rezeptCount.getRezept().getName() + " nochnicht abgeschlossen. Sage weiter für den nächsten Schritt oder Rezept abschließen.";
             repromptText = null;
         }
 
