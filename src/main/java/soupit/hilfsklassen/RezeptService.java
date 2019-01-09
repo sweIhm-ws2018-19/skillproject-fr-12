@@ -85,56 +85,99 @@ public final class RezeptService {
         if (formattedThreeDouble < 0.000) {
             //kleiner 0
             response = "none";
-        } else if (formattedThreeDouble <= 0.125) {
-
-            response = "ein Achtel";
-
-        } else if (formattedThreeDouble <= 0.167) {
-
-            response = "ein Sechstel";
-
-        } else if (formattedThreeDouble <= 0.250) {
-
-            response = "ein Viertel";
-
-        } else if (formattedThreeDouble <= 0.334) {
-
-            response = "ein Drittel";
-
-        } else if (formattedThreeDouble <= 0.500) {
-            String[] strs = { "zwiebel","knoblauchzehe","karotte"};
-            List<String> list = new ArrayList<>(Arrays.asList(strs));
-
-            if (list.contains(zutat.getSingular())){
-                response = "eine halbe";
-            }else {
-                response = "ein halb";
+        }
+        //1/8
+        else if (formattedThreeDouble <= 0.125) {
+            switch (zutat.getEinheitGeschlecht()) {
+                case "w":
+                    response = "eine Achtel";
+                    break;
+                case "m":
+                    response = "einen Achtel";
+                    break;
+                default:
+                    response = "ein Achtel";
             }
-
-        } else if (formattedThreeDouble < 1.000) {
-
-            response = "ein halb";
-
+        }
+        //1/6
+        else if (formattedThreeDouble <= 0.167) {
+            switch (zutat.getEinheitGeschlecht()) {
+                case "w":
+                    response = "eine Sechstel";
+                    break;
+                case "m":
+                    response = "ein Sechstel";
+                    break;
+                default:
+                    response = "ein Sechstel";
+            }
+        } else if (formattedThreeDouble <= 0.250) {
+            switch (zutat.getEinheitGeschlecht()) {
+                case "w":
+                    response = "eine Viertel";
+                    break;
+                case "m":
+                    response = "ein Viertel";
+                    break;
+                default:
+                    response = "ein Viertel";
+            }
+        } else if (formattedThreeDouble <= 0.334) {
+            switch (zutat.getEinheitGeschlecht()) {
+                case "w":
+                    response = "eine Drittel";
+                    break;
+                case "m":
+                    response = "ein Drittel";
+                    break;
+                default:
+                    response = "ein Drittel";
+            }
+        } else if (formattedThreeDouble <= 0.500) {
+//            String[] strs = { "zwiebel","knoblauchzehe","karotte"};
+//            List<String> list = new ArrayList<>(Arrays.asList(strs));
+//
+//            if (list.contains(zutat.getSingular())){
+//                response = "eine halbe";
+//            }else {
+//                response = "ein halb";
+//            }
+            switch (zutat.getEinheitGeschlecht()) {
+                case "w":
+                    response = "eine halbe";
+                    break;
+                case "m":
+                    response = "einen halben";
+                    break;
+                default:
+                    response = "ein halbes";
+            }
+        } else if (formattedThreeDouble < 1.000){
+            switch (zutat.getEinheitGeschlecht()) {
+                case "w":
+                    response = "drei Viertel";
+                    break;
+                case "m":
+                    response = "drei Viertel";
+                    break;
+                default:
+                    response = "drei Viertel";
+            }
         } else if (formattedThreeDouble == 1.000) {
             switch (zutat.getEinheitGeschlecht()) {
                 case "w":
                     response = "eine";
                     break;
                 case "m":
-                    response = "einen";
+                    response = "ein";
                     break;
                 default:
                     response = "ein";
             }
-            //response = "" + "genau eins";
         } else {
             //groesser 1
-
             response = formattedZeroString;
-
-
         }
-
         return response;
     }
 }
