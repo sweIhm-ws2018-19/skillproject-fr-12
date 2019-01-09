@@ -102,7 +102,7 @@ public final class RezeptService {
             response = "ein Drittel";
 
         } else if (formattedThreeDouble <= 0.500) {
-            String[] strs = { "zwiebel","knoblauchzehe","karotte" };
+            String[] strs = { "zwiebel","knoblauchzehe","karotte"};
             List<String> list = new ArrayList<>(Arrays.asList(strs));
 
             if (list.contains(zutat.getSingular())){
