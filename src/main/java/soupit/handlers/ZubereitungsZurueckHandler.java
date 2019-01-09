@@ -51,7 +51,7 @@ public class ZubereitungsZurueckHandler implements RequestHandler {
             rezeptString = DbRequest.getRezeptFromDynDB(input);
         }
 
-        if (rezeptString == null) {
+        if (rezeptString == null || rezeptString.equals("none")) {
             speechText = "Das weiß ich leider nicht!";
         }
         else {
@@ -62,7 +62,7 @@ public class ZubereitungsZurueckHandler implements RequestHandler {
                 speechText = "Die Zubereitung ist bereits Abgeschlossen.";
             } else {
                 if (steps.size() == rezept.getCount() - 2) {
-                    speechText = steps.get(rezept.getCount()) + "Ich hoffe die Suppe schmeckt und wünsche einen guten Appetit. Bis zum nächsten Mal.";
+                    speechText = steps.get(rezept.getCount()) + "Ich hoffe die Suppe schmeckt und wünsche einen guten Appetit. Um das Rezept abzuschließen sage: Rezept abschließen.";
                 } else {
                     speechText = steps.get(rezept.getCount());
                 }

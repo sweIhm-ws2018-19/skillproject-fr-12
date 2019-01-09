@@ -41,13 +41,14 @@ public class LaunchRequestHandler implements RequestHandler {
     public Optional<Response> handle(HandlerInput input) {
         String rezeptCountString = DbRequest.getRezeptFromDynDB(input);
 
-        final String speechText;
+        final   String speechText;
         final  String repromptText;
-        if (rezeptCountString == null) {
+        if (rezeptCountString == null || rezeptCountString.equals("none")) {
 
            speechText =  "<say-as interpret-as=\"interjection\">Willkommen</say-as> bei <lang xml:lang=\"en-US\">Soup It</lang> ! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung. " +
                     randomResponse();
             repromptText = randomResponse();
+
         }
         else {
             RezeptCount rezeptCount = JsonService.rezeptCountParsen(new JSONObject(rezeptCountString));
