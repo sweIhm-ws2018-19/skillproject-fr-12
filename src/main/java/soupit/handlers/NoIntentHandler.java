@@ -56,11 +56,11 @@ public class NoIntentHandler implements RequestHandler {
     }
 
     public String getAllMatchingRezipeNames(ArrayList<Rezept> rezepte) {
-        String alleRezepte = "";
+        StringBuilder alleRezepte = new StringBuilder();
         for (Rezept aRezepte : rezepte) {
-            alleRezepte = alleRezepte + " " + aRezepte.getName();
+            alleRezepte.append(" ").append(aRezepte.getName());
         }
-        return alleRezepte;
+        return alleRezepte.toString();
     }
 
 }
