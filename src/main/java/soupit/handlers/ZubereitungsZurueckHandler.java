@@ -4,10 +4,7 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
 import org.json.JSONObject;
-import soupit.hilfsklassen.DbRequest;
-import soupit.hilfsklassen.JsonService;
-import soupit.hilfsklassen.SessionAttributeService;
-import soupit.hilfsklassen.SlotFilter;
+import soupit.hilfsklassen.*;
 import soupit.model.RezeptCount;
 
 import java.util.ArrayList;
@@ -51,7 +48,7 @@ public class ZubereitungsZurueckHandler implements RequestHandler {
 
 
         if (rezeptString == null) {
-            rezeptString = DbRequest.getRezeptFromDynDB();
+            rezeptString = DbRequest.getRezeptFromDynDB(input);
         }
 
         if (rezeptString == null) {
@@ -71,10 +68,9 @@ public class ZubereitungsZurueckHandler implements RequestHandler {
                 }
 
 
-                //DynDb update missing
-
                 String currRezString = new JSONObject(rezept).toString();
                 SessionAttributeService.setSingleSessionAttribute(input, CURRENT_REZEPT, currRezString);
+                PersistentAttributeService.setSinglePersistentAttribute(input, CURRENT_REZEPT, currRezString);
 
             }
 

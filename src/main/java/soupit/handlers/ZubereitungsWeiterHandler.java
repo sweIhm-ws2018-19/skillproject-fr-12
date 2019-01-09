@@ -51,7 +51,7 @@ public class ZubereitungsWeiterHandler implements RequestHandler {
 
 
         if (rezeptString == null) {
-            rezeptString = DbRequest.getRezeptFromDynDB();
+            rezeptString = DbRequest.getRezeptFromDynDB(input);
         }
 
         if (rezeptString == null) {
@@ -73,10 +73,10 @@ public class ZubereitungsWeiterHandler implements RequestHandler {
                 }
 
 
-                //DynDb update missing
 
                 String currRezString = new JSONObject(rezept).toString();
                 SessionAttributeService.setSingleSessionAttribute(input, CURRENT_REZEPT, currRezString);
+                PersistentAttributeService.setSinglePersistentAttribute(input, CURRENT_REZEPT, currRezString);
 
             }
 

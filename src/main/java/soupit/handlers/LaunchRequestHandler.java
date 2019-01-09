@@ -39,7 +39,7 @@ public class LaunchRequestHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String rezeptCountString = DbRequest.getRezeptFromDynDB();
+        String rezeptCountString = DbRequest.getRezeptFromDynDB(input);
 
         final String speechText;
         final  String repromptText;
