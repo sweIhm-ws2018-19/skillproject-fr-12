@@ -44,8 +44,8 @@ public final class DbRequest {
         });
 
         ArrayList<Rezept> returnRecipies = new ArrayList<>();
-        for (RezeptCount rc : foundRezepte) {
-            returnRecipies.add(rc.getRezept());
+        for (int index = 0; index < foundRezepte.size() && index < 15; index++) {
+            returnRecipies.add(foundRezepte.get(index).getRezept());
         }
 
         return returnRecipies;

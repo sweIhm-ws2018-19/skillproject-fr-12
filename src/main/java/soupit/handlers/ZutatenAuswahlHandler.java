@@ -62,16 +62,16 @@ public class ZutatenAuswahlHandler implements RequestHandler {
             ausgeschlosseneZutatenListe = new ArrayList<>();
         }
 
-        SessionAttributeService.setSingleSessionAttribute(input, ZUTAT_KEY, zutatStringList);
+       SessionAttributeService.setSingleSessionAttribute(input, ZUTAT_KEY, zutatStringList);
         ArrayList<Rezept> allRecipies = DbRequest.getRecipies(zutatStringList, ausgeschlosseneZutatenListe);
 
        final String allRecipiesJson = new JSONArray(allRecipies).toString();
-        SessionAttributeService.setSingleSessionAttribute(input, ALL_MATCHED_RECIPIES, allRecipiesJson);
+       SessionAttributeService.setSingleSessionAttribute(input, ALL_MATCHED_RECIPIES, allRecipiesJson);
 
         ArrayList<Rezept> recipies = DbRequest.recipiesOutputSizeLimiter(allRecipies, 0, 3);
 
        final String json = new JSONArray(recipies).toString();
-        SessionAttributeService.setSingleSessionAttribute(input, REZEPT_FOUND, json);
+         SessionAttributeService.setSingleSessionAttribute(input, REZEPT_FOUND, json);
 
         SessionAttributeService.setSingleSessionAttribute(input, MORE_RECIPIES_GIVEN, recipies.size());
 
