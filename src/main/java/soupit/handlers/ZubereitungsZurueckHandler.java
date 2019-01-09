@@ -64,7 +64,7 @@ public class ZubereitungsZurueckHandler implements RequestHandler {
             if (rezept.getCount() < 0 || rezept.getCount() >= steps.size()) {
                 speechText = "Die Zubereitung ist bereits Abgeschlossen.";
             } else {
-                if (steps.size() == rezept.getCount() - 1) {
+                if (steps.size() == rezept.getCount() - 2) {
                     speechText = steps.get(rezept.getCount()) + "Ich hoffe die Suppe schmeckt und wünsche einen guten Appetit. Bis zum nächsten Mal.";
                 } else {
                     speechText = steps.get(rezept.getCount());
