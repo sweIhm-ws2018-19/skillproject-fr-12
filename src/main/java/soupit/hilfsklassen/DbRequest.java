@@ -15,7 +15,7 @@ public final class DbRequest {
     private static DbRequest instance;
 
     private DbRequest() {
-        //empty
+        //emptys
     }
 
     public static DbRequest getInstance() {
