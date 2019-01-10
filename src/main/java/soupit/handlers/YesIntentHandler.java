@@ -10,8 +10,8 @@ import java.util.Optional;
 import static com.amazon.ask.request.Predicates.intentName;
 
 public class YesIntentHandler implements RequestHandler {
-    private final static String BREAK_HALF_SECOND = "<break time=\"500ms\"/>";
-    private final static String PORTIONEN_AUSWAHL_INTENT = "PortionenAuswahlIntent";
+    private static final String BREAK_HALF_SECOND = "<break time=\"500ms\"/>";
+    private static final String PORTIONEN_AUSWAHL_INTENT = "PortionenAuswahlIntent";
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -25,7 +25,7 @@ public class YesIntentHandler implements RequestHandler {
         String lastIntent = SessionAttributeService.getLastIntent(input);
 
         if (lastIntent.equalsIgnoreCase(PORTIONEN_AUSWAHL_INTENT)) {
-            speechText = "Super! " + BREAK_HALF_SECOND + "Sobald du mit dem Kochen anfangen möchtest, sage: Rezept starten"; //TextService.schritteVonRezeptVorlesen(null);
+            speechText = "Super! " + BREAK_HALF_SECOND + "Sobald du mit dem Kochen anfangen möchtest, sage: Rezept starten";
 
             SessionAttributeService.updateLastIntent(input, "PortionenYesIntent");
         } else {

@@ -1,16 +1,3 @@
-/*
-     Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
-     Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file
-     except in compliance with the License. A copy of the License is located at
-
-         http://aws.amazon.com/apache2.0/
-
-     or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for
-     the specific language governing permissions and limitations under the License.
-*/
-
 package soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
@@ -21,22 +8,18 @@ import org.json.JSONArray;
 import soupit.hilfsklassen.DbRequest;
 import soupit.hilfsklassen.JsonService;
 import soupit.hilfsklassen.SessionAttributeService;
-import soupit.hilfsklassen.SlotFilter;
 import soupit.model.Rezept;
 
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
-import static soupit.handlers.ZutatenAbfrageHandler.ZUTAT_KEY;
-import static soupit.handlers.ZutatenAusschliessenAbfrageHandler.ZUTAT_AUSSCHLIESSEN_KEY;
 
 public class WeitereRezepteHandler implements RequestHandler {
     private static final String BREAK_SECOND = "<break time=\"1s\"/>";
-    private final static String REZEPT_FOUND = "REZEPT_FOUND";
-    private final static String MORE_RECIPIES_GIVEN = "MORE_RECIPIES_GIVEN";
-    private final static String ALL_MATCHED_RECIPIES = "ALL_MATCHED_RECIPIES";
+    private static final String REZEPT_FOUND = "REZEPT_FOUND";
+    private static final String MORE_RECIPIES_GIVEN = "MORE_RECIPIES_GIVEN";
+    private static final String ALL_MATCHED_RECIPIES = "ALL_MATCHED_RECIPIES";
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -45,11 +28,6 @@ public class WeitereRezepteHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-
-        Request request = input.getRequestEnvelope().getRequest();
-        IntentRequest intentRequest = (IntentRequest) request;
-
-
         String speechText;
         final String repromptText;
         boolean isAskResponse = false;
@@ -64,16 +42,13 @@ public class WeitereRezepteHandler implements RequestHandler {
             repromptText = speechText;
         } else {
 
-        ArrayList<Rezept> allRecipies = JsonService.rezepteParsen(new JSONArray(allRecipiesString));
-        ArrayList<Rezept> recipies = DbRequest.recipiesOutputSizeLimiter(allRecipies, moreRead, moreRead + 3);
+            ArrayList<Rezept> allRecipies = JsonService.rezepteParsen(new JSONArray(allRecipiesString));
+            ArrayList<Rezept> recipies = DbRequest.recipiesOutputSizeLimiter(allRecipies, moreRead, moreRead + 3);
 
-        SessionAttributeService.setSingleSessionAttribute(input, MORE_RECIPIES_GIVEN, moreRead + recipies.size());
+            SessionAttributeService.setSingleSessionAttribute(input, MORE_RECIPIES_GIVEN, moreRead + recipies.size());
 
-        final String json = new JSONArray(recipies).toString();
-        SessionAttributeService.setSingleSessionAttribute(input, REZEPT_FOUND, json);
-
-
-
+            final String json = new JSONArray(recipies).toString();
+            SessionAttributeService.setSingleSessionAttribute(input, REZEPT_FOUND, json);
 
 
             if (recipies.isEmpty()) {
