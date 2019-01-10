@@ -11,7 +11,7 @@ import java.util.Map;
 public class ZubereitungsSteuerungsLogik {
     private static ZubereitungsSteuerungsLogik instance;
 
-    private final static String CURRENT_REZEPT = "CURRENT_REZEPT";
+    private static final String CURRENT_REZEPT = "CURRENT_REZEPT";
 
     private ZubereitungsSteuerungsLogik() {
         //empty

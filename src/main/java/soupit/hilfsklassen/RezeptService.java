@@ -64,45 +64,29 @@ public final class RezeptService {
         formatterZero.applyPattern("#");
         String formattedZeroString = formatterZero.format(menge);
 
+        switch (zutat.getEinheitGeschlecht()) {
+            case "w":
+                response = "eine";
+                break;
+            default:
+                response = "ein";
+        }
+
         if (formattedThreeDouble < 0.000) {
             //kleiner 0
             response = "none";
         }
         //1/8
         else if (formattedThreeDouble <= 0.125) {
-            switch (zutat.getEinheitGeschlecht()) {
-                case "w":
-                    response = "eine Achtel";
-                    break;
-                default:
-                    response = "ein Achtel";
-            }
+            response += " Achtel";
         }
         //1/6
         else if (formattedThreeDouble <= 0.167) {
-            switch (zutat.getEinheitGeschlecht()) {
-                case "w":
-                    response = "eine Sechstel";
-                    break;
-                default:
-                    response = "ein Sechstel";
-            }
+            response += " Sechstel";
         } else if (formattedThreeDouble <= 0.250) {
-            switch (zutat.getEinheitGeschlecht()) {
-                case "w":
-                    response = "eine Viertel";
-                    break;
-                default:
-                    response = "ein Viertel";
-            }
+            response += " Viertel";
         } else if (formattedThreeDouble <= 0.334) {
-            switch (zutat.getEinheitGeschlecht()) {
-                case "w":
-                    response = "eine Drittel";
-                    break;
-                default:
-                    response = "ein Drittel";
-            }
+            response += " Drittel";
         } else if (formattedThreeDouble <= 0.500) {
             switch (zutat.getEinheitGeschlecht()) {
                 case "w":
@@ -119,7 +103,7 @@ public final class RezeptService {
             switch (zutat.getEinheitGeschlecht()) {
                 case "w":
                     //Bsp. die Tomate
-                    response = "eine drei Viertelte";
+                    response += " drei Viertelte";
                     break;
                 case "m":
                     //Bsp. der Salat
