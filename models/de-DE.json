@@ -305,6 +305,22 @@
             "{Anzahl} schritte zurück",
             "zurück {Anzahl}"
           ]
+        },
+        {
+          "name": "ZubereitungAbschliessenIntent",
+          "slots": [],
+          "samples": [
+            "rezept beenden",
+            "rezept schließen",
+            "ich habe fertig",
+            "die zubereitung ist fertig",
+            "es ist vollbracht",
+            "die suppe ist fertig",
+            "das essen ist fertig",
+            "ich habe fertig gekocht",
+            "fertig",
+            "Rezept abschließen"
+          ]
         }
       ],
       "types": [
@@ -1308,6 +1324,16 @@
         {
           "name": "SUPPEN",
           "values": [
+            {
+              "name": {
+                "value": "demo tomatencreme suppe",
+                "synonyms": [
+                  "tomatencreme demo suppe",
+                  "demo tomaten creme suppe",
+                  "demo tomatencremesuppe"
+                ]
+              }
+            },
             {
               "name": {
                 "value": "tomatenfischsuppe"
