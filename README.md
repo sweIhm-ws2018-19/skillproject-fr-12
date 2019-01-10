@@ -1,5 +1,10 @@
 # Soup-IT
 
+## Status
+[![Travis-CI Status](https://travis-ci.org/sweIhm-ws2018-19/skillproject-fr-12.svg?branch=master)](https://travis-ci.org/sweIhm-ws2018-19/skillproject-fr-12)
+
+[![Sonarcloud Status](https://sonarcloud.io/api/project_badges/measure?project=alexa-skills-kit-samples%3Asoupit%3Asprint3&metric=alert_status)](https://sonarcloud.io/dashboard?id=sweIhm_ws2018_19:lieblingsfarbe)
+
 ##  Präsentation Tourismus
 [Präsentation Tourismus](https://github.com/sweIhm-ws2018-19/skillproject-fr-12/blob/master/UML/soupit_praesentation.pdf)
 
