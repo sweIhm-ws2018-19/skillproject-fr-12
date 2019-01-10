@@ -30,4 +30,4 @@ Als Vision stellen wir uns die Benutzung dieser Anwendung in verschiedensten Leb
 Die Anwendungsfallbeschreibungen sind [hier](https://github.com/sweIhm-ws2018-19/skillproject-fr-12/blob/master/UML/Sprint%200/AWF%20Beschreibungen.pdf) als PDF zu finden.
 
 ## Fachklassenmodell
-![Sprint2Fachklassenmodell](https://github.com/sweIhm-ws2018-19/skillproject-fr-12/blob/master/UML/Sprint%202/UML%20Klassendiagramm%20Sprint%202.png)
+![Sprint2Fachklassenmodell](UML/Sprint%202/UML%20Klassendiagramm%20Sprint%202.png)
