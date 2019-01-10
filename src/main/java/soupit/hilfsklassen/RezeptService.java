@@ -64,12 +64,11 @@ public final class RezeptService {
         formatterZero.applyPattern("#");
         String formattedZeroString = formatterZero.format(menge);
 
-        switch (zutat.getEinheitGeschlecht()) {
-            case "w":
-                response = "eine";
-                break;
-            default:
-                response = "ein";
+        if("w".equalsIgnoreCase(zutat.getEinheitGeschlecht())){
+            response = "eine";
+        }
+        else {
+            response = "ein";
         }
 
         if (formattedThreeDouble < 0.000) {
