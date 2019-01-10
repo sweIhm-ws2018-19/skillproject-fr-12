@@ -3,11 +3,8 @@ package soupit.handlers;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.*;
-import org.json.JSONObject;
 import soupit.hilfsklassen.*;
-import soupit.model.RezeptCount;
 
-import java.util.ArrayList;
 import java.util.Map;
 import java.util.Optional;
 
@@ -29,7 +26,6 @@ public class ZubereitungsZurueckHandler implements RequestHandler {
         Map<String, Slot> slots = intent.getSlots();
 
         String speechText = ZubereitungsSteuerungsLogik.getNext(input, slots, -1);
-
 
         SessionAttributeService.updateLastIntent(input, "ZubereitungsZurueckHandler");
         return input.getResponseBuilder()
