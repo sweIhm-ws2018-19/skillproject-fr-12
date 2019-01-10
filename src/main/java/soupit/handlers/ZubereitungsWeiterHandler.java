@@ -34,53 +34,7 @@ public class ZubereitungsWeiterHandler implements RequestHandler {
         //get slots from current intent s
         Map<String, Slot> slots = intent.getSlots();
 
-        String speechText;
-        String rezeptString = (String) input.getAttributesManager().getSessionAttributes().get(CURRENT_REZEPT);
-
-
-        String slotValue = SlotFilter.getSingleSlotCheckedValue(slots, "Anzahl");
-
-
-        final int stepsToGo;
-
-        if (slotValue.equals("none")) {
-            stepsToGo = 1;
-        } else {
-            stepsToGo = Integer.parseInt(slotValue);
-        }
-
-
-        if (rezeptString == null) {
-            rezeptString = DbRequest.getRezeptFromDynDB(input);
-        }
-
-        if (rezeptString == null || rezeptString.equals("none")) {
-            speechText = "Das weiß ich leider nicht!";
-        }
-        else {
-            RezeptCount rezept = JsonService.rezeptCountParsen(new JSONObject(rezeptString));
-
-            rezept.setCount(rezept.getCount() + stepsToGo);
-            ArrayList<String> steps = rezept.getRezept().getSchritte();
-            if (rezept.getCount() < 0 || rezept.getCount() >= steps.size()) {
-                speechText = "Die Zubereitung ist bereits Abgeschlossen.";
-            } else {
-                if (steps.size() == rezept.getCount() - 1) {
-                    speechText = steps.get(rezept.getCount()) + "Ich hoffe die Suppe schmeckt und wünsche einen guten Appetit. Um das Rezept abzuschließen sage: Rezept abschließen.";
-
-                    } else {
-                    speechText = steps.get(rezept.getCount());
-                }
-
-
-
-                String currRezString = new JSONObject(rezept).toString();
-                SessionAttributeService.setSingleSessionAttribute(input, CURRENT_REZEPT, currRezString);
-                PersistentAttributeService.setSinglePersistentAttribute(input, CURRENT_REZEPT, currRezString);
-
-            }
-
-        }
+        String speechText = ZubereitungsSteuerungsLogik.getNext(input, slots, 1);;
 
 
         //SessionAttributeService.updateLastIntent(input, "ZubereitungsWeiterHandler");
