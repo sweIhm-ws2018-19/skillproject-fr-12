@@ -14,6 +14,8 @@ import static soupit.handlers.ZutatenAusschliessenAbfrageHandler.ZUTAT_AUSSCHLIE
 import static soupit.hilfsklassen.SlotFilter.getIngredient;
 
 public class ZutatenWiederaufnahmeHandler implements RequestHandler {
+    private static final String KEINE_ZUTATEN_AUSGESCHLOSSEN = "Es wurden noch keine Zutaten ausgeschlossen. Sagen Sie zum Beispiel: Ich möchte Kartoffeln ausschließen";
+
     @Override
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("ZutatenWiederaufnahmeIntent"));
@@ -50,13 +52,11 @@ public class ZutatenWiederaufnahmeHandler implements RequestHandler {
                     repromptText = speechText;
                 }
             } else {
-                // TODO: 03.01.2019 replace speechText "Entschuldigung, das habe ich nicht verstanden. Könntest du das bitte wiederholen?"
                 speechText = "Zutat wurde nicht ausgeschlossen und konnte deshalb nicht wiederhergestellt werden.";
                 repromptText = speechText;
             }
         } else {
-            // TODO: 03.01.2019 replace speechText "Entschuldigung, das habe ich nicht verstanden. Könntest du das bitte wiederholen?"
-            speechText = "Es wurden noch keine Zutaten ausgeschlossen. Sagen Sie zum Beispiel: Ich möchte Kartoffeln ausschließen";
+            speechText = KEINE_ZUTATEN_AUSGESCHLOSSEN;
             repromptText = speechText;
             isAskResponse = true;
         }

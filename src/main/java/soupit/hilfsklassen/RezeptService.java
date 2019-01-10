@@ -52,8 +52,6 @@ public final class RezeptService {
     private static String mengeFormatieren(Zutat zutat, Double menge) {
         String response = "";
 
-        System.out.println("MengeOrginal: " + menge);
-
         //Formatter Three
         DecimalFormat formatter = (DecimalFormat) DecimalFormat.getInstance(Locale.ENGLISH);
         formatter.applyPattern("0.000");

@@ -94,25 +94,6 @@ public class RezeptServiceTest {
         assertEquals(want, have);
     }
 
-//    @Test
-//    public void testMengeFormatierenNoInteger(){
-//        String want = "2.5";
-//        String have = null;
-//
-//        Zutat zutat =  TestHelper.generateDummyZutat();
-//        Double menge = 2.5;
-//
-//        try {
-//            Method method = RezeptService.class.getDeclaredMethod("mengeFormatieren", Zutat.class, Double.class);
-//            method.setAccessible(true);
-//            have = (String) method.invoke(null, zutat, menge);
-//        } catch (Exception ex) {
-//        }
-//
-//        assertNotNull(have);
-//        assertEquals(want, have);
-//    }
-
     @Test
     public void testMengeFormatierenOne(){
         String want = "ein";
@@ -151,39 +132,22 @@ public class RezeptServiceTest {
         assertEquals(want, have);
     }
 
-//    @Test
-//    public void testMengeFormatierenOneMale(){
-//        String want = "einen";
-//        String have = null;
-//
-//        Zutat zutat =  TestHelper.generateDummyZutat("m");
-//        Double menge = 1.0;
-//
-//        try {
-//            Method method = RezeptService.class.getDeclaredMethod("mengeFormatieren", Zutat.class, Double.class);
-//            method.setAccessible(true);
-//            have = (String) method.invoke(null, zutat, menge);
-//        } catch (Exception ex) {
-//        }
-//
-//        assertNotNull(have);
-//        assertEquals(want, have);
-//    }
+    @Test
+    public void testMengeFormatierenOneMale(){
+        String want = "ein";
+        String have = null;
 
-//    @Test
-//    public void testMengeFormatierenInfinite(){
-//        String have = null;
-//
-//        Zutat zutat =  TestHelper.generateDummyZutat();
-//        Double menge = Double.POSITIVE_INFINITY;
-//
-//        try {
-//            Method method = RezeptService.class.getDeclaredMethod("mengeFormatieren", Zutat.class, Double.class);
-//            method.setAccessible(true);
-//            have = (String) method.invoke(null, zutat, menge);
-//        } catch (Exception ex) {
-//        }
-//
-//        assertNotNull(have);
-//    }
+        Zutat zutat =  TestHelper.generateDummyZutat("m");
+        Double menge = 1.0;
+
+        try {
+            Method method = RezeptService.class.getDeclaredMethod("mengeFormatieren", Zutat.class, Double.class);
+            method.setAccessible(true);
+            have = (String) method.invoke(null, zutat, menge);
+        } catch (Exception ex) {
+        }
+
+        assertNotNull(have);
+        assertEquals(want, have);
+    }
 }
