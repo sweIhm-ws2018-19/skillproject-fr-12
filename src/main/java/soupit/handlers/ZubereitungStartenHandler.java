@@ -8,7 +8,6 @@ import org.json.JSONObject;
 import soupit.hilfsklassen.JsonService;
 import soupit.hilfsklassen.PersistentAttributeService;
 import soupit.hilfsklassen.SessionAttributeService;
-import soupit.hilfsklassen.TextService;
 import soupit.model.Rezept;
 import soupit.model.RezeptCount;
 
@@ -22,7 +21,6 @@ public class ZubereitungStartenHandler implements RequestHandler {
     private final static String REZEPT_FOUND = "REZEPT_FOUND";
     private final static String REZEPT_INDEX = "REZEPT_INDEX";
     private final static String CURRENT_REZEPT = "CURRENT_REZEPT";
-    private final static String CURRENT_REZEPT_STEP = "CURRENT_REZEPT_STEP";
 
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("ZubereitungStartenIntent"));

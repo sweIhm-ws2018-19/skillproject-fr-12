@@ -109,8 +109,4 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
         return responseBuilder.build();
     }
-
-
-
-
 }

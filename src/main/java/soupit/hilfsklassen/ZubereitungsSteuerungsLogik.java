@@ -9,12 +9,9 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class ZubereitungsSteuerungsLogik {
-    private final static String PORTIONEN_YES_INTENT = "PortionenYesIntent";
-    private final static String REZEPT_FOUND = "REZEPT_FOUND";
-    private final static String REZEPT_INDEX = "REZEPT_INDEX";
     private final static String CURRENT_REZEPT = "CURRENT_REZEPT";
 
-    public static String getNext(HandlerInput input, Map<String, Slot> slots, int direction){
+    public static String getNext(HandlerInput input, Map<String, Slot> slots, int direction) {
         final String speechText;
         String rezeptString = (String) input.getAttributesManager().getSessionAttributes().get(CURRENT_REZEPT);
 
@@ -37,8 +34,7 @@ public class ZubereitungsSteuerungsLogik {
 
         if (rezeptString == null || rezeptString.equals("none")) {
             speechText = "Das weiß ich leider nicht!";
-        }
-        else {
+        } else {
             RezeptCount rezept = JsonService.rezeptCountParsen(new JSONObject(rezeptString));
             rezept.setCount(rezept.getCount() + stepsToGo);
             ArrayList<String> steps = rezept.getRezept().getSchritte();

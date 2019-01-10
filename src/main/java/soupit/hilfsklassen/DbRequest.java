@@ -95,8 +95,7 @@ public final class DbRequest {
     }
 
 
-
-    public static ArrayList<Rezept> recipiesOutputSizeLimiter(ArrayList<Rezept> allRecipies, int startIndex, int endIndex){
+    public static ArrayList<Rezept> recipiesOutputSizeLimiter(ArrayList<Rezept> allRecipies, int startIndex, int endIndex) {
         ArrayList<Rezept> recipies = new ArrayList<>();
         if (allRecipies.size() < 4) {
             recipies = allRecipies;
@@ -122,9 +121,7 @@ public final class DbRequest {
         return returnString;
     }
 
-    public static String getRezeptFromDynDB(HandlerInput input){
+    public static String getRezeptFromDynDB(HandlerInput input) {
         return (String) PersistentAttributeService.getSinglePersistentAttribute(input, CURRENT_REZEPT);
     }
-
-
 }
