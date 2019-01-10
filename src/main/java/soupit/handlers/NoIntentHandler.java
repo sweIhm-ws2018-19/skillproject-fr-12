@@ -14,11 +14,8 @@ import java.util.Optional;
 import static com.amazon.ask.request.Predicates.intentName;
 
 public class NoIntentHandler implements RequestHandler {
-    private final static String BREAK_HALF_SECOND = "<break time=\"500ms\"/>";
-    private final static String PORTIONEN_AUSWAHL_INTENT = "PortionenAuswahlIntent";
-
-    private final static String REZEPT_INDEX = "REZEPT_INDEX";
-    private final static String REZEPT_FOUND = "REZEPT_FOUND";
+    private static final String PORTIONEN_AUSWAHL_INTENT = "PortionenAuswahlIntent";
+    private static final String REZEPT_FOUND = "REZEPT_FOUND";
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -33,11 +30,9 @@ public class NoIntentHandler implements RequestHandler {
         String lastIntent = SessionAttributeService.getLastIntent(input);
 
         if (lastIntent.equalsIgnoreCase(PORTIONEN_AUSWAHL_INTENT)) {
-            int suppenIndex = (int) SessionAttributeService.getSingleSessionAttribute(input, REZEPT_INDEX);
             ArrayList<Rezept> rezepte = JsonService.rezepteParsen(new JSONArray((String) SessionAttributeService.getSingleSessionAttribute(input, REZEPT_FOUND)));
-            Rezept rezept = rezepte.get(suppenIndex);
 
-            speechText = "Welches Rezept möchtest du statdessen kochen? Sollte dir kein Rezept gefallen nenne einfach neue Zutaten. " +
+            speechText = "Welches Rezept möchtest du stattdessen kochen? Sollte dir kein Rezept gefallen nenne einfach neue Zutaten. " +
                     "Ich kann dir folgende Rezepte vorschlagen: " + getAllMatchingRezipeNames(rezepte);
             repromptText = speechText;
 
