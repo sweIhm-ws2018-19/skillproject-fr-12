@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "ps",
+      "invocationName": "sn",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -53,6 +53,15 @@
             }
           ],
           "samples": [
+            "Ich habe {Zutat} {Zutat_zwei} {Zutat_drei} {Zutat_vier} und {Zutat_fuenf}",
+            "Ich habe {Zutat} {Zutat_zwei} {Zutat_drei} und {Zutat_vier}",
+            "Ich habe {Zutat} {Zutat_zwei} und {Zutat_drei}",
+            "Ich habe {Zutat} und {Zutat_zwei}",
+            "Ich habe {Zutat} {Zutat_zwei} {Zutat_drei} {Zutat_vier} {Zutat_fuenf}",
+            "Ich habe {Zutat} {Zutat_zwei} {Zutat_drei} {Zutat_vier}",
+            "Ich habe {Zutat} {Zutat_zwei} {Zutat_drei}",
+            "Ich habe {Zutat} {Zutat_zwei}",
+            "Ich habe {Zutat}",
             "Meine Zutaten sind {Zutat} {Zutat_zwei} {Zutat_drei} {Zutat_vier} und  {Zutat_fuenf}",
             "Meine Zutaten sind {Zutat} {Zutat_zwei} {Zutat_drei} und {Zutat_vier}",
             "Meine Zutaten sind {Zutat} {Zutat_zwei} und {Zutat_drei}",
