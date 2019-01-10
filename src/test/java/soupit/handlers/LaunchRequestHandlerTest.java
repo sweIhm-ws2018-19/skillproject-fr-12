@@ -34,16 +34,12 @@ public class LaunchRequestHandlerTest {
 
     @Test
     public void testHandle() {
-        HandlerInput input = TestHelper.mockEmptyInput();
+        HandlerInput input = TestHelper.mockInputWithoutSlot();
 
         String have = "";
-        try{
-            Response response = handler.handle(input).get();
-            SsmlOutputSpeech ssmlOut = (SsmlOutputSpeech) response.getOutputSpeech();
-            have = ssmlOut.getSsml();
-        }catch (NullPointerException expt){
-            have = "Bis zum nächsten mal!";
-        }
+        Response response = handler.handle(input).get();
+        SsmlOutputSpeech ssmlOut = (SsmlOutputSpeech) response.getOutputSpeech();
+        have = ssmlOut.getSsml();
 
         assertNotNull(have);
     }
