@@ -9,7 +9,20 @@ import java.util.ArrayList;
 import java.util.Map;
 
 public class ZubereitungsSteuerungsLogik {
+    private static ZubereitungsSteuerungsLogik instance;
+
     private final static String CURRENT_REZEPT = "CURRENT_REZEPT";
+
+    private ZubereitungsSteuerungsLogik() {
+        //empty
+    }
+
+    public static ZubereitungsSteuerungsLogik getInstance() {
+        if (instance == null)
+            instance = new ZubereitungsSteuerungsLogik();
+
+        return instance;
+    }
 
     public static String getNext(HandlerInput input, Map<String, Slot> slots, int direction) {
         final String speechText;
