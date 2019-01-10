@@ -65,7 +65,7 @@ public class ZubereitungsWeiterHandler implements RequestHandler {
             if (rezept.getCount() < 0 || rezept.getCount() >= steps.size()) {
                 speechText = "Die Zubereitung ist bereits Abgeschlossen.";
             } else {
-                if (steps.size() == rezept.getCount() - 2) {
+                if (steps.size() == rezept.getCount() - 1) {
                     speechText = steps.get(rezept.getCount()) + "Ich hoffe die Suppe schmeckt und wünsche einen guten Appetit. Um das Rezept abzuschließen sage: Rezept abschließen.";
 
                     } else {
