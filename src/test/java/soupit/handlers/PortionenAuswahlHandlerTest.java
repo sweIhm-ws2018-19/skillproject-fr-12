@@ -11,12 +11,12 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
-public class ZubereitungAbschliessenHandlerTest {
-    private ZubereitungAbschliessenHandler handler;
+public class PortionenAuswahlHandlerTest {
+    private PortionenAuswahlHandler handler;
 
     @Before
     public void setup(){
-        handler = new ZubereitungAbschliessenHandler();
+        handler = new PortionenAuswahlHandler();
     }
 
     @Test
@@ -28,14 +28,28 @@ public class ZubereitungAbschliessenHandlerTest {
 
     @Test
     public void testHandle() {
-        HandlerInput input = TestHelper.mockInputWithoutSlot();
+        HandlerInput input = TestHelper.mockInputWithEmptySlot("Anzahl");
 
         String have = "";
         Response response = handler.handle(input).get();
         SsmlOutputSpeech ssmlOut = (SsmlOutputSpeech) response.getOutputSpeech();
         have = ssmlOut.getSsml();
 
-        Boolean b = have.contains("Bis zum nächsten mal!");
+        Boolean b = have.contains("Entschuldigung, ich habe dich nicht verstanden.");
+
+        assertTrue(b);
+    }
+
+    @Test
+    public void testHandleSinnvoll() {
+        HandlerInput input = TestHelper.mockInputWithSlot("Anzahl", "test", true);
+
+        String have = "";
+        Response response = handler.handle(input).get();
+        SsmlOutputSpeech ssmlOut = (SsmlOutputSpeech) response.getOutputSpeech();
+        have = ssmlOut.getSsml();
+
+        Boolean b = have.contains("Entschuldigung, ich habe dich nicht verstanden.");
 
         assertTrue(b);
     }

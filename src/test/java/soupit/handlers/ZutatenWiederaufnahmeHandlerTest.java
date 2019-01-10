@@ -7,16 +7,18 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
-public class ZubereitungAbschliessenHandlerTest {
-    private ZubereitungAbschliessenHandler handler;
+public class ZutatenWiederaufnahmeHandlerTest {
+    private ZutatenWiederaufnahmeHandler handler;
 
     @Before
     public void setup(){
-        handler = new ZubereitungAbschliessenHandler();
+        handler = new ZutatenWiederaufnahmeHandler();
     }
 
     @Test
@@ -35,7 +37,21 @@ public class ZubereitungAbschliessenHandlerTest {
         SsmlOutputSpeech ssmlOut = (SsmlOutputSpeech) response.getOutputSpeech();
         have = ssmlOut.getSsml();
 
-        Boolean b = have.contains("Bis zum nächsten mal!");
+        Boolean b = have.contains("Es wurden noch keine Zutaten ausgeschlossen.");
+
+        assertTrue(b);
+    }
+
+    @Test
+    public void testHandleWithSlot() {
+        HandlerInput input = TestHelper.mockInputWithSlot("ZUTAT_AUSSCHLIESSEN", new ArrayList<String>().toString(), true);
+
+        String have = "";
+        Response response = handler.handle(input).get();
+        SsmlOutputSpeech ssmlOut = (SsmlOutputSpeech) response.getOutputSpeech();
+        have = ssmlOut.getSsml();
+
+        Boolean b = have.contains("Es wurden noch keine Zutaten ausgeschlossen.");
 
         assertTrue(b);
     }
