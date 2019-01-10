@@ -68,15 +68,15 @@ public class JsonService {
 
         //hier Json einlesen
         try (BufferedReader br = new BufferedReader(new FileReader("data/zutaten.json"))) {
-            String input = "";
+            StringBuilder input = new StringBuilder();
 
             String zeile = br.readLine();
             while (zeile != null) {
-                input += zeile;
+                input.append(zeile);
                 zeile = br.readLine();
             }
 
-            JSONArray json = new JSONObject(input).getJSONArray("zutaten");
+            JSONArray json = new JSONObject(input.toString()).getJSONArray("zutaten");
             for (Object j : json) {
                 zutaten.add(zutatParsen((JSONObject) j));
             }
