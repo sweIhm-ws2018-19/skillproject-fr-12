@@ -42,7 +42,7 @@ public class SoupitStreamHandler extends SkillStreamHandler {
                         new YesIntentHandler(),
 
                         new NoIntentHandler(),
-                        new WeitereRezepteHandler())
+                        new WeitereRezepteHandler(),
                         new ZubereitungAbschliessenHandler())
 
                 // Add your skill id below
