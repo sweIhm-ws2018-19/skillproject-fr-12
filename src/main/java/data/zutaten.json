@@ -8,9 +8,9 @@
   {"plural":"null","einheitPlural":"null","zutatID":6,"singular":"schnittlauch","einheitSingular":"esslöffel","einheitGeschlecht":"null"},
   {"plural":"null","einheitPlural":"null","zutatID":7,"singular":"saure oder süße sahne","einheitSingular":"nach wunsch einen klecks","einheitGeschlecht":"null"},
   {"plural":"null","einheitPlural":"null","zutatID":8,"singular":"brokkoli","einheitSingular":"gramm","einheitGeschlecht":"null"},
-  {"plural":"null","einheitPlural":"null","zutatID":9,"singular":"zwiebel","einheitSingular":"","einheitGeschlecht":"null"},
+  {"plural":"null","einheitPlural":"null","zutatID":9,"singular":"zwiebel","einheitSingular":"","einheitGeschlecht":"w"},
   {"plural":"null","einheitPlural":"null","zutatID":10,"singular":"knoblauchzehe","einheitSingular":"","einheitGeschlecht":"null"},
-  {"plural":"null","einheitPlural":"null","zutatID":11,"singular":"gemüsebrühe","einheitSingular":"mililiter","einheitGeschlecht":"null"},
+  {"plural":"null","einheitPlural":"null","zutatID":11,"singular":"gemüsebrühe","einheitSingular":"mililiter","einheitGeschlecht":"w"},
   {"plural":"null","einheitPlural":"null","zutatID":12,"singular":"butter","einheitSingular":"esslöffel","einheitGeschlecht":"null"},
   {"plural":"null","einheitPlural":"null","zutatID":13,"singular":"gehackte petersilie","einheitSingular":"","einheitGeschlecht":"null"},
   {"plural":"null","einheitPlural":"null","zutatID":14,"singular":"oregano","einheitSingular":"teelöffel","einheitGeschlecht":"null"},
@@ -32,7 +32,7 @@
   {"plural":"null","einheitPlural":"null","zutatID":30,"singular":"crème légère gartenkräuter","einheitSingular":"becher","einheitGeschlecht":"null"},
   {"plural":"null","einheitPlural":"null","zutatID":31,"singular":"curry","einheitSingular":"teelöffel","einheitGeschlecht":"null"},
   {"plural":"null","einheitPlural":"null","zutatID":32,"singular":"geräucherte forellenfilets","einheitSingular":"gramm","einheitGeschlecht":"null"},
-  {"plural":"null","einheitPlural":"null","zutatID":33,"singular":"tomaten","einheitSingular":"gramm","einheitGeschlecht":"null"},
+  {"plural":"null","einheitPlural":"null","zutatID":33,"singular":"tomaten","einheitSingular":"gramm","einheitGeschlecht":"w"},
   {"plural":"null","einheitPlural":"null","zutatID":34,"singular":"schlagsahne","einheitSingular":"mililiter","einheitGeschlecht":"null"},
   {"plural":"null","einheitPlural":"null","zutatID":35,"singular":"erbsen","einheitSingular":"gramm","einheitGeschlecht":"null"},
   {"plural":"null","einheitPlural":"null","zutatID":36,"singular":"olivenöl","einheitSingular":"esslöffel","einheitGeschlecht":"null"},
@@ -214,7 +214,7 @@
   {"plural":"null","einheitPlural":"null","zutatID":212,"singular":"meerrettich","einheitSingular":"teelöffel","einheitGeschlecht":"null"},
   {"plural":"null","einheitPlural":"null","zutatID":213,"singular":"brot","einheitSingular":"scheibe","einheitGeschlecht":"null"},
   {"plural":"null","einheitPlural":"null","zutatID":214,"singular":"selleriegrün","einheitSingular":"bund","einheitGeschlecht":"null"},
-  {"plural":"null","einheitPlural":"null","zutatID":215,"singular":"sahne","einheitSingular":"esslöffel","einheitGeschlecht":"null"},
+  {"plural":"null","einheitPlural":"null","zutatID":215,"singular":"sahne","einheitSingular":"milliliter","einheitGeschlecht":"w"},
   {"plural":"null","einheitPlural":"null","zutatID":216,"singular":"grüner spargel","einheitSingular":"gramm","einheitGeschlecht":"null"},
   {"plural":"null","einheitPlural":"null","zutatID":217,"singular":"rucola","einheitSingular":"gramm","einheitGeschlecht":"null"},
   {"plural":"null","einheitPlural":"null","zutatID":218,"singular":"zucker","einheitSingular":"teelöffel","einheitGeschlecht":"null"},
@@ -247,3 +247,4 @@
   {"plural":"null","einheitPlural":"null","zutatID":245,"singular":"baguette","einheitSingular":"","einheitGeschlecht":"null"},
   {"plural":"null","einheitPlural":"null","zutatID":246,"singular":"käse","einheitSingular":"","einheitGeschlecht":"null"}
 ]}
+
