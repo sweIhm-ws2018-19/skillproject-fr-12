@@ -43,7 +43,7 @@ public class SoupitStreamHandler extends SkillStreamHandler {
                         new WeitereRezepteHandler(),
                         new ZubereitungAbschliessenHandler())
                 // Add your skill id below
-               // .withSkillId("")
+               // .withSkillId("")//s
                 .withTableName("soupit")
                 .withAutoCreateTable(true)
                 .build();
