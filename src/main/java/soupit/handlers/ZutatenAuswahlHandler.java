@@ -1,16 +1,3 @@
-/*
-     Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
-     Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file
-     except in compliance with the License. A copy of the License is located at
-
-         http://aws.amazon.com/apache2.0/
-
-     or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for
-     the specific language governing permissions and limitations under the License.
-*/
-
 package soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
@@ -31,9 +18,9 @@ import static soupit.handlers.ZutatenAusschliessenAbfrageHandler.ZUTAT_AUSSCHLIE
 
 public class ZutatenAuswahlHandler implements RequestHandler {
     private static final String BREAK_SECOND = "<break time=\"1s\"/>";
-    private final static String REZEPT_FOUND = "REZEPT_FOUND"; // ausgegebene Rezepte
-    private final static String MORE_RECIPIES_GIVEN = "MORE_RECIPIES_GIVEN"; // Zaehler ausgegebene Rezepte
-    private final static String ALL_MATCHED_RECIPIES = "ALL_MATCHED_RECIPIES";
+    private static final String REZEPT_FOUND = "REZEPT_FOUND"; // ausgegebene Rezepte
+    private static final String MORE_RECIPIES_GIVEN = "MORE_RECIPIES_GIVEN"; // Zaehler ausgegebene Rezepte
+    private static final String ALL_MATCHED_RECIPIES = "ALL_MATCHED_RECIPIES";
 
     @Override
     public boolean canHandle(HandlerInput input) {

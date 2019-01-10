@@ -4,14 +4,9 @@ import soupit.model.Rezept;
 import soupit.model.Zutat;
 import soupit.model.ZutatMenge;
 
-import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Locale;
-
-import static jdk.nashorn.internal.objects.NativeMath.round;
 
 public final class RezeptService {
     private static RezeptService instance;
@@ -55,60 +50,21 @@ public final class RezeptService {
     }
 
     private static String mengeFormatieren(Zutat zutat, Double menge) {
-        // TODO: 06.01.2019 formatieren
         String response = "";
-
-        int mengeInt = menge.intValue();
-        double mengeRounded = round(menge, 1);
-
-        if ((menge == mengeInt)) {
-            if (mengeInt == 1) {
-                switch (zutat.getEinheitGeschlecht()) {
-                    case "w":
-                        response = "eine";
-                        break;
-                    case "m":
-                        response = "einen";
-                        break;
-                    default:
-                        response = "ein";
-                }
-            } else if (mengeInt < 0) {
-                response = "none";
-            } else
-                //gerade Zahl groesser 1
-                response += mengeInt;
-            // TODO: 21.12.2018 Mengenangabe formatieren
-        } else {
-            //wenn nicht gerade && nicht 1, 0 oder kleiner 0
-
-            response += menge;
-        }
-
 
         System.out.println("MengeOrginal: " + menge);
 
         //Formatter Three
         DecimalFormat formatter = (DecimalFormat) DecimalFormat.getInstance(Locale.ENGLISH);
-        //formatter.setRoundingMode(RoundingMode.HALF_UP);
         formatter.applyPattern("0.000");
         String formattedThreeString = formatter.format(menge);
         Double formattedThreeDouble = Double.parseDouble(formattedThreeString);
-        //Test
-        System.out.println("Three String: " + formattedThreeString + " Double: " + formattedThreeDouble);
 
 
         //Formatter Zero
-        //Double mengeDoubleFormatedThree = Double.parseDouble(dfThree.format(menge));
         DecimalFormat formatterZero = (DecimalFormat) DecimalFormat.getInstance(Locale.ENGLISH);
         formatterZero.applyPattern("#");
-        //dfZero.setRoundingMode(RoundingMode.HALF_UP);
         String formattedZeroString = formatterZero.format(menge);
-        Double formattedZeroDouble = Double.parseDouble(formattedZeroString);
-        //Test
-        System.out.println("Zero String: " + formattedZeroString + " Double: " + formattedZeroDouble);
-
-        System.out.println();
 
         if (formattedThreeDouble < 0.000) {
             //kleiner 0
@@ -162,14 +118,6 @@ public final class RezeptService {
                     response = "ein Drittel";
             }
         } else if (formattedThreeDouble <= 0.500) {
-//            String[] strs = { "zwiebel","knoblauchzehe","karotte"};
-//            List<String> list = new ArrayList<>(Arrays.asList(strs));
-//
-//            if (list.contains(zutat.getSingular())){
-//                response = "eine halbe";
-//            }else {
-//                response = "ein halb";
-//            }
             switch (zutat.getEinheitGeschlecht()) {
                 case "w":
                     response = "eine halbe";
