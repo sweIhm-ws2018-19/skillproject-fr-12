@@ -33,8 +33,8 @@ public class ZubereitungAbschliessenHandler implements RequestHandler {
     @Override
     public Optional<Response> handle(HandlerInput input) {
         String speechText = "Bis zum nächsten mal!";
-        SessionAttributeService.setSingleSessionAttribute(input, "CURRENT_REZEPT", null);
-        PersistentAttributeService.setSinglePersistentAttribute(input, "CURRENT_REZEPT", null);
+       SessionAttributeService.setSingleSessionAttribute(input, "CURRENT_REZEPT", null);
+       PersistentAttributeService.setSinglePersistentAttribute(input, "CURRENT_REZEPT", null);
 
 
 

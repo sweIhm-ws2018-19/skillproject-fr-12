@@ -41,7 +41,7 @@ public class SoupitStreamHandler extends SkillStreamHandler {
                         new ImBatmanHandler(),
                         new YesIntentHandler(),
                         new WeitereRezepteHandler(),
-                        new ZutatenAusschliessenHandler())
+                        new ZubereitungAbschliessenHandler())
                 // Add your skill id below
                // .withSkillId("")
                 .withTableName("soupit")
