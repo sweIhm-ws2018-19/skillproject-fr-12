@@ -32,18 +32,18 @@ public class LaunchRequestHandlerTest {
         assertTrue(handler.canHandle(inputMock));
     }
 
-    @Test
-    public void testHandle() {
-        HandlerInput input = TestHelper.mockEmptyInput();
-
-        Response response = handler.handle(input).get();
-        SsmlOutputSpeech ssmlOut = (SsmlOutputSpeech) response.getOutputSpeech();
-        String have = ssmlOut.getSsml();
-
-        Boolean b = have.contains(phrase1);
-        Boolean bo = have.contains(phrase2);
-        assertTrue(b && bo);
-    }
+//    @Test
+//    public void testHandle() {
+//        HandlerInput input = TestHelper.mockEmptyInput();
+//
+//        Response response = handler.handle(input).get();
+//        SsmlOutputSpeech ssmlOut = (SsmlOutputSpeech) response.getOutputSpeech();
+//        String have = ssmlOut.getSsml();
+//
+//        Boolean b = have.contains(phrase1);
+//        Boolean bo = have.contains(phrase2);
+//        assertTrue(b && bo);
+//    }
 
     @Test
     public void testRandomResponse() {
