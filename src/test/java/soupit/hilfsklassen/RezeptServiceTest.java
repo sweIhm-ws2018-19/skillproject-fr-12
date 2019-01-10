@@ -150,4 +150,42 @@ public class RezeptServiceTest {
         assertNotNull(have);
         assertEquals(want, have);
     }
+
+    @Test
+    public void testMengeFormatierenAchtelFemale(){
+        String want = "eine Achtel";
+        String have = null;
+
+        Zutat zutat =  TestHelper.generateDummyZutat("w");
+        Double menge = 0.1;
+
+        try {
+            Method method = RezeptService.class.getDeclaredMethod("mengeFormatieren", Zutat.class, Double.class);
+            method.setAccessible(true);
+            have = (String) method.invoke(null, zutat, menge);
+        } catch (Exception ex) {
+        }
+
+        assertNotNull(have);
+        assertEquals(want, have);
+    }
+
+    @Test
+    public void testMengeFormatierenAchtelMale(){
+        String want = "ein Achtel";
+        String have = null;
+
+        Zutat zutat =  TestHelper.generateDummyZutat("m");
+        Double menge = 0.1;
+
+        try {
+            Method method = RezeptService.class.getDeclaredMethod("mengeFormatieren", Zutat.class, Double.class);
+            method.setAccessible(true);
+            have = (String) method.invoke(null, zutat, menge);
+        } catch (Exception ex) {
+        }
+
+        assertNotNull(have);
+        assertEquals(want, have);
+    }
 }

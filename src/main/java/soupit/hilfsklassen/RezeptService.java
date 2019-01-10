@@ -74,9 +74,6 @@ public final class RezeptService {
                 case "w":
                     response = "eine Achtel";
                     break;
-                case "m":
-                    response = "ein Achtel";
-                    break;
                 default:
                     response = "ein Achtel";
             }
@@ -87,9 +84,6 @@ public final class RezeptService {
                 case "w":
                     response = "eine Sechstel";
                     break;
-                case "m":
-                    response = "ein Sechstel";
-                    break;
                 default:
                     response = "ein Sechstel";
             }
@@ -98,9 +92,6 @@ public final class RezeptService {
                 case "w":
                     response = "eine Viertel";
                     break;
-                case "m":
-                    response = "ein Viertel";
-                    break;
                 default:
                     response = "ein Viertel";
             }
@@ -108,9 +99,6 @@ public final class RezeptService {
             switch (zutat.getEinheitGeschlecht()) {
                 case "w":
                     response = "eine Drittel";
-                    break;
-                case "m":
-                    response = "ein Drittel";
                     break;
                 default:
                     response = "ein Drittel";
@@ -145,9 +133,6 @@ public final class RezeptService {
             switch (zutat.getEinheitGeschlecht()) {
                 case "w":
                     response = "eine";
-                    break;
-                case "m":
-                    response = "ein";
                     break;
                 default:
                     response = "ein";
