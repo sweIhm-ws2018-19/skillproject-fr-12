@@ -17,7 +17,12 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
+import org.json.JSONObject;
+import soupit.hilfsklassen.DbRequest;
+import soupit.hilfsklassen.JsonService;
 import soupit.hilfsklassen.SessionAttributeService;
+import soupit.model.Rezept;
+import soupit.model.RezeptCount;
 
 import java.util.Optional;
 import java.util.Random;
@@ -25,6 +30,8 @@ import java.util.Random;
 import static com.amazon.ask.request.Predicates.requestType;
 
 public class LaunchRequestHandler implements RequestHandler {
+    private final static String CURRENT_REZEPT = "CURRENT_REZEPT";
+
     @Override
     public boolean canHandle(HandlerInput input) {
         return input.matches(requestType(LaunchRequest.class));
@@ -32,9 +39,24 @@ public class LaunchRequestHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "<say-as interpret-as=\"interjection\">Willkommen</say-as> bei <lang xml:lang=\"en-US\">Soup It</lang> ! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung. " +
-                randomResponse();
-        String repromptText = randomResponse();
+        String rezeptCountString = DbRequest.getRezeptFromDynDB(input);
+
+        final   String speechText;
+        final  String repromptText;
+        if (rezeptCountString == null || rezeptCountString.equals("none")) {
+
+           speechText =  "<say-as interpret-as=\"interjection\">Willkommen</say-as> bei <lang xml:lang=\"en-US\">Soup It</lang> ! Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung. " +
+                    randomResponse();
+            repromptText = randomResponse();
+
+        }
+        else {
+            RezeptCount rezeptCount = JsonService.rezeptCountParsen(new JSONObject(rezeptCountString));
+            SessionAttributeService.setSingleSessionAttribute(input, CURRENT_REZEPT, rezeptCountString);
+            speechText = "Du hast die " + rezeptCount.getRezept().getName() + " nochnicht abgeschlossen. Sage weiter für den nächsten Schritt oder Rezept abschließen.";
+            repromptText = null;
+        }
+
 
         SessionAttributeService.updateLastIntent(input, "LaunchRequest");
 

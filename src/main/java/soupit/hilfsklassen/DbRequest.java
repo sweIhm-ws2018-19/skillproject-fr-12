@@ -1,5 +1,6 @@
 package soupit.hilfsklassen;
 
+import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import soupit.model.Rezept;
 import soupit.model.RezeptCount;
 import soupit.model.Zutat;
@@ -7,13 +8,14 @@ import soupit.model.Zutat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.logging.Handler;
 
 public final class DbRequest {
-
+    private final static String CURRENT_REZEPT = "CURRENT_REZEPT";
     private static DbRequest instance;
 
     private DbRequest() {
-        //empty
+        //emptys
     }
 
     public static DbRequest getInstance() {
@@ -42,8 +44,8 @@ public final class DbRequest {
         });
 
         ArrayList<Rezept> returnRecipies = new ArrayList<>();
-        for (RezeptCount rc : foundRezepte) {
-            returnRecipies.add(rc.getRezept());
+        for (int index = 0; index < foundRezepte.size() && index < 15; index++) {
+            returnRecipies.add(foundRezepte.get(index).getRezept());
         }
 
         return returnRecipies;
@@ -118,6 +120,10 @@ public final class DbRequest {
             }
         }
         return returnString;
+    }
+
+    public static String getRezeptFromDynDB(HandlerInput input){
+        return (String) PersistentAttributeService.getSinglePersistentAttribute(input, CURRENT_REZEPT);
     }
 
 
