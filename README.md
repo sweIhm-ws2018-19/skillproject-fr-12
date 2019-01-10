@@ -22,3 +22,12 @@ Unser Ziel besteht darin, das Kochen von Rezepten per Spracheingabe zu ermöglic
 #### Vision:
 
 Als Vision stellen wir uns die Benutzung dieser Anwendung in verschiedensten Lebenslagen bzw. Altersklassen vor. Was zunächst nur für Suppen möglich sein soll, könnte in Zukunft auch für verschiedene andere Gerichte angewandt werden. Vor allem in der heutigen Zeit, die oft recht stressig und hektisch ist, soll das Kochen von eigenen, gesunden Gerichten nicht auf der Strecke bleiben. Aber auch Hobby-Köchen, mit mehr Erfahrung, soll die Anwendung eine interessante Alternative für das „Kochen nach Rezept“ bieten. Denn mit einem persönlichen Kochassistenten macht das Kochen sicherlich noch mehr Spaß als alleine.
+
+## Anwendungsfalldiagramm
+![Anwendungsfalldiagramm](https://github.com/sweIhm-ws2018-19/skillproject-fr-12/blob/master/UML/Sprint%200/Anwendungsfalldiagramm.png)
+
+## Anwendungsfallbeschreibungen
+Die Anwendungsfallbeschreibungen sind [hier](https://github.com/sweIhm-ws2018-19/skillproject-fr-12/blob/master/UML/Sprint%200/AWF%20Beschreibungen.pdf) als PDF zu finden.
+
+## Fachklassenmodell
+![Sprint2Fachklassenmodell](https://github.com/sweIhm-ws2018-19/skillproject-fr-12/blob/master/UML/Sprint%202/UML%20Klassendiagramm%20Sprint%202.png)
