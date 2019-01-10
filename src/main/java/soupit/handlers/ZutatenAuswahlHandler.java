@@ -81,7 +81,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
                 speechText = "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0).getName();
             } else {
                 String rezepte = DbRequest.suppenToString(recipies);
-                speechText = "Ich kann dir anhand der genannten Zutaten " + recipies.size() + " Rezepte vorschlagen: " + rezepte;
+                speechText = "Ich kann dir anhand der genannten Zutaten " + allRecipies.size() + " Rezepte vorschlagen: " + rezepte;
             }
             speechText += BREAK_SECOND + " Welche Suppe wählst du?";
             repromptText = speechText;

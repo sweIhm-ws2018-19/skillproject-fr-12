@@ -321,6 +321,17 @@
             "fertig",
             "Rezept abschließen"
           ]
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": [
+            "nope",
+            "nö",
+            "ne",
+            "nada",
+            "nein",
+            "no"
+          ]
         }
       ],
       "types": [
