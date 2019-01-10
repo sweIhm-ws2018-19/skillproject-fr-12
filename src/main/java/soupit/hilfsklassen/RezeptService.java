@@ -4,7 +4,9 @@ import soupit.model.Rezept;
 import soupit.model.Zutat;
 import soupit.model.ZutatMenge;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public final class RezeptService {
     private static RezeptService instance;
@@ -49,28 +51,79 @@ public final class RezeptService {
 
     private static String mengeFormatieren(Zutat zutat, Double menge) {
         String response = "";
-        int mengeInt = menge.intValue();
 
-        if ((menge == mengeInt)) {
-            if (mengeInt == 1) {
-                switch (zutat.getEinheitGeschlecht()) {
-                    case "w":
-                        response = "eine";
-                        break;
-                    case "m":
-                        response = "einen";
-                        break;
-                    default:
-                        response = "ein";
-                }
-            } else if (mengeInt < 0) {
-                response = "none";
-            } else
-                response += mengeInt;
-        } else {
-            response += menge;
+        //Formatter Three
+        DecimalFormat formatter = (DecimalFormat) DecimalFormat.getInstance(Locale.ENGLISH);
+        formatter.applyPattern("0.000");
+        String formattedThreeString = formatter.format(menge);
+        Double formattedThreeDouble = Double.parseDouble(formattedThreeString);
+
+
+        //Formatter Zero
+        DecimalFormat formatterZero = (DecimalFormat) DecimalFormat.getInstance(Locale.ENGLISH);
+        formatterZero.applyPattern("#");
+        String formattedZeroString = formatterZero.format(menge);
+
+        if("w".equalsIgnoreCase(zutat.getEinheitGeschlecht())){
+            response = "eine";
+        }
+        else {
+            response = "ein";
         }
 
+        if (formattedThreeDouble < 0.000) {
+            //kleiner 0
+            response = "none";
+        }
+        //1/8
+        else if (formattedThreeDouble <= 0.125) {
+            response += " Achtel";
+        }
+        //1/6
+        else if (formattedThreeDouble <= 0.167) {
+            response += " Sechstel";
+        } else if (formattedThreeDouble <= 0.250) {
+            response += " Viertel";
+        } else if (formattedThreeDouble <= 0.334) {
+            response += " Drittel";
+        } else if (formattedThreeDouble <= 0.500) {
+            switch (zutat.getEinheitGeschlecht()) {
+                case "w":
+                    response = "eine halbe";
+                    break;
+                case "m":
+                    response = "einen halben";
+                    break;
+                default:
+                    response = "ein halbes";
+            }
+        } else if (formattedThreeDouble < 1.000){
+            //
+            switch (zutat.getEinheitGeschlecht()) {
+                case "w":
+                    //Bsp. die Tomate
+                    response += " drei Viertelte";
+                    break;
+                case "m":
+                    //Bsp. der Salat
+                    response = "ein drei Viertelter";
+                    break;
+                default:
+                    //Bsp. das Ei
+                    response = "ein drei Vierteltes";
+            }
+        } else if (formattedThreeDouble == 1.000) {
+            switch (zutat.getEinheitGeschlecht()) {
+                case "w":
+                    response = "eine";
+                    break;
+                default:
+                    response = "ein";
+            }
+        }  else {
+            //groesser 1
+            response = formattedZeroString;
+        }
         return response;
     }
 }

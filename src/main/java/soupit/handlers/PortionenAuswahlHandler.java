@@ -14,9 +14,9 @@ import java.util.Optional;
 import static com.amazon.ask.request.Predicates.intentName;
 
 public class PortionenAuswahlHandler implements RequestHandler {
-    private final static String PORTIONEN = "PORTIONEN";
-    private final static String REZEPT_FOUND = "REZEPT_FOUND";
-    private final static String REZEPT_INDEX = "REZEPT_INDEX";
+    private static final String PORTIONEN = "PORTIONEN";
+    private static final String REZEPT_FOUND = "REZEPT_FOUND";
+    private static final String REZEPT_INDEX = "REZEPT_INDEX";
 
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("PortionenAuswahlIntent"));
@@ -35,7 +35,6 @@ public class PortionenAuswahlHandler implements RequestHandler {
         if (slotValue.equalsIgnoreCase("none")) {
             speechText = "Entschuldigung, ich habe dich nicht verstanden. Wiederhole es bitte noch einmal.";
             //würde mehr Sinn machen, entspricht jedoch nicht Invocable...
-            //speechText = "Bitte nenne die Anzahl an Portionen.";
         } else {
             int anzahl = Integer.parseInt(slotValue);
             SessionAttributeService.setSingleSessionAttribute(input, PORTIONEN, anzahl);

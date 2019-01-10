@@ -11,9 +11,9 @@ addons:
     organization: "sweihmws2018-19"
     branches:
     - master
-    - sprint2
-    - feature_testing
+    - sprint3
 
 script:
 - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install -Pdev sonar:sonar
 - mvn org.apache.maven.plugins:maven-assembly-plugin:2.6:assembly -DdescriptorId=jar-with-dependencies package
+# mvn -Dmaven.test.failure.ignore=true org.apache.maven.plugins:maven-assembly-plugin:2.6:assembly -DdescriptorId=jar-with-dependencies package

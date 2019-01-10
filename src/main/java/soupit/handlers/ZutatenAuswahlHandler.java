@@ -1,16 +1,3 @@
-/*
-     Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
-
-     Licensed under the Apache License, Version 2.0 (the "License"). You may not use this file
-     except in compliance with the License. A copy of the License is located at
-
-         http://aws.amazon.com/apache2.0/
-
-     or in the "license" file accompanying this file. This file is distributed on an "AS IS" BASIS,
-     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the License for
-     the specific language governing permissions and limitations under the License.
-*/
-
 package soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
@@ -31,6 +18,9 @@ import static soupit.handlers.ZutatenAusschliessenAbfrageHandler.ZUTAT_AUSSCHLIE
 
 public class ZutatenAuswahlHandler implements RequestHandler {
     private static final String BREAK_SECOND = "<break time=\"1s\"/>";
+    private static final String REZEPT_FOUND = "REZEPT_FOUND"; // ausgegebene Rezepte
+    private static final String MORE_RECIPIES_GIVEN = "MORE_RECIPIES_GIVEN"; // Zaehler ausgegebene Rezepte
+    private static final String ALL_MATCHED_RECIPIES = "ALL_MATCHED_RECIPIES";
 
     @Override
     public boolean canHandle(HandlerInput input) {
@@ -43,7 +33,7 @@ public class ZutatenAuswahlHandler implements RequestHandler {
         Request request = input.getRequestEnvelope().getRequest();
         IntentRequest intentRequest = (IntentRequest) request;
         Intent intent = intentRequest.getIntent();
-        //get slots from current intent
+        //get slots from current intent s
         Map<String, Slot> slots = intent.getSlots();
 
 
@@ -55,23 +45,30 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
         ArrayList<String> ausgeschlosseneZutatenListe = (ArrayList<String>) input.getAttributesManager().getSessionAttributes().get(ZUTAT_AUSSCHLIESSEN_KEY);
 
-        if (ausgeschlosseneZutatenListe == null){
-            ausgeschlosseneZutatenListe = new ArrayList<String>();
+        if (ausgeschlosseneZutatenListe == null) {
+            ausgeschlosseneZutatenListe = new ArrayList<>();
         }
 
-        SessionAttributeService.setSingleSessionAttribute(input, ZUTAT_KEY, zutatStringList);
-        ArrayList<Rezept> recipies = DbRequest.getRecipies(zutatStringList, ausgeschlosseneZutatenListe);
+       SessionAttributeService.setSingleSessionAttribute(input, ZUTAT_KEY, zutatStringList);
+        ArrayList<Rezept> allRecipies = DbRequest.getRecipies(zutatStringList, ausgeschlosseneZutatenListe);
 
-        String json = new JSONArray(recipies).toString();
-        SessionAttributeService.setSingleSessionAttribute(input, "REZEPT_FOUND", json);
+       final String allRecipiesJson = new JSONArray(allRecipies).toString();
+       SessionAttributeService.setSingleSessionAttribute(input, ALL_MATCHED_RECIPIES, allRecipiesJson);
+
+        ArrayList<Rezept> recipies = DbRequest.recipiesOutputSizeLimiter(allRecipies, 0, 3);
+
+       final String json = new JSONArray(recipies).toString();
+         SessionAttributeService.setSingleSessionAttribute(input, REZEPT_FOUND, json);
+
+        SessionAttributeService.setSingleSessionAttribute(input, MORE_RECIPIES_GIVEN, recipies.size());
 
 
         if (!recipies.isEmpty()) {
             if (recipies.size() == 1) {
                 speechText = "Ich kann dir folgendes Rezept vorschlagen " + recipies.get(0).getName();
             } else {
-                String rezepte = this.suppenToString(recipies);
-                speechText = "Ich kann dir anhand der genannten Zutaten " + recipies.size() +  " Rezepte vorschlagen: " + rezepte;
+                String rezepte = DbRequest.suppenToString(recipies);
+                speechText = "Ich kann dir anhand der genannten Zutaten " + allRecipies.size() + " Rezepte vorschlagen: " + rezepte;
             }
             speechText += BREAK_SECOND + " Welche Suppe wählst du?";
             repromptText = speechText;
@@ -99,17 +96,4 @@ public class ZutatenAuswahlHandler implements RequestHandler {
 
         return responseBuilder.build();
     }
-
-    private String suppenToString(ArrayList<Rezept> rezepts){
-        String returnString = "";
-        for (int index = 0; index < rezepts.size(); index ++){
-            if (index == rezepts.size() -1 ){
-                returnString = returnString.substring(0,returnString.length()-2) + " und " + rezepts.get(index).getName();
-            } else {
-                returnString = returnString.concat(rezepts.get(index).getName()).concat(", ");
-            }
-        }
-    return returnString;
-    }
-
 }

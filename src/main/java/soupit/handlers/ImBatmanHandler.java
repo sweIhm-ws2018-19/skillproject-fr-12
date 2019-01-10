@@ -18,7 +18,6 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 import soupit.hilfsklassen.SessionAttributeService;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
@@ -32,7 +31,7 @@ public class ImBatmanHandler implements RequestHandler {
 
     @Override
     public Optional<Response> handle(HandlerInput input) {
-        String speechText = "<audio src=\"https://www.jovo.tech/audio/5z8RiZ9U-im-batman.mp3\" />";
+        String speechText = "<audio src=\"https://www.jovo.tech/audio/uESsvDpn-batman.mp3\" />";
 
 
         SessionAttributeService.updateLastIntent(input, "ImBatmanIntent ");

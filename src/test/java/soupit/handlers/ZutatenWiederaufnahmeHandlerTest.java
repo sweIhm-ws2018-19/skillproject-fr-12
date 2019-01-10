@@ -1,28 +1,24 @@
 package soupit.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
-import com.amazon.ask.model.RequestEnvelope;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.ui.SsmlOutputSpeech;
 import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mockito;
 
-import java.lang.reflect.Method;
+import java.util.ArrayList;
 
-import org.junit.Test;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 
-public class LaunchRequestHandlerTest {
-    private final static String phrase1 = "Willkommen";
-    private final static String phrase2 = "Als dein persönlicher Assistent begleite ich dich bei der Suppenzubereitung.";
-    private LaunchRequestHandler handler;
+public class ZutatenWiederaufnahmeHandlerTest {
+    private ZutatenWiederaufnahmeHandler handler;
 
     @Before
     public void setup(){
-        handler = new LaunchRequestHandler();
+        handler = new ZutatenWiederaufnahmeHandler();
     }
 
     @Test
@@ -41,21 +37,22 @@ public class LaunchRequestHandlerTest {
         SsmlOutputSpeech ssmlOut = (SsmlOutputSpeech) response.getOutputSpeech();
         have = ssmlOut.getSsml();
 
-        assertNotNull(have);
+        Boolean b = have.contains("Es wurden noch keine Zutaten ausgeschlossen.");
+
+        assertTrue(b);
     }
 
     @Test
-    public void testRandomResponse() {
+    public void testHandleWithSlot() {
+        HandlerInput input = TestHelper.mockInputWithSlot("ZUTAT_AUSSCHLIESSEN", new ArrayList<String>().toString(), true);
+
         String have = "";
+        Response response = handler.handle(input).get();
+        SsmlOutputSpeech ssmlOut = (SsmlOutputSpeech) response.getOutputSpeech();
+        have = ssmlOut.getSsml();
 
-        try {
-            Method method = LaunchRequestHandler.class.getDeclaredMethod("randomResponse");
-            method.setAccessible(true);
-            have = (String) method.invoke(handler);
-        } catch (Exception ex) {
-        }
+        Boolean b = have.contains("Es wurden noch keine Zutaten ausgeschlossen.");
 
-        assertNotNull(have);
-        assertNotEquals("", have);
+        assertTrue(b);
     }
 }

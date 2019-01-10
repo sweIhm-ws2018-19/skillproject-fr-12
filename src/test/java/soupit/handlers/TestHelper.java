@@ -1,14 +1,14 @@
 package soupit.handlers;
 
+import com.amazon.ask.attributes.persistence.PersistenceAdapter;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
+import com.amazon.ask.exception.PersistenceException;
 import com.amazon.ask.model.*;
 import com.amazon.ask.model.slu.entityresolution.*;
 import soupit.model.Rezept;
 import soupit.model.Zutat;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
+import java.util.*;
 
 public final class TestHelper {
     private final static String VALID_SLOT = "ER_SUCCESS_MATCH";
@@ -29,6 +29,18 @@ public final class TestHelper {
                 .withRequestEnvelope(RequestEnvelope.builder()
                         .withSession(Session.builder().build())
                         .build())
+                .withPersistenceAdapter(new PersistenceAdapter() {
+                                            @Override
+                                            public Optional<Map<String, Object>> getAttributes(RequestEnvelope requestEnvelope) throws PersistenceException {
+                                                return Optional.of(new HashMap<String, Object>());
+                                            }
+
+                                            @Override
+                                            public void saveAttributes(RequestEnvelope requestEnvelope, Map<String, Object> map) throws PersistenceException {
+
+                                            }
+                                        }
+                )
                 .build();
 
         return inputMock;
@@ -48,6 +60,18 @@ public final class TestHelper {
                                 .build())
                         .withSession(Session.builder().build())
                         .build())
+                .withPersistenceAdapter(new PersistenceAdapter() {
+                                            @Override
+                                            public Optional<Map<String, Object>> getAttributes(RequestEnvelope requestEnvelope) throws PersistenceException {
+                                                return Optional.empty();
+                                            }
+
+                                            @Override
+                                            public void saveAttributes(RequestEnvelope requestEnvelope, Map<String, Object> map) throws PersistenceException {
+
+                                            }
+                                        }
+                )
                 .build();
 
         return inputMock;
@@ -100,6 +124,18 @@ public final class TestHelper {
                         .withRequest(requestMock)
                         .withSession(Session.builder().build())
                         .build())
+                .withPersistenceAdapter(new PersistenceAdapter() {
+                                            @Override
+                                            public Optional<Map<String, Object>> getAttributes(RequestEnvelope requestEnvelope) throws PersistenceException {
+                                                return Optional.empty();
+                                            }
+
+                                            @Override
+                                            public void saveAttributes(RequestEnvelope requestEnvelope, Map<String, Object> map) throws PersistenceException {
+
+                                            }
+                                        }
+                )
                 .build();
 
         return inputMock;

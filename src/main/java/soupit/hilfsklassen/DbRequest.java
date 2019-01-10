@@ -1,5 +1,6 @@
 package soupit.hilfsklassen;
 
+import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import soupit.model.Rezept;
 import soupit.model.RezeptCount;
 import soupit.model.Zutat;
@@ -7,16 +8,17 @@ import soupit.model.Zutat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.logging.Handler;
 
 public final class DbRequest {
-
+    private final static String CURRENT_REZEPT = "CURRENT_REZEPT";
     private static DbRequest instance;
 
-    private DbRequest(){
-        //empty
+    private DbRequest() {
+        //emptys
     }
 
-    public static DbRequest getInstance(){
+    public static DbRequest getInstance() {
         if (instance == null)
             instance = new DbRequest();
 
@@ -37,16 +39,14 @@ public final class DbRequest {
         Collections.sort(foundRezepte, new Comparator<RezeptCount>() {
             @Override
             public int compare(RezeptCount o1, RezeptCount o2) {
-                return o2.getCount()-o1.getCount();
+                return o2.getCount() - o1.getCount();
             }
         });
 
         ArrayList<Rezept> returnRecipies = new ArrayList<>();
-        for (int index = 0; index < 3 && index < foundRezepte.size(); index++){
+        for (int index = 0; index < foundRezepte.size() && index < 15; index++) {
             returnRecipies.add(foundRezepte.get(index).getRezept());
         }
-
-
 
         return returnRecipies;
     }
@@ -57,7 +57,7 @@ public final class DbRequest {
 
         for (String ingr : ingrdsStringList) {
             for (Zutat ztat : allZutatenListe) {
-                if (ztat.getSingular().equals(ingr) || ztat.getPlural().equals(ingr)) {
+                if (ztat.getSingular().contains(ingr) || ztat.getPlural().contains(ingr)) {
                     ingrdID.add(ztat.getZutatID());
                 }
             }
@@ -66,7 +66,7 @@ public final class DbRequest {
     }
 
 
-    private static ArrayList<RezeptCount> searchMatching(ArrayList<Integer> ingrdID, ArrayList<Integer> woIngrdID){
+    private static ArrayList<RezeptCount> searchMatching(ArrayList<Integer> ingrdID, ArrayList<Integer> woIngrdID) {
         ArrayList<Rezept> allRezepte = JsonService.rezepteEinlesen();
         ArrayList<RezeptCount> foundRezepte = new ArrayList<>();
 
@@ -88,11 +88,40 @@ public final class DbRequest {
 
             if (match) {
                 foundRezepte.add(new RezeptCount(rezept, matchCount));
-                match = false;
             }
         }
 
         return foundRezepte;
     }
 
+
+    public static ArrayList<Rezept> recipiesOutputSizeLimiter(ArrayList<Rezept> allRecipies, int startIndex, int endIndex) {
+        ArrayList<Rezept> recipies = new ArrayList<>();
+        if (allRecipies.size() < 4) {
+            recipies = allRecipies;
+        } else {
+            for (int index = startIndex; index < endIndex && index < allRecipies.size(); index++) {
+                recipies.add(allRecipies.get(index));
+            }
+        }
+
+        return recipies;
+    }
+
+
+    public static String suppenToString(ArrayList<Rezept> rezepts) {
+        String returnString = "";
+        for (int index = 0; index < 3 && index < rezepts.size(); index++) {
+            if (index == rezepts.size() - 1) {
+                returnString = returnString.substring(0, returnString.length() - 2) + " und " + rezepts.get(index).getName();
+            } else {
+                returnString = returnString.concat(rezepts.get(index).getName()).concat(", ");
+            }
+        }
+        return returnString;
+    }
+
+    public static String getRezeptFromDynDB(HandlerInput input) {
+        return (String) PersistentAttributeService.getSinglePersistentAttribute(input, CURRENT_REZEPT);
+    }
 }

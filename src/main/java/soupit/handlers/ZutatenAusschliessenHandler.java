@@ -51,7 +51,6 @@ public class ZutatenAusschliessenHandler implements RequestHandler {
             speechText = "Keine Zutaten wurden ausgeschlossen.";
             repromptText = speechText;
             isAskResponse = true;
-
         }
 
 
