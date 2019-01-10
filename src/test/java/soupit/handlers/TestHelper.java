@@ -112,6 +112,18 @@ public final class TestHelper {
                         .withRequest(requestMock)
                         .withSession(Session.builder().build())
                         .build())
+                .withPersistenceAdapter(new PersistenceAdapter() {
+                                            @Override
+                                            public Optional<Map<String, Object>> getAttributes(RequestEnvelope requestEnvelope) throws PersistenceException {
+                                                return Optional.empty();
+                                            }
+
+                                            @Override
+                                            public void saveAttributes(RequestEnvelope requestEnvelope, Map<String, Object> map) throws PersistenceException {
+
+                                            }
+                                        }
+                )
                 .build();
 
         return inputMock;

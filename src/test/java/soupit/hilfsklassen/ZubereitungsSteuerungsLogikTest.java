@@ -30,4 +30,28 @@ public class ZubereitungsSteuerungsLogikTest {
 
         assertNotNull(have);
     }
+
+    @Test
+    public void testGetNextWithSlot(){
+        HandlerInput input = TestHelper.mockInputWithoutSlot();
+        Map<String, Slot> slots = new HashMap<>();
+        slots.put("anzahl", TestHelper.mockEmptySlot("anzahl"));
+        int direction = 0;
+
+        String have = ZubereitungsSteuerungsLogik.getNext(input, slots, direction);
+
+        assertNotNull(have);
+    }
+
+    @Test
+    public void testGetNextWithInputSlot(){
+        HandlerInput input = TestHelper.mockInputWithEmptySlot("test");
+        Map<String, Slot> slots = new HashMap<>();
+        slots.put("anzahl", TestHelper.mockEmptySlot("anzahl"));
+        int direction = 0;
+
+        String have = ZubereitungsSteuerungsLogik.getNext(input, slots, direction);
+
+        assertNotNull(have);
+    }
 }
