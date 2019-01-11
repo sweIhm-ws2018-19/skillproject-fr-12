@@ -12,7 +12,7 @@ Unser Ziel besteht darin, das Kochen von Rezepten per Spracheingabe zu ermöglic
 Die Anwendungsfallbeschreibungen sind [hier](https://github.com/sweIhm-ws2018-19/skillproject-fr-12/blob/master/UML/Sprint%200/AWF%20Beschreibungen.pdf) als PDF zu finden.
 
 ## Fachklassenmodell
-![Sprint2Fachklassenmodell](UML/Sprint%203/UML%20Klassendiagramm%20Sprint%203.png)
+![Sprint2Fachklassenmodell](https://github.com/sweIhm-ws2018-19/skillproject-fr-12/blob/master/UML/Sprint%203/UML%20Klassendiagramm%20Sprint%203.png)
 
 
 ### Status
