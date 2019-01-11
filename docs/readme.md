@@ -11,7 +11,7 @@ Die Anwendungsfallbeschreibungen sind [hier](https://github.com/sweIhm-ws2018-19
 ## UML - Diagramme
 [UML - Diagramme](https://github.com/sweIhm-ws2018-19/skillproject-fr-12/wiki/UML-Diagramme) <br />
 
-### Status
+
 ## Status
 [![Travis-CI Status](https://travis-ci.org/sweIhm-ws2018-19/skillproject-fr-12.svg?branch=master)](https://travis-ci.org/sweIhm-ws2018-19/skillproject-fr-12)
 
