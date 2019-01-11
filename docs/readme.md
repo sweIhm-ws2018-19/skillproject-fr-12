@@ -5,15 +5,11 @@ Soup-IT ist eine Anwendung, die den Nutzer bei der Zubereitung von Suppen unters
 
 Unser Ziel besteht darin, das Kochen von Rezepten per Spracheingabe zu ermöglichen. Somit werden angezeigte Rezepte auf einem Display oder auf Papier nicht benötigt. Mehrmaliges Durchlesen der einzelnen Kochschritte sowie die Bedienung eines Touchscreens mit „schmutzigen Fingern“ während dem Kochen werden überflüssig. Die Anwendung soll Kochanfängern das Kochen durch speziell formulierte Anleitungen erleichtern, sowie beschäftigte Berufstätige oder Studenten mit wenig Zeit, zum Kochen von leckeren Suppen in der Freizeit animieren. Daher wird großer Wert auf möglichst einfache und schnelle Rezepte, die zugleich auch lecker und gesund sind, gelegt.
 
-## Anwendungsfalldiagramm
-![Anwendungsfalldiagramm](UML/Sprint%200/Anwendungsfalldiagramm.png)
-
 ## Anwendungsfallbeschreibungen
 Die Anwendungsfallbeschreibungen sind [hier](https://github.com/sweIhm-ws2018-19/skillproject-fr-12/blob/master/UML/Sprint%200/AWF%20Beschreibungen.pdf) als PDF zu finden.
 
-## Fachklassenmodell
-![Sprint2Fachklassenmodell](https://github.com/sweIhm-ws2018-19/skillproject-fr-12/blob/master/UML/Sprint%203/UML%20Klassendiagramm%20Sprint%203.png)
-
+## UML - Diagramme
+[UML - Diagramme](https://github.com/sweIhm-ws2018-19/skillproject-fr-12/wiki/UML-Diagramme) <br />
 
 ### Status
 ## Status
